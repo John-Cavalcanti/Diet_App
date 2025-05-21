@@ -59,6 +59,8 @@ git log
 ```bash
 # Criar uma nova branch
 git branch nome_da_branch
+# ou
+git checkout -b nome_da_branch
 
 # Alternar para uma branch
 git checkout nome_da_branch
