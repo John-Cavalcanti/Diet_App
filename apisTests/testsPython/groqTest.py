@@ -1,1 +1,1 @@
-print('algo')
+print('algo 10')
