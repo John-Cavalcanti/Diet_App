@@ -15,4 +15,6 @@ response = client.chat.completions.create(
     stream=False
 )
 
+# Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}
+
 print(response.choices[0].message.content)
