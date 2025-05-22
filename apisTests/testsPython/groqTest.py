@@ -5,13 +5,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 client = Groq(
-    api_key= os.getenv('GROQ_API_KEY'),
+    api_key= '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',
 )
 
 client_message = ''
+client_input = ''
+previous_context = ''
 
-while client_message != "tchau" :
-    client_message = input()
+while client_input != "tchau" :
+    client_input = input()
+    client_message = previous_context + "\n" + client_input
     chat_completion = client.chat.completions.create(
         messages=[
             {
@@ -23,3 +26,5 @@ while client_message != "tchau" :
     )
 
     print(chat_completion.choices[0].message.content)
+
+    previous_context = f"{client_message}"
