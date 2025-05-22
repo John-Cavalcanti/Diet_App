@@ -1,7 +1,11 @@
 from groq import Groq
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 client = Groq(
-    api_key= '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',
+    api_key= os.getenv('GROQ_API_KEY'),
 )
 
 client_message = ''
