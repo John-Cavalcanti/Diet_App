@@ -25,6 +25,6 @@ while client_input != "tchau" :
         model="llama3-70b-8192",
     )
 
-    print(chat_completion.choices[0].message.content)
+    print(f"\n{chat_completion.choices[0].message.content}")
 
     previous_context = f"{client_message}"
