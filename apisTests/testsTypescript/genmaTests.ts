@@ -1,5 +1,7 @@
 import 'dotenv/config';
 import OpenAI from 'openai';
+import { promises as fs} from 'fs';
+import promptConfig from './promptConfig';
 
 const openai = new OpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
@@ -11,17 +13,34 @@ const openai = new OpenAI({
 });
 
 async function main() {
-  const completion = await openai.chat.completions.create({
-    model: 'google/gemma-3n-e4b-it:free',
-    messages: [
-      {
-        role: 'user',
-        content: 'dado que estou conversando com você por uma api, como é definido o "contexto" da conversa ou chat atual ?? como eu sei que estou mandando um prompt que você reconheça o prompt anterior ??'
-      }
-    ]
-  });
 
-  console.log(completion.choices[0].message.content);
+  try{
+
+    const promptContent = await fs.readFile('prompts/promptEx.txt', 'utf-8');
+
+    const config = {
+      ...promptConfig,
+      messages: promptConfig.messages.map((message: any) => {
+        if(message.content.includes('PLACEHOLDER_FOR_PROMPT')){
+          return {
+            ...message,
+            content: promptContent
+          };
+        }
+        return message;
+      })
+    };
+
+    const inicio = Date.now();
+    const completion = await openai.chat.completions.create(config);
+    const fim = Date.now();
+
+    
+    console.log(completion.choices[0].message.content);
+    console.log(`\nTempo de processamento: ${fim - inicio}ms`);
+  }catch(e){
+    console.log("Erro ao processar a requisição: ", e);
+  }
 }
 
-main().catch(console.error);
+main();
