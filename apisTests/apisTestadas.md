@@ -15,7 +15,7 @@ Nesse readme devem ser listadas apis que foram testadas com casos de uso e imple
 
 ## LLMs utilizadas e documentações de suas apis
 
-### Genma - Google 
+### Genma - Google / via OpenRouter
 
 Ia do google com api gratuita e definição de número máximo de tokens a serem respondidos.
 [Documentação do Genma](https://openrouter.ai/google/gemma-3n-e4b-it:free/api) <br>
@@ -115,3 +115,70 @@ Você mencionou que trabalha como analista de suporte técnico e é sedentário.
 Estou aqui para te ajudar em cada etapa do caminho! Não hesite em me perguntar qualquer coisa. 😊 Vamos construir juntos uma vida mais saudável e feliz!
 
 Obs..: tempo de resposta foi de aproximadamente 70 segundos.
+
+### Compound-beta - Groq / via Groq
+
+Resposta do compound-beta via Groq :
+
+Olá Carlos! É um prazer enorme conhecê-lo e ter a oportunidade de ajudá-lo em sua jornada para uma vida mais saudável. Aqui no Nutri.AI, estamos comprometidos em entender suas necessidades e criar um plano personalizado que se adapte ao seu estilo de vida.
+
+Entendi que você é um homem de 38 anos, trabalha como analista de suporte técnico, e seu principal objetivo é perder peso e iniciar um estilo de vida mais saudável. Você mencionou que é sedentário, consome muitas comidas ultraprocessadas, e não tem restrições alimentares. Além disso, você já tentou fazer dietas antes, mas elas não funcionaram por causa das mudanças radicais que exigiam em sua rotina.
+
+**Nosso Objetivo:**
+Nosso objetivo aqui é criar um plano alimentar gradual e sustentável que você possa seguir a longo prazo. Queremos ajudá-lo a entender o que é uma vida saudável na prática e a tornar essas mudanças uma parte natural de sua rotina diária.
+
+**Recomendações Gerais:**
+
+1. **Hidratação:** Beba bastante água ao longo do dia. A meta é cerca de 2 litros de água por dia.
+2. **Atividade Física:** Inicie com atividades físicas leves e vá aumentando gradualmente. Mesmo uma caminhada de 30 minutos por dia pode fazer uma grande diferença.
+3. **Alimentação Balanceada:** Priorize alimentos integrais, como frutas, vegetais, proteínas magras, grãos integrais, e gorduras saudáveis. Tente limitar o consumo de comidas ultraprocessadas.
+
+**Plano Alimentar Semanal:**
+Aqui está um exemplo de plano alimentar para você. Lembre-se, é apenas um ponto de partida e pode ser ajustado de acordo com suas preferências e necessidades.
+
+#### Segunda-feira:
+- **Café da manhã:** Aveia cozida com frutas (maçã, banana) e uma colher de sopa de mel.
+- **Almoço:** Peito de frango grelhado com salada de folhas verdes, tomate, pepino, e uma colher de sopa de azeite de oliva.
+- **Jantar:** Sopa de legumes (ervilha, cenoura, batata) com um filé de peixe assado.
+
+#### Terça-feira:
+- **Café da manhã:** Iogurte natural com granola e uma fruta.
+- **Almoço:** Arroz integral com feijão preto, uma coxa de frango grelhada, e uma porção de brócolis no vapor.
+- **Jantar:** Omelete de ovos com vegetais (cebola, pimentão, espinafre) e uma fatia de queijo cottage.
+
+#### Quarta-feira:
+- **Café da manhã:** Smoothie de banana com leite desnatado e uma colher de sopa de chia.
+- **Almoço:** Quinoa com vegetais grelhados (abobrinha, pimentão, cebola) e um bife grelhado.
+- **Jantar:** Sopa de lentilhas com uma fatia de pão integral.
+
+#### Quinta-feira:
+- **Café da manhã:** Pão integral tostado com abacate e ovos mexidos.
+- **Almoço:** Salada de atum com alface, tomate, pepino, e uma colher de sopa de azeite.
+- **Jantar:** Peixe grelhado com purê de batata doce e uma porção de couve-flor.
+
+#### Sexta-feira:
+- **Café da manhã:** Iogurte com mirtilo e uma colher de sopa de aveia.
+- **Almoço:** Wrap de frango com alface, tomate, e uma colher de sopa de hummus.
+- **Jantar:** Frango grelhado com arroz integral e vegetais assados.
+
+#### Sábado:
+- **Café da manhã:** Omelete de claras com espinafre e uma fatia de queijo cottage.
+- **Almoço:** Salada caprese (tomate, queijo de búfala, manjericão) com um filé de frango grelhado.
+- **Jantar:** Camarão grelhado com quinoa e uma porção de aspargos.
+
+#### Domingo:
+- **Café da manhã:** Smoothie de frutas com iogurte natural e uma colher de sopa de linhaça.
+- **Almoço:** Peito de peru grelhado com uma salada de quinoa e vegetais.
+- **Jantar:** Bife grelhado com batata doce assada e brócolis.
+
+**Dicas:**
+- **Controle de porções:** Tente manter as porções controladas para não exagerar.
+- **Variedade:** Varie as frutas e vegetais para garantir uma ampla gama de nutrientes.
+- **Hidratação:** Beba água ao longo do dia.
+
+**Próximos Passos:**
+Gostaria de agendar um acompanhamento para discutirmos seu progresso e fazer ajustes no plano alimentar, se necessário? Estamos aqui para apoiá-lo em cada etapa de sua jornada.
+
+Como você se sente com esse plano inicial? Tem alguma dúvida ou prefere fazer algum ajuste? Aqui no Nutri.AI, estamos comprometidos em ajudá-lo a alcançar seus objetivos de forma saudável e sustentável. Estamos ansiosos para ouvir suas impressões e começar essa jornada juntos!
+
+Obs.: O tempo de resposta ofi de aproximadamente 8 segundos
