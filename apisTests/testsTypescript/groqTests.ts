@@ -1,21 +1,13 @@
 import 'dotenv/config';
-import OpenAI from 'openai';
+import Groq from "groq-sdk";
 import { promises as fs} from 'fs';
-import promptConfig from './configs/promptGenmaConfig';
+import promptConfig from './configs/promptGroqConfig';
 
-const openai = new OpenAI({
-  baseURL: 'https://openrouter.ai/api/v1',
-  apiKey: process.env.OPENROUTER_API_KEY,
-  defaultHeaders: {
-    'HTTP-Referer': 'https://meusite.com',
-    'X-Title': 'Chat Gemma com OpenRouter'
-  }
-});
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-async function main() {
-
-  try{
-
+async function main()
+{
+  try {
     const promptContent = await fs.readFile('prompts/promptEx.txt', 'utf-8');
 
     const config = {
@@ -32,12 +24,13 @@ async function main() {
     };
 
     const inicio = Date.now();
-    const completion = await openai.chat.completions.create(config);
+    const completion = await groq.chat.completions.create(config);
     const fim = Date.now();
 
-    
-    console.log(completion.choices[0].message.content);
+    console.log(completion.choices[0]?.message?.content ?? "Nenhuma resposta");
     console.log(`\nTempo de processamento: ${fim - inicio}ms`);
+
+
   }catch(e){
     console.log("Erro ao processar a requisição: ", e);
   }
