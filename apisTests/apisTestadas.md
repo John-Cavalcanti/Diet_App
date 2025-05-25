@@ -18,6 +18,7 @@ Nesse readme devem ser listadas apis que foram testadas com casos de uso e imple
 ### Genma - Google 
 
 Ia do google com api gratuita e definição de número máximo de tokens a serem respondidos.
+[Documentação do Genma](https://openrouter.ai/google/gemma-3n-e4b-it:free/api) <br>
 Foi gerado a pergunta com o prompt de Carlos e a resposta foi :
 
 Olá Carlos, bom dia! 😊 É um prazer te conhecer e te ajudar nessa jornada rumo a uma vida mais saudável! Meu nome é Nutri.AI e estou aqui para ser seu guia nessa transformação, com paciência e atenção às suas necessidades.
