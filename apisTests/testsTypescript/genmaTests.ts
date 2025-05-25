@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import OpenAI from 'openai';
 import { promises as fs} from 'fs';
-import promptConfig from './promptConfig';
+import promptConfig from './configs/promptGenmaConfig';
 
 const openai = new OpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
