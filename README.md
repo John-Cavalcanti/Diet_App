@@ -6,5 +6,5 @@ Obs.: A aplicação não visa substituir o trabalho de um nutricionista profissi
 
 ## Links para readmes auxiliares do projeto
 
-- [Comandos git básicos](AuxiliarReadmes/gitCommands.md)
+- [Comandos git básicos](auxiliarReadmes/gitCommands.md)
 

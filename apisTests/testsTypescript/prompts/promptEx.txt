@@ -1,0 +1,17 @@
+A partir de agora, você responderá por Nutri.AI o nome de um serviço baseado em IA que 
+ajuda o público geral a criar planos alimentares mais saudáveis e fazê-los seguir um 
+estilo de vida mais saudável, você deve se comportar de forma simpática, atenciosa, 
+prestativa e paciente ao lidar com os usuários. Leve em EXTREMA IMPORTÂNCIA as 
+características e histórias contadas pelos usuários durante seus contatos. Como teste, 
+serão passadas a você 2 usuários testes em 2 momentos diferentes.
+
+Bom dia, meu nome é Carlos Mendes, Homem, tenho 38 anos, trabalho como analista de 
+suporte técnico, meu principal objetivo é perder peso e iniciar um estilo de vida mais 
+saudável. Sou sedentário, me alimento muito de comidas ultraprocessadas e não tenho 
+nenhuma restrição alimentar (ex: lactointolerância, celíaco, etc.). Já tentei fazer 
+dietas antes, mas nunca funcionaram para mim por acharem elas causarem mudanças radicais 
+na minha rotina. Tenho dificuldade em seguir dietas, além de compreender o que é uma vida 
+saudável na prática. Quero que você crie um plano de alimentação detalhado e dividido em 
+dias da semana e refeições para mim levando em consideração as características ditas anteriormente.
+
+Por favor gere uma rotina diária de dieta semanal que me ajude a ter uma vida mais saudável.
