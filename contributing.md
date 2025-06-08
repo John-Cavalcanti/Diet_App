@@ -8,11 +8,62 @@ Obs.: A aplicação não visa substituir o trabalho de um nutricionista profissi
 
 Em seguida há tutoriais, convenções e padrões de fluxo de contribuição para este repositório.
 
+
+## Fluxo de contribuições para o projeto
+
 Antes de mais nada deve ser feita a clonagem do repositório 
 
 ```bash
 git clone https://github.com/John-Cavalcanti/Diet_App.git
 ```
+
+Após isso a branch com foco principal para o desenvolvimento do projeto não será a develop(não a main).
+
+Cada desenvolvedor deve abrir uma nova branch para cada feature ou correção que for realizar na aplicação
+a partir da branch principal que será a develop e nomear a branch da seguinte forma:
+
+**feature/título-da-feature**
+
+Dessa forma fica claro identificar qual a issue está sendo resolvida com aquele pull request.
+
+Além dos títulos das branchs seguirem um padrão a mensagem de commit também devem ter um padrão a ser seguido e seguiremos o padrão de convetional commits, no início de cada mensagem deve ser especificado o que aquele commit realiza, exemplos :
+
+```bash
+git commit -m "feat: commit para a criação de uma feature"
+git commit -m "chore: commit para alterações de ferramentas"
+git commit -m "fix: commit para correção de bugs ou falhas no código"
+...
+```
+
+Segue um artigo no medium sobre [convetional commits](https://medium.com/linkapi-solutions/conventional-commits-pattern-3778d1a1e657), deve ser lido caso não conheça sobre.
+
+Após a realização da issue a branch deve ser enviada para o repositório remoto e deverá ser feito uma pull request para a branch develop, onde os líderes-técnicos as avaliarão e realizarão os devidos merges.
+
+Envie sua branch para o repositório remoto
+
+```bash
+git add .
+git commit -m "feat: mensagem explicando o que foi realizado na branch"
+git push -u origin feature/titulo-da-feature
+```
+
+Crie o pull request com sua branch
+
+[](/auxiliarReadmes/imgs/createPR)
+
+Apesar de sabermos qual issue está sendo resolvida com base no título da branch é necessário que junto com o PR seja listado o que foi feito naquela branch, segue exemplo :
+
+```markdown
+**O que foi feito**
+
+- criação do Endpoint X
+- ajuste na estilização do componente Y
+- correção de bug no componente Z
+...
+- assim por diante...
+```
+
+Dessa forma fica mais fácil para quem está revisando o código (seus líderes-técnicos) saber o que foi feito em cada commit e arquivo que foi alterado durante o desenvolvimento da branch o que nem sempre é trivial (apesar de parecer).
 
 ## Rodando o código - Backend (NestJS)
 
