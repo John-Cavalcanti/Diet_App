@@ -49,7 +49,13 @@ git push -u origin feature/titulo-da-feature
 
 Crie o pull request com sua branch
 
-[](/auxiliarReadmes/imgs/createPR)
+![PR via pag inicial](/auxiliarReadmes/imgs/creatingPR.png)
+
+ou acessando a aba Pull requests e clicando em New pull request selecionando sua branch em compare e logo após em create pull request
+
+![New PR](/auxiliarReadmes/imgs/creatingPR1.png)
+
+Clique em create pull request e adicione na descrição o que foi feito
 
 Apesar de sabermos qual issue está sendo resolvida com base no título da branch é necessário que junto com o PR seja listado o que foi feito naquela branch, segue exemplo :
 
@@ -62,6 +68,10 @@ Apesar de sabermos qual issue está sendo resolvida com base no título da branc
 ...
 - assim por diante...
 ```
+
+Exemplo:
+
+![](/auxiliarReadmes/imgs/creatingPR2.png)
 
 Dessa forma fica mais fácil para quem está revisando o código (seus líderes-técnicos) saber o que foi feito em cada commit e arquivo que foi alterado durante o desenvolvimento da branch o que nem sempre é trivial (apesar de parecer).
 
