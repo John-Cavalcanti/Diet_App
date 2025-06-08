@@ -1,9 +1,3 @@
-# Diet_App - Nutre.AI
-
-Nutre.AI é um assistente que visa proporcionar uma rotina alimentar básica mais saudável através da geração de dietas simples com base nas preferências ou restrições alimentares de seu usuário.
-
-Obs.: A aplicação não visa substituir o trabalho de um nutricionista profissional qualificado, apenas ajudar quem busca entender sobre como construir uma dieta básica com base em suas restrições com alimentos personalizados, ou apenas quer realizar uma reeducação alimentar para ter uma vida mais saudável com praticidade.
-
 # Contribuições
 
 Em seguida há tutoriais, convenções e padrões de fluxo de contribuição para este repositório.
@@ -166,8 +160,3 @@ Server is running on port: https://localhost:5000/api
 Você pode checar se o código está funcionando acessando a url providenciada pelo NestJS em seu terminal
 
 ## Rodando o código - Frontend (React)
-
-## Links para readmes auxiliares do projeto
-
-- [Comandos git básicos](auxiliarReadmes/gitCommands.md)
-
