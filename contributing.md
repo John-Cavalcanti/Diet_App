@@ -75,6 +75,18 @@ Exemplo:
 
 Dessa forma fica mais fácil para quem está revisando o código (seus líderes-técnicos) saber o que foi feito em cada commit e arquivo que foi alterado durante o desenvolvimento da branch o que nem sempre é trivial (apesar de parecer).
 
+## Boas práticas de revisão de código - Cultura, Preparação e Aspectos Técnicos
+
+- **Foque no código e não na pessoa:** A crítica deve ser sempre sobre o código e as escolhas técnicas, nunca o autor.
+
+- **Clareza e construtividade:** Seja objetivo e claro oferecendo sugestões e explicações, caso haja uma abordagem melhor explique porquê.
+
+- **Entenda o contexto da issue:** Antes de revisar, deve ser lida a descrição do pull request e a task associada, entendendo o problema que resolve ou a funcionalidade que implementa.
+
+- **Lógica:** O código atende aos requisitos? Ele resolve o problema proposto? Existem cenários de erro ou edge cases que não foram tratados?
+
+- **Legibilidade:** O código é fácil de entender para alguém que não o escreveu? Existe código duplicado? (Princípio DRY - Don't Repeat Yourself)
+
 ## Rodando o código - Backend (NestJS)
 
 O código do backend foi feito utilizando o framework Nestjs, contando nodemon para rodar o código em ambiente de desenvolvimento.
@@ -152,6 +164,8 @@ Server is running on port: https://localhost:5000/api
 ```
 
 Você pode checar se o código está funcionando acessando a url providenciada pelo NestJS em seu terminal
+
+## Rodando o código - Frontend (React)
 
 ## Links para readmes auxiliares do projeto
 
