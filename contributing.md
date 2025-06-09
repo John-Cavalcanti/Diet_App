@@ -11,7 +11,7 @@ Antes de mais nada deve ser feita a clonagem do repositório
 git clone https://github.com/John-Cavalcanti/Diet_App.git
 ```
 
-Após isso a branch com foco principal para o desenvolvimento do projeto não será a develop(não a main).
+Após isso a branch com foco principal para o desenvolvimento do projeto será a develop(não a main).
 
 Cada desenvolvedor deve abrir uma nova branch para cada feature ou correção que for realizar na aplicação
 a partir da branch principal que será a develop e nomear a branch da seguinte forma:
@@ -29,7 +29,7 @@ git commit -m "fix: commit para correção de bugs ou falhas no código"
 ...
 ```
 
-Segue um artigo no medium sobre [convetional commits](https://medium.com/linkapi-solutions/conventional-commits-pattern-3778d1a1e657), deve ser lido caso não conheça sobre.
+Segue um artigo no medium sobre [conventional commits](https://medium.com/linkapi-solutions/conventional-commits-pattern-3778d1a1e657), deve ser lido caso não conheça sobre.
 
 Após a realização da issue a branch deve ser enviada para o repositório remoto e deverá ser feito uma pull request para a branch develop, onde os líderes-técnicos as avaliarão e realizarão os devidos merges.
 
