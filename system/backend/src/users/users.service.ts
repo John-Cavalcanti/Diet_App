@@ -21,10 +21,16 @@ export class UsersService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    const user = this.userRepository.updateUser(id, new User(updateUserDto));
+    return user;
+  }
+
+  updateAgePlusOne(id: number) {
+    const user = this.userRepository.updateUserAgePlusOne(id);
+    return user;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    return this.userRepository.deleteById(id);
   }
 }

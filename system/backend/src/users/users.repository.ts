@@ -22,4 +22,23 @@ export class UsersRepository {
   findByEmail(email: string): User | undefined {
     return this.users.find(user => user.getEmail() === email);
   }
+
+  updateUser(id: number, user: User): User
+  {
+    this.users[id] = user;
+    return user;
+  }
+
+  updateUserAgePlusOne(id: number)
+  {
+    this.users[id].setAge(this.users[id].getAge() + 1);
+    return this.users[id];
+  }
+
+  deleteById(id: number)
+  {
+    const user = this.users[id];
+    this.users.splice(id, 1);
+    return user;
+  }
 }

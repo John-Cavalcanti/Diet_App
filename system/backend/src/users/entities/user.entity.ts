@@ -1,4 +1,5 @@
 import { CreateUserDto } from "../dto/create-user.dto";
+import { UpdateUserDto } from "../dto/update-user.dto";
 
 export class User {
   private _name: string;
@@ -9,7 +10,7 @@ export class User {
   private _height: number;
   private _weight: number;
 
-  constructor(dto: CreateUserDto) {
+  constructor(dto: CreateUserDto | UpdateUserDto) {
     this._name = dto.name;
     this._email = dto.email;
     this._birthday = new Date(dto.birthday);
