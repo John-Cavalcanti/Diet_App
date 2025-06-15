@@ -4,15 +4,17 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersRepository {
+  private id = 0;
   private readonly users: User[] = [];
 
   CreateUser(user: User): User {
+    user.setId(++this.id);// lógica para mimificar auto increment do bd
     this.users.push(user);
     return user;
   }
 
   findUserById(id: number): User | undefined {
-    return this.users[id];
+    return this.users.find(user => user.getId() === id);
   }
 
   findAll(): User[] {
@@ -25,20 +27,16 @@ export class UsersRepository {
 
   updateUser(id: number, user: User): User
   {
-    this.users[id] = user;
+    const index = this.users.findIndex(user => user.getId() === id);
+    this.users[index] = user;
     return user;
-  }
-
-  updateUserAgePlusOne(id: number)
-  {
-    this.users[id].setAge(this.users[id].getAge() + 1);
-    return this.users[id];
   }
 
   deleteById(id: number)
   {
-    const user = this.users[id];
-    this.users.splice(id, 1);
+    const index = this.users.findIndex(user => user.getId() === id);
+    const user = this.users[index];
+    this.users.splice(index, 1);
     return user;
   }
 }

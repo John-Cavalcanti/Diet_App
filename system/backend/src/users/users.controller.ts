@@ -27,11 +27,6 @@ export class UsersController {
     return this.usersService.update(+id, updateUserDto);
   }
 
-  @Patch(':id/age')
-  updateAge(@Param('id') id: string) {
-    return this.usersService.updateAgePlusOne(+id);
-  }
-
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);

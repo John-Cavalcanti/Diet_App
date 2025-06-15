@@ -25,11 +25,6 @@ export class UsersService {
     return user;
   }
 
-  updateAgePlusOne(id: number) {
-    const user = this.userRepository.updateUserAgePlusOne(id);
-    return user;
-  }
-
   remove(id: number) {
     return this.userRepository.deleteById(id);
   }

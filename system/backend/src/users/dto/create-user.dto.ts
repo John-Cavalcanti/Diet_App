@@ -1,4 +1,4 @@
-import { IsDateString, IsEmail, IsNotEmpty, Length } from "class-validator";
+import { IsDateString, IsEmail, IsNotEmpty, IsOptional, Length } from "class-validator";
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -12,16 +12,22 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsDateString()
   birthday: string;
-
+  
   @IsNotEmpty()
-  genre: string;
-
-  @IsNotEmpty()
-  age: number;
+  weight: number;
 
   @IsNotEmpty()
   height: number;
 
   @IsNotEmpty()
-  weight: number;
+  workoutsFrequency: string;
+  
+  @IsNotEmpty()
+  goals: string;
+
+  @IsOptional()
+  foodRestrictions?: string;
+
+  @IsOptional()
+  foodPreferences?: string;
 }
