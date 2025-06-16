@@ -2,23 +2,28 @@ import type { ReactNode } from "react";
 import styled from "styled-components";
 import { PrimaryButton } from "../../../componens/primary-button";
 import { SecondaryButton } from "../../../componens/secondary-button";
+import { ProgressBar } from "../../../componens/progress-bar";
 
 interface FormCardProps {
     children: ReactNode
     title: string
     description: string
+    percentageOfFomsCompletion: number
 }
-export function FormCard({ title, description, children } : FormCardProps){
+export function FormCard({ title, description, percentageOfFomsCompletion, children }: FormCardProps) {
     return (
-        <Container>
-            <Title>{title}</Title>
-            <Description>{description}</Description>
-            {children}
-            <ButtonsContainer>
-                <SecondaryButton>Voltar</SecondaryButton>
-                <PrimaryButton>Próximo</PrimaryButton>
-            </ButtonsContainer>
-        </Container>
+        <div>
+            <ProgressBar percentage={percentageOfFomsCompletion} />
+            <Container>
+                <Title>{title}</Title>
+                <Description>{description}</Description>
+                {children}
+                <ButtonsContainer>
+                    <SecondaryButton>Voltar</SecondaryButton>
+                    <PrimaryButton>Próximo</PrimaryButton>
+                </ButtonsContainer>
+            </Container>
+        </div>
     )
 }
 
