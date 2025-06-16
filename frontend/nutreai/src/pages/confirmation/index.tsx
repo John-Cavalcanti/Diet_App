@@ -5,6 +5,7 @@ import almoco from "../../assets/icons/almoco.png"
 import jantar from "../../assets/icons/jantar.png"
 import lanche from "../../assets/icons/lanche.png"
 import { Card } from "../../componens/card"
+import { PrimaryButton } from "../../componens/primary-button"
 
 export function Confirmation() {
     return (
@@ -16,7 +17,7 @@ export function Confirmation() {
             </Header>
             <Card>
                 <MealPlanCard>
-                    <h4>Refeições</h4>
+                    <CardTitle>Refeições</CardTitle>
                     <Bar />
                     <MealTitle><img src={cafeDaManha} />Café da manhã</MealTitle>
                     <MealList>
@@ -47,6 +48,22 @@ export function Confirmation() {
                     </MealList>
                 </MealPlanCard>
             </Card>
+            <SecondColumnContainer>
+                <Card>
+                    <FeedbacksCard>
+                        <CardTitle>
+                            Gostaria de sugerir alguma alteração?
+                        </CardTitle>
+                        <Input placeholder="Descreva aqui suas preferências ou sugestões de mudanças na rotina..." />
+                        <Description>Seu feedback ajuda a ajustar ainda mais seu plano alimentar!</Description>
+                        <PrimaryButton>Enviar Feedback</PrimaryButton>
+                    </FeedbacksCard>
+                </Card>
+                <section>
+                    <PrimaryButton>Confirmar Plano Alimentar</PrimaryButton>
+                </section>
+            </SecondColumnContainer>
+
         </Container>
     )
 }
@@ -63,6 +80,7 @@ const Container = styled.div`
     padding: 2rem;
 
     row-gap: 3rem;
+    column-gap: 3rem;
 `
 
 const Header = styled.header`
@@ -94,12 +112,11 @@ const Bar = styled.hr`
 const MealPlanCard = styled.div`
     grid-area: mealplan;
     padding: 2rem;
+`
 
-    h4 {
-        font-size: 1.5rem;
-        gap: 1rem;
-    }
-
+const CardTitle = styled.h4`
+    font-size: 1.5rem;
+    gap: 1rem;
 `
 
 const MealTitle = styled.h5`
@@ -129,4 +146,55 @@ const MealList = styled.ul`
             font-weight: bold;
         }
     }
+`
+
+const SecondColumnContainer = styled.div`
+    grid-area: feedback;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 3rem;
+
+    section {
+        width: 100%;
+        padding-inline: 7rem;
+    }
+`
+
+const FeedbacksCard = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 4rem;
+
+    text-align: center;
+
+    gap: 2rem;
+`
+
+const Input = styled.textarea`
+    width: 100%;
+    height: 7rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 0.875rem;
+    resize: none;
+    outline: none;
+
+    &::placeholder {
+        
+        color: #aaa;
+    }
+
+    &:focus {
+        border-color: ${({ theme }) => theme["green-700"]};
+    }
+`
+
+const Description = styled.p`
+    font-size: 1.5rem;
+    color: ${({ theme }) => theme["text-color"]};
 `
