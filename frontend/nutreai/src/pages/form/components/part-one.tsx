@@ -1,11 +1,13 @@
 import styled from "styled-components"
 import { FormCard } from "./form-card"
 import { FormInput } from "./form-inputs"
+
 export function PartOne() {
     return (
-        <FormCard 
-            title="Vamos te conhecer melhor!" 
+        <FormCard
+            title="Vamos te conhecer melhor!"
             description="Informe alguns dados para criar seu plano alimentar. Essas informações são importantes para personalizar sua alimentação."
+            percentageOfFomsCompletion={20}
         >
             <InputsContainer>
                 <FormInput id="nome" label={"Nome"} placeholder="Nome" />
