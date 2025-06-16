@@ -4,6 +4,7 @@ import cafeDaManha from "../../assets/icons/cafe-da-manha.png"
 import almoco from "../../assets/icons/almoco.png"
 import jantar from "../../assets/icons/jantar.png"
 import lanche from "../../assets/icons/lanche.png"
+import folha from "../../assets/folha.png"
 import { Card } from "../../componens/card"
 import { PrimaryButton } from "../../componens/primary-button"
 
@@ -63,7 +64,7 @@ export function Confirmation() {
                     <PrimaryButton>Confirmar Plano Alimentar</PrimaryButton>
                 </section>
             </SecondColumnContainer>
-
+            <BackgroundImage src={folha} />
         </Container>
     )
 }
@@ -197,4 +198,10 @@ const Input = styled.textarea`
 const Description = styled.p`
     font-size: 1.5rem;
     color: ${({ theme }) => theme["text-color"]};
+`
+
+const BackgroundImage = styled.img`
+    position: absolute;
+    bottom: -29.5rem;
+    right: 0;
 `
