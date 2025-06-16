@@ -110,4 +110,19 @@ export class User {
     this._foodPreferences = foodPreferences;
   }
 
+  toObject() {
+    return {
+      id: this._id,
+      name: this._name,
+      email: this._email,
+      birthday: this._birthday,
+      height: this._height,
+      weight: this._weight,
+      workoutsFrequency: this._workoutsFrequency,
+      goals: this._goals,
+      foodRestrictions: this._foodRestrictions,
+      foodPreferences: this._foodPreferences
+    };
+  }
+
 }

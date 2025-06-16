@@ -16,7 +16,7 @@ export class UsersService {
     return this.userRepository.findAll();
   }
 
-  findOne(id: number) {
+  findOne(id: number): User | undefined {
     return this.userRepository.findUserById(id);
   }
 
