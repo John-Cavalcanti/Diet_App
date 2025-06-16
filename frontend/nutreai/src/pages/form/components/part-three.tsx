@@ -1,11 +1,12 @@
-import styled from "styled-components";
-import { FormCard } from "./form-card";
+import styled from "styled-components"
+import { FormCard } from "./form-card"
 
 export function PartThree() {
     return (
         <FormCard
             title={"Qual é o seu objetivo?"}
             description={"Isso nos ajuda a criar um plano mais adequado para você."}
+            percentageOfFomsCompletion={60}
         >
             <RadioContainer>
                 <input id="maintain-weight" type="radio" />
