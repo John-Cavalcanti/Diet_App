@@ -3,9 +3,10 @@ import { FormCard } from "./form-card";
 
 export function PartTwo() {
     return (
-        <FormCard 
-            title="Com que frequencia você realiza atividades físicas?" 
+        <FormCard
+            title="Com que frequencia você realiza atividades físicas?"
             description="Entender seu nível de atividade nos ajuda a ajustar sua dieta e metas."
+            percentageOfFomsCompletion={40}
         >
             <RadioContainer>
                 <input id="0" type="radio" />
