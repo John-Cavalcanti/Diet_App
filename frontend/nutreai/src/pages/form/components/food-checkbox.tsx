@@ -32,8 +32,8 @@ const Button = styled.div`
         background-color: ${({theme}) => theme["green-100"]};
     }
 
-  &[data-state='checked'] {
-    background-color: ${({theme}) => theme["green-100"]};
-    border: 2px solid ${({ theme }) => theme["green-700"]};
-  }
+    &[data-state='checked'] {
+        background-color: ${({theme}) => theme["green-100"]};
+        border: 2px solid ${({ theme }) => theme["green-700"]};
+    }
 `
