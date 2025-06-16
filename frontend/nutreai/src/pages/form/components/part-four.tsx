@@ -1,11 +1,12 @@
-import styled from "styled-components";
-import { FormCard } from "./form-card";
+import styled from "styled-components"
+import { FormCard } from "./form-card"
 
 export function PartFour() {
     return (
         <FormCard
             title={"Você possui alguma restrição alimentar?"}
             description={"Informe se possui alergias, intolerâncias ou adota uma dieta específica (vegetariana, vegana etc.). "}
+            percentageOfFomsCompletion={80}
         >
             <CheckboxContainer>
                 <input id="lactose-intolerance" type="checkbox" />
