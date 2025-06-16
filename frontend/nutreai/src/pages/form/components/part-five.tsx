@@ -1,47 +1,48 @@
-import { FoodCheckbox } from "./food-checkbox";
-import { FormCard } from "./form-card";
-import styled from "styled-components";
+import { FoodCheckbox } from "./food-checkbox"
+import { FormCard } from "./form-card"
+import styled from "styled-components"
 
 export function PartFive() {
     return (
-        <FormCard
-            title={"Quais alimentos você gosta?"}
-            description={"Isso nos ajuda a montar refeições que combinam com seu paladar."}
-        >
-            <CheckBoxContainer>
-                <FoodCheckbox>
-                    <p><span>🍗</span>Frango</p>
-                </FoodCheckbox>
-                <FoodCheckbox>
-                    <p><span>🍚</span>Arroz</p>
-                </FoodCheckbox>
-                <FoodCheckbox>
-                    <p><span>🍓</span>Morango</p>
-                </FoodCheckbox>
-                <FoodCheckbox>
-                    <p><span>🍞</span>Pão</p>
-                </FoodCheckbox>
-                <FoodCheckbox>
-                    <p><span>🐟</span>Peixe</p>
-                </FoodCheckbox>
-                <FoodCheckbox>
-                    <p><span>🍌</span>Banana</p>
-                </FoodCheckbox>
-                <FoodCheckbox>
-                    <p><span>🥚</span>Ovo</p>
-                </FoodCheckbox>
-                <FoodCheckbox>
-                    <p><span>🥑</span>Abacate</p>
-                </FoodCheckbox>
-                <FoodCheckbox>
-                    <p><span>🍝</span>Macarrão</p>
-                </FoodCheckbox>
-            </CheckBoxContainer>
+            <FormCard
+                title={"Quais alimentos você gosta?"}
+                description={"Isso nos ajuda a montar refeições que combinam com seu paladar."}
+                percentageOfFomsCompletion={100}
+            >
+                <CheckBoxContainer>
+                    <FoodCheckbox>
+                        <p><span>🍗</span>Frango</p>
+                    </FoodCheckbox>
+                    <FoodCheckbox>
+                        <p><span>🍚</span>Arroz</p>
+                    </FoodCheckbox>
+                    <FoodCheckbox>
+                        <p><span>🍓</span>Morango</p>
+                    </FoodCheckbox>
+                    <FoodCheckbox>
+                        <p><span>🍞</span>Pão</p>
+                    </FoodCheckbox>
+                    <FoodCheckbox>
+                        <p><span>🐟</span>Peixe</p>
+                    </FoodCheckbox>
+                    <FoodCheckbox>
+                        <p><span>🍌</span>Banana</p>
+                    </FoodCheckbox>
+                    <FoodCheckbox>
+                        <p><span>🥚</span>Ovo</p>
+                    </FoodCheckbox>
+                    <FoodCheckbox>
+                        <p><span>🥑</span>Abacate</p>
+                    </FoodCheckbox>
+                    <FoodCheckbox>
+                        <p><span>🍝</span>Macarrão</p>
+                    </FoodCheckbox>
+                </CheckBoxContainer>
 
-            <AddFavoriteFoodButton>
-                <p>+ Adicionar alimento favorito<span>🍽️</span></p>
-            </AddFavoriteFoodButton>
-        </FormCard>
+                <AddFavoriteFoodButton>
+                    <p>+ Adicionar alimento favorito<span>🍽️</span></p>
+                </AddFavoriteFoodButton>
+            </FormCard>
     )
 }
 
@@ -57,7 +58,7 @@ const AddFavoriteFoodButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 10rem;
+    width: 12rem;
 
     padding-block: 0.5rem;
 
@@ -76,6 +77,6 @@ const AddFavoriteFoodButton = styled.button`
     transition: 1s;
 
     &:hover {
-        background-color: ${({theme}) => theme["green-100"]};
+        background-color: ${({ theme }) => theme["green-100"]};
     }
 `
