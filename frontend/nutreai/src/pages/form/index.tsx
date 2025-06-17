@@ -10,6 +10,8 @@ import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { postForm } from "../../services/form"
+import { useUsersInformations } from "../../contexts/user-informations"
+import { useNavigate } from "react-router-dom"
 
 const DietFormSchema = z.object({
     email: z.string(),
@@ -26,7 +28,9 @@ const DietFormSchema = z.object({
 export type DietFormItems = z.infer<typeof DietFormSchema>
 
 export function DietForm() {
+    const { createUser } = useUsersInformations()
     const { step } = useFormSteps()
+    const navigate = useNavigate();
 
     const formMethods = useForm<DietFormItems>({
         resolver: zodResolver(DietFormSchema)
@@ -53,13 +57,14 @@ export function DietForm() {
         }
     }
 
-    const handleFormSubmit: SubmitHandler<DietFormItems> = (data) => {
+    const handleFormSubmit: SubmitHandler<DietFormItems> = async (data) => {
         const preferencies = data.foodPreferences.join(", ")
         const restrictions = data.foodRestrictions.join(", ")
         const weightNumber = Number(data.weight)
         const heightNumber = Number(data.height)
         const birthdayISO = new Date(data.birthday).toISOString()
-        postForm({
+        
+        const userId = await postForm({
             name: data.name,
             email: data.email,
             birthday: birthdayISO,
@@ -70,6 +75,11 @@ export function DietForm() {
             foodPreferences: preferencies,
             foodRestrictions: restrictions
         })
+
+        if(userId != undefined){
+            createUser(userId!)
+            navigate("/weekly-diet-confirmation");
+        }
     }
 
     return (
