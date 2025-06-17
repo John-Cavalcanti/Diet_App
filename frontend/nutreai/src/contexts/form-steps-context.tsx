@@ -10,8 +10,6 @@ const FormStepsContext = createContext({} as FormStepsContextProps)
 export function FormStepsProvider({ children }: { children: ReactNode }) {
     const [step, setStep] = useState<number>(0)
 
-    console.log(step)
-
     function handleNextStep () {
         if(step <= 3){
             setStep(state => state + 1)
