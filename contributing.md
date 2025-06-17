@@ -160,3 +160,52 @@ Server is running on port: https://localhost:5000/api
 Você pode checar se o código está funcionando acessando a url providenciada pelo NestJS em seu terminal
 
 ## Rodando o código - Frontend (React)
+
+O código do frontend foi criado com React.js. Para que seja possível rodá-lo é preciso ter instalado o node.js e o npm.
+
+Para instalar o node em seu computador siga as intruções do [site oficial do node.js](https://nodejs.org/pt/download)
+
+Após sua instalação você pode verificar se o nodejs está instalado com o comando
+
+```bash
+node -v
+```
+
+O código do fronten está localizado no diretório frontend/nutreai contando da raiz do projeto
+Portanto para que seja possível rodá-lo certifique-se que o seu terminal esteja neste diretório com o comando 
+
+```bash
+pwd
+```
+
+Caso esteja na raiz do repositório execute 
+
+```bash
+cd frontend/nutreai
+```
+
+Instale as dependências com o comando (isto deve demorar alguns minutos)
+
+```bash
+npm install
+```
+
+Por último rode o código com o comando
+
+```bash
+npm run dev
+```
+
+Deve aparecer algo como isso no seu terminal:
+
+```bash
+10:49:59 [vite] (client) Re-optimizing dependencies because lockfile has changed
+
+  VITE v6.3.5  ready in 228 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
+
+Para abrir o site no navegador, basta clicar em http://localhost:5173/ segurando o ctrl, ou acessar diretamente http://localhost:5173/ do seu navegador
