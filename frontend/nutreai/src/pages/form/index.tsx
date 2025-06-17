@@ -6,9 +6,34 @@ import { PartTwo } from "./components/part-two"
 import { PartThree } from "./components/part-three"
 import { PartFour } from "./components/part-four"
 import { PartFive } from "./components/part-five"
+import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+
+const DietFormSchema = z.object({
+    email: z.string(),
+    name: z.string(),
+    birthday: z.string(),
+    height: z.string(),
+    weight: z.string(),
+    workoutsFrequency: z.string(),
+    goals: z.string(),
+    foodRestrictions: z.array(z.string()),
+    foodPreferences: z.array(z.string()),
+})
+
+export type DietFormItems = z.infer<typeof DietFormSchema>
 
 export function DietForm() {
     const { step } = useFormSteps()
+
+    const formMethods = useForm<DietFormItems>({
+        resolver: zodResolver(DietFormSchema)
+    })
+
+    const { handleSubmit, formState: { errors } } = formMethods
+
+    console.log(errors)
 
     const renderStep = () => {
         switch (step) {
@@ -27,11 +52,19 @@ export function DietForm() {
         }
     }
 
+    const handleFormSubmit: SubmitHandler<DietFormItems> = (data) => {
+        console.log("Dados enviados:", data)
+    }
+
     return (
-        <Container>
-            <Header />
-            {renderStep()}
-        </Container>
+        <FormProvider {...formMethods}>
+            <Container>
+                <Header />
+                <form id="diet" onSubmit={handleSubmit(handleFormSubmit)}>
+                    {renderStep()}
+                </form>
+            </Container>
+        </FormProvider>
     )
 }
 

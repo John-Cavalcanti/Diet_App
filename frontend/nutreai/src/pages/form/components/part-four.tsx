@@ -1,7 +1,10 @@
 import styled from "styled-components"
 import { FormCard } from "./form-card"
+import { useFormContext } from "react-hook-form"
+import { type DietFormItems } from ".."
 
 export function PartFour() {
+    const { register } = useFormContext<DietFormItems>()
     return (
         <FormCard
             title={"Você possui alguma restrição alimentar?"}
@@ -9,20 +12,40 @@ export function PartFour() {
             percentageOfFomsCompletion={80}
         >
             <CheckboxContainer>
-                <input id="lactose-intolerance" type="checkbox" />
-                <label htmlFor="lactose-intolerance">Intolerância à lactose</label>
+                <input 
+                    id="Intolerância a lactose" 
+                    type="checkbox" 
+                    value="Intolerância a lactose"
+                    {...register('foodRestrictions')}
+                />
+                <label htmlFor="Intolerância a lactose">Intolerância à lactose</label>
             </CheckboxContainer>
             <CheckboxContainer>
-                <input id="gluten-alergy" type="checkbox" />
-                <label htmlFor="gluten-alergy">Alergia ao glúten</label>
+                <input 
+                    id="Alergia ao gluten"
+                    type="checkbox" 
+                    value="Alergia ao gluten"
+                    {...register('foodRestrictions')} 
+                />
+                <label htmlFor="Alergia ao gluten">Alergia ao glúten</label>
             </CheckboxContainer>
             <CheckboxContainer>
-                <input id="vegeterian-diet" type="checkbox" />
-                <label htmlFor="vegeterian-diet">Dieta vegetariana</label>
+                <input 
+                    id="Dieta vegetariana" 
+                    type="checkbox" 
+                    value="Dieta vegetariana"
+                    {...register('foodRestrictions')} 
+                />
+                <label htmlFor="Dieta vegetariana">Dieta vegetariana</label>
             </CheckboxContainer>
             <CheckboxContainer>
-                <input id="vegan-diet" type="checkbox" />
-                <label htmlFor="vegan-diet">Dieta vegana</label>
+                <input 
+                    id="Dieta vegana" 
+                    type="checkbox" 
+                    value="Dieta vegana"
+                    {...register('foodRestrictions')} 
+                />
+                <label htmlFor="Dieta vegana">Dieta vegana</label>
             </CheckboxContainer>
         </FormCard>
     )

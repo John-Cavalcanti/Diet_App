@@ -1,48 +1,71 @@
+import { Controller, useFormContext } from "react-hook-form"
 import { FoodCheckbox } from "./food-checkbox"
 import { FormCard } from "./form-card"
 import styled from "styled-components"
+import { type DietFormItems } from ".."
 
 export function PartFive() {
+    const { control } = useFormContext<DietFormItems>()
     return (
-            <FormCard
-                title={"Quais alimentos você gosta?"}
-                description={"Isso nos ajuda a montar refeições que combinam com seu paladar."}
-                percentageOfFomsCompletion={100}
-            >
-                <CheckBoxContainer>
-                    <FoodCheckbox>
-                        <p><span>🍗</span>Frango</p>
-                    </FoodCheckbox>
-                    <FoodCheckbox>
-                        <p><span>🍚</span>Arroz</p>
-                    </FoodCheckbox>
-                    <FoodCheckbox>
-                        <p><span>🍓</span>Morango</p>
-                    </FoodCheckbox>
-                    <FoodCheckbox>
-                        <p><span>🍞</span>Pão</p>
-                    </FoodCheckbox>
-                    <FoodCheckbox>
-                        <p><span>🐟</span>Peixe</p>
-                    </FoodCheckbox>
-                    <FoodCheckbox>
-                        <p><span>🍌</span>Banana</p>
-                    </FoodCheckbox>
-                    <FoodCheckbox>
-                        <p><span>🥚</span>Ovo</p>
-                    </FoodCheckbox>
-                    <FoodCheckbox>
-                        <p><span>🥑</span>Abacate</p>
-                    </FoodCheckbox>
-                    <FoodCheckbox>
-                        <p><span>🍝</span>Macarrão</p>
-                    </FoodCheckbox>
-                </CheckBoxContainer>
+        <FormCard
+            title={"Quais alimentos você gosta?"}
+            description={"Isso nos ajuda a montar refeições que combinam com seu paladar."}
+            percentageOfFomsCompletion={100}
+        >
+            <Controller
+                control={control}
+                name="foodPreferences"
+                defaultValue={[]}
+                render={({ field }) => {
+                    const { value, onChange } = field
 
-                <AddFavoriteFoodButton>
-                    <p>+ Adicionar alimento favorito<span>🍽️</span></p>
-                </AddFavoriteFoodButton>
-            </FormCard>
+                    const toggle = (item: string) => {
+                        if (value.includes(item)) {
+                            onChange(value.filter((v: string) => v !== item))
+                        } else {
+                            onChange([...value, item])
+                        }
+                    }
+
+                    return (
+                        <CheckBoxContainer>
+                            <FoodCheckbox value="Frango" onCheckedChange={toggle}>
+                                <p><span>🍗</span>Frango</p>
+                            </FoodCheckbox >
+                            <FoodCheckbox value="Arroz"  onCheckedChange={toggle}>
+                                <p><span>🍚</span>Arroz</p>
+                            </FoodCheckbox>
+                            <FoodCheckbox value="Morango"  onCheckedChange={toggle}>
+                                <p><span>🍓</span>Morango</p>
+                            </FoodCheckbox>
+                            <FoodCheckbox value="Pao"  onCheckedChange={toggle}>
+                                <p><span>🍞</span>Pão</p>
+                            </FoodCheckbox>
+                            <FoodCheckbox value="Peixe"  onCheckedChange={toggle}>
+                                <p><span>🐟</span>Peixe</p>
+                            </FoodCheckbox>
+                            <FoodCheckbox value="Banana"  onCheckedChange={toggle}>
+                                <p><span>🍌</span>Banana</p>
+                            </FoodCheckbox>
+                            <FoodCheckbox value="Ovo"  onCheckedChange={toggle}>
+                                <p><span>🥚</span>Ovo</p>
+                            </FoodCheckbox>
+                            <FoodCheckbox value="Abacate"  onCheckedChange={toggle}>
+                                <p><span>🥑</span>Abacate</p>
+                            </FoodCheckbox>
+                            <FoodCheckbox value="Macarrao"  onCheckedChange={toggle}>
+                                <p><span>🍝</span>Macarrão</p>
+                            </FoodCheckbox>
+                        </CheckBoxContainer>
+                    )
+                }}
+            />
+
+
+            <AddFavoriteFoodButton>
+                <p>+ Adicionar alimento favorito<span>🍽️</span></p>
+            </AddFavoriteFoodButton>
+        </FormCard>
     )
 }
 

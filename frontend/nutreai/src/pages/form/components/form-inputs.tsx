@@ -1,14 +1,17 @@
+import { useFormContext } from 'react-hook-form'
 import styled from 'styled-components'
 
 interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement>{
+    id: string
     label: string
 }
 
 export function FormInput({id, placeholder, label}: FormInputProps) {
+    const { register } = useFormContext()
     return (
         <Container>
             <Label htmlFor={id}>{label}</Label>
-            <Input id={id} placeholder={placeholder} />
+            <Input id={id} placeholder={placeholder} {...register(id)}/>
         </Container>
     )
 }

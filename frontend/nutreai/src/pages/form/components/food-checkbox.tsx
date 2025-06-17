@@ -4,10 +4,15 @@ import styled from "styled-components";
 
 interface FoodCheckBoxProps {
     children: ReactNode
+    value: string
+    onCheckedChange: (item: string) => void
 }
-export function FoodCheckbox({ children }: FoodCheckBoxProps) {
+export function FoodCheckbox({ children, value, onCheckedChange }: FoodCheckBoxProps) {
+    const handleChange = (checked: boolean) => {
+        onCheckedChange(value)
+    }
     return (
-        <Checkbox.Root asChild>
+        <Checkbox.Root asChild value={value} onCheckedChange={handleChange}>
             <Button>{children}</Button>
         </Checkbox.Root>
     )

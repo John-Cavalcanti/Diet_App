@@ -1,8 +1,12 @@
 import styled from "styled-components"
 import { FormCard } from "./form-card"
 import { FormInput } from "./form-inputs"
+import { useFormContext } from "react-hook-form"
+import { type DietFormItems } from ".."
 
 export function PartOne() {
+    const { register } = useFormContext<DietFormItems>()
+
     return (
         <FormCard
             title="Vamos te conhecer melhor!"
@@ -10,12 +14,38 @@ export function PartOne() {
             percentageOfFomsCompletion={20}
         >
             <InputsContainer>
-                <FormInput id="nome" label={"Nome"} placeholder="Nome" />
-                <FormInput id="email" label={"Email"} placeholder="Email" />
-                <FormInput id="dataNasc" label={"Data de nascimento"} placeholder="dd/mm/aaaa" type="date" />
-                <FormInput id="peso" label={"Peso"} placeholder="0.00kg" type="number" />
-                <FormInput id="altura" label={"Altura"} placeholder="Altura (centímetros)" />
-                <FormInput id="sexo" label={"Sexo"} placeholder="Sexo" />
+                <FormInput 
+                    id="name" 
+                    label={"Nome"} 
+                    placeholder="Nome" 
+                />
+                <FormInput 
+                    id="email" 
+                    label={"Email"} 
+                    placeholder="Email" 
+                />
+                <FormInput 
+                    id="birthday" 
+                    label={"Data de nascimento"} 
+                    placeholder="dd/mm/aaaa" 
+                    type="date" 
+                />
+                <FormInput 
+                    id="weight" 
+                    label={"Peso"} 
+                    placeholder="0.00kg" 
+                    type="number" 
+                />
+                <FormInput 
+                    id="height" 
+                    label={"Altura"} 
+                    placeholder="Altura (centímetros)" 
+                />
+                <FormInput 
+                    id="sexo" 
+                    label={"Sexo"} 
+                    placeholder="Sexo"
+                />
             </InputsContainer>
         </FormCard>
     )

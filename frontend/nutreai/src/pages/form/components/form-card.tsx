@@ -15,6 +15,10 @@ interface FormCardProps {
 export function FormCard({ title, description, percentageOfFomsCompletion, children }: FormCardProps) {
     const { handlePreviuosStep, handleNextStep } = useFormSteps()
 
+    const isLastStep = percentageOfFomsCompletion == 100 ? true : false
+
+    console.log(isLastStep)
+
     return (
         <div>
             <ProgressBar percentage={percentageOfFomsCompletion} />
@@ -24,7 +28,13 @@ export function FormCard({ title, description, percentageOfFomsCompletion, child
                 {children}
                 <ButtonsContainer>
                     <SecondaryButton onClick={handlePreviuosStep}>Voltar</SecondaryButton>
-                    <PrimaryButton onClick={handleNextStep}>Próximo</PrimaryButton>
+                    {
+                        isLastStep ?
+                            <PrimaryButton type='submit'>Enviar</PrimaryButton>
+                        :
+                            <PrimaryButton onClick={handleNextStep}>Próximo</PrimaryButton>
+                    }
+                    
                 </ButtonsContainer>
             </Container>
         </div>
