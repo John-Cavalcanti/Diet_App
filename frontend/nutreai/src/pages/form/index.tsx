@@ -40,7 +40,8 @@ const Container = styled.div`
     flex-direction: column;
 
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     background: ${({ theme }) => theme["background-color"]};
 
     gap: 3rem;
