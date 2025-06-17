@@ -1,27 +1,15 @@
+import type { WeeklyDiet } from "../../@types/meal-plan"
 import api from "../axios"
 
-interface Meal {
-    tipoRefeicao: string,
-    descricao: string,
-    calorias: number,
-    carboidratos: number,
-    proteinas: number,
-    gorduras: number
+interface postWeekltDietProps {
+    userId: number
 }
 
-interface PostWeeklyDietResponse {
-    segunda: Meal[],
-    terca: Meal[],
-    quarta: Meal[],
-    quinta: Meal[],
-    sexta: Meal[],
-    sabado: Meal[],
-    domingo: Meal[]
-}
-
-export async function postWeeklyDiet(userId: number) {
+export async function postWeeklyDiet(userId: postWeekltDietProps) {
+    console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB')
+    console.log()
     try {
-        const response = await api.post<PostWeeklyDietResponse>('/api/weekly-diet', userId)
+        const response = await api.post<WeeklyDiet>('/api/weekly-diet', userId)
         console.log('Sucesso:', response.data)
         return response.data
     } catch (error: any) {

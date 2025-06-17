@@ -63,20 +63,22 @@ export function DietForm() {
         const weightNumber = Number(data.weight)
         const heightNumber = Number(data.height)
         const birthdayISO = new Date(data.birthday).toISOString()
-        
+
         const userId = await postForm({
             name: data.name,
             email: data.email,
             birthday: birthdayISO,
-            height: weightNumber,
-            weight: heightNumber,
+            height: heightNumber,
+            weight: weightNumber,
             workoutsFrequency: data.workoutsFrequency,
             goals: data.goals,
             foodPreferences: preferencies,
             foodRestrictions: restrictions
         })
 
-        if(userId != undefined){
+        console.log(userId)
+
+        if (userId != undefined) {
             createUser(userId!)
             navigate("/weekly-diet-confirmation");
         }

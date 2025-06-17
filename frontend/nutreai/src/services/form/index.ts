@@ -13,7 +13,7 @@ interface PostFormProps {
 }
 
 interface PostFormResponse {
-	id: number,
+	_id: number,
 	name: string,
 	email: string,
 	birthday: string,
@@ -28,8 +28,8 @@ interface PostFormResponse {
 export async function postForm(dados: PostFormProps) {
     try {
         const response = await api.post<PostFormResponse>('/api/users', dados)
-        console.log('Sucesso:', response.data)
-        return response.data.id
+        console.log('Sucesso:', response.data._id)
+        return response.data._id
     } catch (error: any) {
         console.error('Erro ao enviar:', error.response?.data)
     }

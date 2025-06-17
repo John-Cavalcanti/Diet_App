@@ -1,4 +1,4 @@
-import { createContext, useContext, type ReactNode } from "react"
+import { createContext, useContext, useState, type ReactNode } from "react"
 interface UsersInformationsContextProps {
     id: number | undefined
     createUser: (id: number) => void
@@ -7,10 +7,10 @@ interface UsersInformationsContextProps {
 const UsersInformationsContext = createContext({} as UsersInformationsContextProps)
 
 export function UsersInformationsProvider({ children }: { children: ReactNode }) {
-    const id: number | undefined = undefined
+    const [id, setId] = useState<number | undefined>(0)
 
     function createUser(id: number) {
-        id = id
+        setId(id)
     }
 
     return (
