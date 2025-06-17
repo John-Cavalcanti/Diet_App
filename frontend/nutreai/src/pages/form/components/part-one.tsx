@@ -1,12 +1,8 @@
 import styled from "styled-components"
 import { FormCard } from "./form-card"
 import { FormInput } from "./form-inputs"
-import { useFormContext } from "react-hook-form"
-import { type DietFormItems } from ".."
 
 export function PartOne() {
-    const { register } = useFormContext<DietFormItems>()
-
     return (
         <FormCard
             title="Vamos te conhecer melhor!"

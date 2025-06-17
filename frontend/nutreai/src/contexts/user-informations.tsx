@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react"
+import { createContext, useContext, type ReactNode } from "react"
 interface UsersInformationsContextProps {
     id: number | undefined
     createUser: (id: number) => void
