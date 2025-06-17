@@ -40,6 +40,7 @@ export function PartOne() {
                     id="height" 
                     label={"Altura"} 
                     placeholder="Altura (centímetros)" 
+                    type="number"
                 />
                 <FormInput 
                     id="sexo" 
