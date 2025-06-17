@@ -202,6 +202,6 @@ const Description = styled.p`
 
 const BackgroundImage = styled.img`
     position: absolute;
-    bottom: -29.5rem;
+    bottom: -32.25rem;
     right: 0;
 `
