@@ -1,49 +1,36 @@
-import { createContext, useState, type ReactNode } from "react";
-import { PartOne } from "../pages/form/components/part-one";
-import { PartTwo } from "../pages/form/components/part-two";
-import { PartThree } from "../pages/form/components/part-three";
-import { PartFour } from "../pages/form/components/part-four";
-import { PartFive } from "../pages/form/components/part-five";
-
+import { createContext, useContext, useState, type ReactNode } from "react"
 interface FormStepsContextProps {
-    renderStep: () => ReactNode
+    step: number
     handlePreviuosStep: () => void
     handleNextStep: () => void
 }
 
-export const FormStepsContext = createContext({} as FormStepsContextProps)
+const FormStepsContext = createContext({} as FormStepsContextProps)
 
 export function FormStepsProvider({ children }: { children: ReactNode }) {
-        const [step, setStep] = useState(0)
+    const [step, setStep] = useState<number>(0)
+
+    console.log(step)
 
     function handleNextStep () {
-        setStep(state => state + 1)
+        if(step <= 3){
+            setStep(state => state + 1)
+            console.log(step)
+        }
     }
 
     function handlePreviuosStep () {
-        setStep(state => state - 1)
-    }
-
-    const renderStep = () => {
-        switch (step) {
-            case 0:
-                return <PartOne />
-            case 1:
-                return <PartTwo />
-            case 2:
-                return <PartThree />
-            case 3:
-                return <PartFour />
-            case 4:
-                return <PartFive />
-            default:
-                return <PartOne />
+        if (step >= 1){
+            setStep(state => state - 1)
+            console.log(step)
         }
     }
 
     return (
-        <FormStepsContext.Provider value={{renderStep, handlePreviuosStep, handleNextStep}}>
+        <FormStepsContext.Provider value={{step, handlePreviuosStep, handleNextStep}}>
             { children }
         </FormStepsContext.Provider>
     )
 }
+
+export const useFormSteps = () => useContext(FormStepsContext)

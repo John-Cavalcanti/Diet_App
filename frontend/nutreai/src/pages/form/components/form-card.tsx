@@ -1,9 +1,9 @@
-import { useContext, type ReactNode } from "react"
+import { type ReactNode } from "react"
 import styled from "styled-components"
 import { PrimaryButton } from "../../../componens/primary-button"
 import { SecondaryButton } from "../../../componens/secondary-button"
 import { ProgressBar } from "../../../componens/progress-bar"
-import { FormStepsContext } from "../../../contexts/form-steps-context"
+import { useFormSteps } from "../../../contexts/form-steps-context"
 
 interface FormCardProps {
     children: ReactNode
@@ -13,7 +13,7 @@ interface FormCardProps {
 }
 
 export function FormCard({ title, description, percentageOfFomsCompletion, children }: FormCardProps) {
-    const { handlePreviuosStep, handleNextStep } = useContext(FormStepsContext)
+    const { handlePreviuosStep, handleNextStep } = useFormSteps()
 
     return (
         <div>
