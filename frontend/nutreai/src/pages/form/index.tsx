@@ -9,6 +9,7 @@ import { PartFive } from "./components/part-five"
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { postForm } from "../../services/form"
 
 const DietFormSchema = z.object({
     email: z.string(),
@@ -53,7 +54,22 @@ export function DietForm() {
     }
 
     const handleFormSubmit: SubmitHandler<DietFormItems> = (data) => {
-        console.log("Dados enviados:", data)
+        const preferencies = data.foodPreferences.join(", ")
+        const restrictions = data.foodRestrictions.join(", ")
+        const weightNumber = Number(data.weight)
+        const heightNumber = Number(data.height)
+        const birthdayISO = new Date(data.birthday).toISOString()
+        postForm({
+            name: data.name,
+            email: data.email,
+            birthday: birthdayISO,
+            height: weightNumber,
+            weight: heightNumber,
+            workoutsFrequency: data.workoutsFrequency,
+            goals: data.goals,
+            foodPreferences: preferencies,
+            foodRestrictions: restrictions
+        })
     }
 
     return (
