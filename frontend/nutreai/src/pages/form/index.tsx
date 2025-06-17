@@ -76,8 +76,6 @@ export function DietForm() {
             foodRestrictions: restrictions
         })
 
-        console.log(userId)
-
         if (userId != undefined) {
             createUser(userId!)
             navigate("/weekly-diet-confirmation");

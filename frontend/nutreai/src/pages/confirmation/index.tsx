@@ -39,8 +39,6 @@ export function Confirmation() {
     };
 
     useEffect(() => {
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-        console.log(id)
         const fetchMealPlan = async () => {
             if (id) {
                 try {
@@ -77,9 +75,6 @@ export function Confirmation() {
                                 <li><span>Opção {i + 1}:</span>{opcao.descricao}</li>
                             ))
                         }
-                        {/* <li><span>Opção 1:</span> 2 ovos mexidos com 1 fatia de pão integral (50g) e 1 fruta (ex: banana, maçã ou 1 xícara de morangos).</li>
-                        <li><span>Opção 2:</span>Vitamina com 1 scoop de whey protein, 200ml de leite desnatado ou bebida vegetal, 1/2 banana e 1 colher de sopa de aveia.</li>
-                        <li><span>Opção 3:</span>1 xícara de iogurte natural desnatado (170g) com 3 colheres de sopa de granola sem açúcar e 1/2 xícara de frutas vermelhas</li> */}
                     </MealList>
                     <Bar />
                     <MealTitle><img src={almoco} />Almoço</MealTitle>
@@ -89,9 +84,6 @@ export function Confirmation() {
                                 <li><span>Opção {i + 1}:</span>{opcao.descricao}</li>
                             ))
                         }
-                        {/* <li><span>Opção 1:</span>120g de peito de frango grelhado ou assado, 4 colheres de sopa de arroz integral, 1 concha média de feijão e salada à vontade (folhas verdes, tomate, pepino, cenoura ralada) com 1 colher de sopa de azeite</li>
-                        <li><span>Opção 2:</span>150g de peixe assado ou cozido, 3 colheres de sopa de purê de batata doce e brócolis cozido no vapor ou salada à vontade com 1 colher de sopa de azeite.</li>
-                        <li><span>Opção 3:</span>120g de carne magra (patinho, alcatra) grelhada, 4 colheres de sopa de quinoa cozida e salada colorida (alface, tomate, milho, ervilha, beterraba) com 1 colher de sopa de azeite.</li> */}
                     </MealList>
                     <Bar />
                     <MealTitle><img src={jantar} />Jantar</MealTitle>
@@ -101,9 +93,6 @@ export function Confirmation() {
                                 <li><span>Opção {i + 1}:</span>{opcao.descricao}</li>
                             ))
                         }
-                        {/* <li><span>Opção 1:</span>1 banana com 1 colher de sopa de pasta de amendoim integral</li>
-                        <li><span>Opção 2:</span>1 fatia de pão integral com 1 fatia de peito de peru light.</li>
-                        <li><span>Opção 3:</span>1 iogurte natural desnatado com 1/2 xícara de frutas.</li> */}
                     </MealList>
                     <Bar />
                     <MealTitle><img src={lanche} />Lanches</MealTitle>
@@ -113,9 +102,6 @@ export function Confirmation() {
                                 <li><span>Opção {i + 1}:</span>{opcao.descricao}</li>
                             ))
                         }
-                        {/* <li><span>Opção 1:</span>120g de peito de frango desfiado com legumes variados (cenoura, abobrinha, couve-flor) refogados em - pouco azeite.</li>
-                        <li><span>Opção 2:</span>Sopa de legumes com cubos de frango ou carne magra.</li>
-                        <li><span>Opção 3:</span>Omelete de 2 ovos com queijo branco e espinafre, acompanhado de salada verde.</li> */}
                     </MealList>
                 </MealPlanCard>
             </Card>

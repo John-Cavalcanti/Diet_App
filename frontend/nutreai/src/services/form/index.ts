@@ -28,7 +28,6 @@ interface PostFormResponse {
 export async function postForm(dados: PostFormProps) {
     try {
         const response = await api.post<PostFormResponse>('/api/users', dados)
-        console.log('Sucesso:', response.data._id)
         return response.data._id
     } catch (error: any) {
         console.error('Erro ao enviar:', error.response?.data)
