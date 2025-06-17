@@ -1,8 +1,9 @@
-import type { ReactNode } from "react";
-import styled from "styled-components";
-import { PrimaryButton } from "../../../componens/primary-button";
-import { SecondaryButton } from "../../../componens/secondary-button";
-import { ProgressBar } from "../../../componens/progress-bar";
+import { useContext, type ReactNode } from "react"
+import styled from "styled-components"
+import { PrimaryButton } from "../../../componens/primary-button"
+import { SecondaryButton } from "../../../componens/secondary-button"
+import { ProgressBar } from "../../../componens/progress-bar"
+import { FormStepsContext } from "../../../contexts/form-steps-context"
 
 interface FormCardProps {
     children: ReactNode
@@ -10,7 +11,10 @@ interface FormCardProps {
     description: string
     percentageOfFomsCompletion: number
 }
+
 export function FormCard({ title, description, percentageOfFomsCompletion, children }: FormCardProps) {
+    const { handlePreviuosStep, handleNextStep } = useContext(FormStepsContext)
+
     return (
         <div>
             <ProgressBar percentage={percentageOfFomsCompletion} />
@@ -19,8 +23,8 @@ export function FormCard({ title, description, percentageOfFomsCompletion, child
                 <Description>{description}</Description>
                 {children}
                 <ButtonsContainer>
-                    <SecondaryButton>Voltar</SecondaryButton>
-                    <PrimaryButton>Próximo</PrimaryButton>
+                    <SecondaryButton onClick={handlePreviuosStep}>Voltar</SecondaryButton>
+                    <PrimaryButton onClick={handleNextStep}>Próximo</PrimaryButton>
                 </ButtonsContainer>
             </Container>
         </div>
