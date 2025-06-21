@@ -6,12 +6,12 @@ interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement>{
     label: string
 }
 
-export function FormInput({id, placeholder, label}: FormInputProps) {
+export function FormInput({id, placeholder, label, onChange}: FormInputProps) {
     const { register } = useFormContext()
     return (
         <Container>
             <Label htmlFor={id}>{label}</Label>
-            <Input id={id} placeholder={placeholder} {...register(id)}/>
+            <Input id={id} placeholder={placeholder} {...register(id)} onChange={onChange} />
         </Container>
     )
 }
