@@ -17,8 +17,6 @@ export function FormCard({ title, description, percentageOfFomsCompletion, child
 
     const isLastStep = percentageOfFomsCompletion == 100 ? true : false
 
-    console.log(isLastStep)
-
     return (
         <div>
             <ProgressBar percentage={percentageOfFomsCompletion} />
