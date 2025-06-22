@@ -4,6 +4,7 @@ import { PrimaryButton } from "../../../componens/primary-button"
 import { SecondaryButton } from "../../../componens/secondary-button"
 import { ProgressBar } from "../../../componens/progress-bar"
 import { useFormSteps } from "../../../contexts/form-steps-context"
+import { Card } from "../../../componens/card"
 
 interface FormCardProps {
     children: ReactNode
@@ -18,28 +19,37 @@ export function FormCard({ title, description, percentageOfFomsCompletion, child
     const isLastStep = percentageOfFomsCompletion == 100 ? true : false
 
     return (
-        <div>
+        <Container>
             <ProgressBar percentage={percentageOfFomsCompletion} />
-            <Container>
-                <Title>{title}</Title>
-                <Description>{description}</Description>
-                {children}
-                <ButtonsContainer>
-                    <SecondaryButton onClick={handlePreviuosStep}>Voltar</SecondaryButton>
-                    {
-                        isLastStep ?
-                            <PrimaryButton type='submit'>Enviar</PrimaryButton>
-                        :
-                            <PrimaryButton onClick={handleNextStep}>Próximo</PrimaryButton>
-                    }
-                    
-                </ButtonsContainer>
-            </Container>
-        </div>
+            <Card>
+                <CardContainer>
+                    <Title>{title}</Title>
+                    <Description>{description}</Description>
+                    {children}
+                    <ButtonsContainer>
+                        <SecondaryButton onClick={handlePreviuosStep}>Voltar</SecondaryButton>
+                        {
+                            isLastStep ?
+                                <PrimaryButton type='submit'>Enviar</PrimaryButton>
+                                :
+                                <PrimaryButton onClick={handleNextStep}>Próximo</PrimaryButton>
+                        }
+
+                    </ButtonsContainer>
+                </CardContainer>
+            </Card>
+        </Container>
     )
 }
 
 const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+`
+
+const CardContainer = styled.div`
     width: 25rem;
     height: fit-content;
     min-height: 30rem;
@@ -49,11 +59,6 @@ const Container = styled.div`
 
     margin: auto;
     padding: 3.5rem;
-
-    background: white;
-
-    border-radius: 8px;
-    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2);
 `
 const Title = styled.h2`
     font-size: 1rem;
