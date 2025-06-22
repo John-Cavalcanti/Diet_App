@@ -20,6 +20,10 @@ export class UsersService {
     return this.userRepository.findUserById(id);
   }
 
+  findByEmail(email: string): User | undefined {
+    return this.userRepository.findByEmail(email);
+  }
+
   update(id: number, updateUserDto: UpdateUserDto) {
     const user = this.userRepository.updateUser(id, new User(updateUserDto));
     return user;
