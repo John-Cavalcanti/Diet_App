@@ -8,7 +8,8 @@ export class User {
   private _birthday: Date;
   private _weight: number;
   private _height: number;
-  
+  //private _password: string;
+
   private _workoutsFrequency: string;
 
   private _goals: string;
@@ -28,6 +29,7 @@ export class User {
     this._goals = dto.goals;
     this._foodRestrictions = dto.foodRestrictions;
     this._foodPreferences = dto.foodPreferences;
+    //this._password = dto.password;
   }
 
   getId(): number | null {
