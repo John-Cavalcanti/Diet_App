@@ -23,7 +23,8 @@ export class AuthService {
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
-}
+  }
+  
   async signUp(signUpDto: SignUpDto) {
     const user = /*await*/ this.usersService.findByEmail(signUpDto.email);
     // verifica se o cliente digitou um email já existente
@@ -34,12 +35,12 @@ export class AuthService {
     const hashedPassword: string = await bcrypt.hash(signUpDto.password, 10);
 
     const createUserDto: CreateUserDto = {
-        ...signUpDto,
-        password: hashedPassword,
+      ...signUpDto,
+      password: hashedPassword,
     }
 
     // finalmente cria o cliente no banco de dados / memória
     this.usersService.create(createUserDto);
- }
+  }
 
 }
