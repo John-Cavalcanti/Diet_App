@@ -24,7 +24,7 @@ export class AuthService {
       access_token: await this.jwtService.signAsync(payload),
     };
   }
-  
+
   async signUp(signUpDto: SignUpDto) {
     const user = /*await*/ this.usersService.findByEmail(signUpDto.email);
     // verifica se o cliente digitou um email já existente
