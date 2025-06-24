@@ -37,7 +37,7 @@ export class AuthService {
     const createUserDto: CreateUserDto = {
       ...signUpDto,
       password: hashedPassword,
-    }
+    };
 
     // finalmente cria o cliente no banco de dados / memória
     this.usersService.create(createUserDto);
