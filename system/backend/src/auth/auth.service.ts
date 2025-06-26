@@ -15,10 +15,16 @@ export class AuthService {
 
   async logIn(logInDto: LogInDto): Promise<{ access_token: string }> {
     const user = /*await*/ this.usersService.findByEmail(logInDto.email);
-    // if (user?.password !== logInDto.password) {
-    //   // User não tem atributo password? vai ser necessário criar
-    //   throw new UnauthorizedException();
-    // }
+    if (!user) {
+      throw new UnauthorizedException('Usuário não encontrado');
+    }
+
+    const passwordValid = await bcrypt.compare(logInDto.password, user.getPassword());
+
+    if (!passwordValid) {
+      throw new UnauthorizedException('A senha está incorreta');
+    }
+
     const payload = { sub: user?.getId(), email: user?.getEmail() };
     return {
       access_token: await this.jwtService.signAsync(payload),
@@ -42,5 +48,4 @@ export class AuthService {
     // finalmente cria o cliente no banco de dados / memória
     this.usersService.create(createUserDto);
   }
-
 }
