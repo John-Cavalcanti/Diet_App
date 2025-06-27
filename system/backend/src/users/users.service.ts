@@ -28,6 +28,7 @@ export class UsersService {
   async update(id: number, updateUserDto: UpdateUserDto) {
     const dto: UpdateUserDto = await this.encode(updateUserDto);
     const user = this.userRepository.updateUser(id, new User(dto));
+    // após update, o id do usuário fica null. necessário corrigir isso
     return user;
   }
 
