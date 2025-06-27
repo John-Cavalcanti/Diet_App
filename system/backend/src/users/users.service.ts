@@ -26,12 +26,12 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    const dto: UpdateUserDto = await this.decode(updateUserDto);
+    const dto: UpdateUserDto = await this.encode(updateUserDto);
     const user = this.userRepository.updateUser(id, new User(dto));
     return user;
   }
 
-  async decode(dto: UpdateUserDto): Promise<UpdateUserDto> {
+  async encode(dto: UpdateUserDto): Promise<UpdateUserDto> {
     const hashedPassword: string = await bcrypt.hash(dto.password, 10);
     const updateUserDto: UpdateUserDto = {
       ...dto,
