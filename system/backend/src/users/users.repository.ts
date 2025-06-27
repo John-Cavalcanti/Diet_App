@@ -29,6 +29,7 @@ export class UsersRepository {
   {
     const index = this.users.findIndex(user => user.getId() === id);
     this.users[index] = user;
+    user.setId(id);
     return user;
   }
 
