@@ -30,6 +30,7 @@ export class UsersRepository {
     const index = this.users.findIndex(user => user.getId() === id);
     this.users[index] = user;
     user.setId(id);
+    // quando update é usado, não é verificado se as informações "destino" já existem no banco de dados, deixando uma brecha para dois usuários com mesmo email
     return user;
   }
 
