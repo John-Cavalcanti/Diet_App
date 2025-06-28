@@ -1,5 +1,5 @@
-import { CreateUserDto } from "../dto/create-user.dto";
-import { UpdateUserDto } from "../dto/update-user.dto";
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
 
 export class User {
   private _id: number | null;
@@ -8,7 +8,8 @@ export class User {
   private _birthday: Date;
   private _weight: number;
   private _height: number;
-  
+  private _password: string;
+
   private _workoutsFrequency: string;
 
   private _goals: string;
@@ -28,6 +29,7 @@ export class User {
     this._goals = dto.goals;
     this._foodRestrictions = dto.foodRestrictions;
     this._foodPreferences = dto.foodPreferences;
+    this._password = dto.password;
   }
 
   getId(): number | null {
@@ -60,6 +62,10 @@ export class User {
 
   setHeight(height: number): void {
     this._height = height;
+  }
+
+  getPassword(): string {
+    return this._password;
   }
 
   getWeight(): number {
@@ -121,8 +127,7 @@ export class User {
       workoutsFrequency: this._workoutsFrequency,
       goals: this._goals,
       foodRestrictions: this._foodRestrictions,
-      foodPreferences: this._foodPreferences
+      foodPreferences: this._foodPreferences,
     };
   }
-
 }

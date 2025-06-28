@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateUserDto } from './create-user.dto';
-import { IsDateString, IsEmail, IsNotEmpty, IsOptional, Length } from 'class-validator';
+import { IsDateString, IsEmail, IsNotEmpty, IsOptional, Length, IsString, MinLength, Matches } from 'class-validator';
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsNotEmpty()
@@ -10,6 +10,15 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsNotEmpty()
   @IsEmail()
   email: string;
+
+  @IsNotEmpty()
+    @IsString()
+    @MinLength(8)
+    @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/, {
+      message:
+        'A senha deve conter pelo menos uma letra maiúscula, uma minúscula e um número',
+    })
+    password: string;
 
   @IsNotEmpty()
   @IsDateString()
