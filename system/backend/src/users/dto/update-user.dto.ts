@@ -85,6 +85,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     // eslint-disable-next-line prettier/prettier
     description: 'listagem dos alimentos e condimentos os quais o usuário tem restrição. É opcional, logo vazio implica em não há restrição',
     example: 'Lactose, nozes',
+    required: false,
   })
   @IsOptional()
   foodRestrictions?: string;
@@ -93,6 +94,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     // eslint-disable-next-line prettier/prettier
     description: 'breve descrição sobre preferência alimentar do usuário. É opcional, logo vazio implica em não há preferência',
     example: 'Vegetariana, prefere pratos quentes no almoço',
+    required: false,
   })
   @IsOptional()
   foodPreferences?: string;

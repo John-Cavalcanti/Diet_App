@@ -86,6 +86,7 @@ export class CreateUserDto {
   @ApiProperty({
     description: 'listagem dos alimentos e condimentos os quais o usuário tem restrição. É opcional, logo vazio implica em não há restrição',
     example: 'Lactose, nozes',
+    required: false,
   })
   @IsOptional()
   @IsString()
@@ -94,6 +95,7 @@ export class CreateUserDto {
   @ApiProperty({
     description: 'breve descrição sobre preferência alimentar do usuário. É opcional, logo vazio implica em não há preferência',
     example: 'Vegetariana, prefere pratos quentes no almoço',
+    required: false,
   })
   @IsOptional()
   @IsString()
