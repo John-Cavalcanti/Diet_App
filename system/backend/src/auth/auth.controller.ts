@@ -7,6 +7,7 @@ import { SignUpDto } from './dto/sign-up.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthSwaggerDocsLogIn } from './decorators/auth-swagger-login.decorators';
 import { AuthSwaggerDocsSignUp } from './decorators/auth-swagger-signup.decorators';
+import { AuthSwaggerDocsProfile } from './decorators/auth-swagger-profile.decorators';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -18,8 +19,9 @@ export class AuthController {
   @Post('login')
   logIn(@Body() logInDto: LogInDto) {
     return this.authService.logIn(logInDto);
-}
+  }
 
+  @AuthSwaggerDocsProfile()
   @UseGuards(AuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
