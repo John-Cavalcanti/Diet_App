@@ -26,7 +26,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Documentação com Swagger - Nutre.AI')
     .setDescription(
-      'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+      'Serviço backend da Nutre Aí responsável pela autenticação via JWT, gerenciamento de usuários e endpoints voltados ao acompanhamento nutricional e hábitos de saúde.'
     )
     .setVersion('1.0')
     .addTag('Auth')
