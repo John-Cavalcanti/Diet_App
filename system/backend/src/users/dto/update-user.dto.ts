@@ -30,7 +30,8 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   email: string;
 
   @ApiProperty({
-    description: 'utilizado para atualizar a senha do usuário',
+    // eslint-disable-next-line prettier/prettier
+    description: 'utilizado para atualizar a senha do usuário. deve ter ao menos 8 caracteres no geral, sendo 1 caractere minúsculo, 1 maiúsculo e 1 número',
     example: 'SenhaForte2024',
   })
   @IsNotEmpty()
