@@ -10,29 +10,28 @@ export class WeeklyDietService {
   constructor(
     private readonly aiService: AiService,
     private readonly mealsService: MealsService,
-    private readonly usersService: UsersService
+    private readonly usersService: UsersService,
+  ) {}
 
-  ){}
   async create(createWeeklyDietDto: CreateWeeklyDietDto) {
     const user = this.usersService.findOne(createWeeklyDietDto.userId);
     let userObj: any;
 
     if (!user) {
       throw new Error('User not found');
-    }else{
-      userObj = user.toObject();
+    } else {
+      userObj = user.toObject(); // o toObject vai precisar ter a senha como uma das chaves?
     }
 
-    const userData =
-    {
-      age : this.calculateAge(userObj.birthday),
-      weigth : userObj.weight,
-      height : userObj.height,
-      workouts : userObj.workoutsFrequency,
-      objetivo : userObj.goals,
-      restricoes : userObj.foodRestrictions,
-      alimentosFavoritos : userObj.foodPreferences
-    }
+    const userData = {
+      age: this.calculateAge(userObj.birthday),
+      weigth: userObj.weight,
+      height: userObj.height,
+      workouts: userObj.workoutsFrequency,
+      objetivo: userObj.goals,
+      restricoes: userObj.foodRestrictions,
+      alimentosFavoritos: userObj.foodPreferences,
+    };
 
     const aiResponse = await this.aiService.groqGenerateWeeklyDiet(userData);
 
@@ -51,20 +50,20 @@ export class WeeklyDietService {
   }
 
   private calculateAge(birthday: string | Date): number {
-  const birthDate = new Date(birthday);
-  const today = new Date();
+    const birthDate = new Date(birthday);
+    const today = new Date();
 
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const monthDiff = today.getMonth() - birthDate.getMonth();
-  const dayDiff = today.getDate() - birthDate.getDate();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    const dayDiff = today.getDate() - birthDate.getDate();
 
-  // Adjust if the birthday hasn't occurred yet this year
-  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-    age--;
+    // Adjust if the birthday hasn't occurred yet this year
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+      age--;
+    }
+
+    return age;
   }
-
-  return age;
-}
 
   findAll() {
     return `This action returns all weeklyDiet`;
