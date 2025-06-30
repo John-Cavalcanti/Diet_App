@@ -68,6 +68,10 @@ export class User {
     return this._password;
   }
 
+  setPassword(password: string): void {
+    this._password = password;
+  }
+
   getWeight(): number {
     return this._weight;
   }

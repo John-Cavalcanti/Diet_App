@@ -1,4 +1,3 @@
-import { MealsService } from './../meals/meals.service';
 import { AiService } from './../ai/ai.service';
 import { Injectable } from '@nestjs/common';
 import { CreateWeeklyDietDto } from './dto/create-weekly-diet.dto';
@@ -9,7 +8,6 @@ import { UsersService } from 'src/users/users.service';
 export class WeeklyDietService {
   constructor(
     private readonly aiService: AiService,
-    private readonly mealsService: MealsService,
     private readonly usersService: UsersService
 
   ){}

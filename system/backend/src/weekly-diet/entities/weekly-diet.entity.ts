@@ -1,6 +1,6 @@
 export class WeeklyDiet {
   id: number;
-  userId: number; // pseudo chave estrangeira
+  userId: number;
   meals: any[];
   createdAt: Date;
   updatedAt: Date;
