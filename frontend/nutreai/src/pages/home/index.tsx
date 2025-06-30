@@ -30,9 +30,11 @@ export default function Home() {
           />
         </Cards>
         <ButtonWrapper>
-          <PrimaryButton style={{ width: 300, height: 40, fontSize: "1rem" }}>
-            Começar jornada
-          </PrimaryButton>
+          <div style={{ width: 240, height: 40 }}>
+            <PrimaryButton style={{ width: "100%", height: "100%", fontSize: "1rem" }}>
+              Começar jornada
+            </PrimaryButton>
+          </div>
         </ButtonWrapper>
       </Content>
       <Footer />
