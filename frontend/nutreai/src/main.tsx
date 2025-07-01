@@ -5,12 +5,17 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { DietForm } from './pages/form/index.tsx'
 import { Confirmation } from './pages/confirmation/index.tsx'
 import { FormStepsProvider } from './contexts/form-steps-context.tsx'
+import { LoginPage } from './pages/login/index.tsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
+      {
+        path: '/login',
+        element: <LoginPage />
+      },
       {
         path: '/weekly-diet-form',
         element: (
