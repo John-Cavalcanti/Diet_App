@@ -18,8 +18,8 @@ export class WeeklyDietController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.weeklyDietService.findOne(+id);
+  findWeeklyDietByUserId(@Param('id') id: string) {
+    return this.weeklyDietService.findWeeklyDietByUserId(+id);
   }
 
   @Patch(':id')
