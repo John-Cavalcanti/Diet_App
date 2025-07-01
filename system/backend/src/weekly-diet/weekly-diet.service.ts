@@ -22,7 +22,7 @@ export class WeeklyDietService {
     let userObj: any;
 
     if (!user) {
-      throw new Error('User not found');
+      throw new BadRequestException('User not found');
     } else {
       userObj = user.toObject();
     }
@@ -78,7 +78,9 @@ export class WeeklyDietService {
   async findWeeklyDietByUserId(id: number) {
     const diet = this.weeklyDietRepository.findWeeklyDietByUserId(id);
     if (!diet) {
-      throw new BadRequestException('Usuário não existe no banco de dados');
+      throw new BadRequestException(
+        'Esse plano alimentar não existe no banco de dados',
+      );
     }
     return diet?.getMeals();
   }
