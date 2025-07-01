@@ -4,6 +4,8 @@ import { Footer } from "./components/footer"
 import { PrimaryButton } from "../../componens/primary-button"
 
 import img1 from "../../assets/home/saudavel1.png"
+import img2 from "../../assets/home/saudavel2.png"
+import img3 from "../../assets/home/saudavel3.png"
 
 export default function Home() {
   return (
@@ -19,12 +21,12 @@ export default function Home() {
             description="Veja sugestões de refeições e personalize sua dieta."
           />
           <FeatureCard
-            image={img1}
+            image={img2}
             title="Use IA inteligente"
             description="Tenha recomendações personalizadas com base no seu perfil."
           />
           <FeatureCard
-            image={img1}
+            image={img3}
             title="Alimente seu bem-estar"
             description="Cuide de você com praticidade e inteligência."
           />
