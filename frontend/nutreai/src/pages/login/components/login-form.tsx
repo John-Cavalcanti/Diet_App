@@ -25,7 +25,11 @@ export function LoginForm() {
             <b>Criar Conta</b>
           </Link>
         </SignupContainer>
-        <PrimaryButton type="submit">Entrar</PrimaryButton>
+        <ButtonWrapper>
+          <PrimaryButton type="submit" style={{ width: "100%", height: "100%" }}>
+            Entrar
+          </PrimaryButton>
+        </ButtonWrapper>
       </FormContainer>
     </FormProvider>
   )
@@ -74,5 +78,8 @@ const InputsContainer = styled.div`
     margin-top: 2rem;
     margin-bottom: 1.2rem;
 `
-
-
+const ButtonWrapper = styled.div`
+  width: 133px;
+  height: 44px;
+  margin: 0 auto;
+`
