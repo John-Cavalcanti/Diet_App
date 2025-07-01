@@ -4,6 +4,9 @@ import { Injectable } from '@nestjs/common';
 import { CreateWeeklyDietDto } from './dto/create-weekly-diet.dto';
 import { UpdateWeeklyDietDto } from './dto/update-weekly-diet.dto';
 import { UsersService } from 'src/users/users.service';
+import { WeeklyDiet } from './entities/weekly-diet.entity';
+import { WeeklyDietRepository } from './weekly-diet.repository';
+import { BadRequestException } from '@nestjs/common';
 
 @Injectable()
 export class WeeklyDietService {
@@ -11,6 +14,7 @@ export class WeeklyDietService {
     private readonly aiService: AiService,
     private readonly mealsService: MealsService,
     private readonly usersService: UsersService,
+    private readonly weeklyDietRepository: WeeklyDietRepository,
   ) {}
 
   async create(createWeeklyDietDto: CreateWeeklyDietDto) {
@@ -20,7 +24,7 @@ export class WeeklyDietService {
     if (!user) {
       throw new Error('User not found');
     } else {
-      userObj = user.toObject(); // o toObject vai precisar ter a senha como uma das chaves?
+      userObj = user.toObject();
     }
 
     const userData = {
@@ -41,6 +45,8 @@ export class WeeklyDietService {
 
     try {
       const parsed = JSON.parse(content);
+      const weeklyDiet = new WeeklyDiet(createWeeklyDietDto.userId, parsed.planoAlimentarSemanal);
+      this.weeklyDietRepository.createDiet(weeklyDiet);
       return parsed.planoAlimentarSemanal; // ou return parsed se quiser tudo
     } catch (err) {
       console.error('Erro ao fazer parse da resposta da IA:', err);
@@ -66,18 +72,22 @@ export class WeeklyDietService {
   }
 
   findAll() {
-    return `This action returns all weeklyDiet`;
+    return 'This action returns all weeklyDiet';
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} weeklyDiet`;
+  async findWeeklyDietByUserId(id: number) {
+    const diet = this.weeklyDietRepository.findWeeklyDietByUserId(id);
+    if (!diet) {
+      throw new BadRequestException('Usuário não existe no banco de dados');
+    }
+    return diet?.getMeals();
   }
 
   update(id: number, updateWeeklyDietDto: UpdateWeeklyDietDto) {
-    return `This action updates a #${id} weeklyDiet`;
+    return 'This action updates a #${id} weeklyDiet';
   }
 
   remove(id: number) {
-    return `This action removes a #${id} weeklyDiet`;
+    return 'This action removes a #${id} weeklyDiet';
   }
 }
