@@ -32,11 +32,9 @@ export default function Home() {
           />
         </Cards>
         <ButtonWrapper>
-          <div style={{ width: 240, height: 40 }}>
-            <PrimaryButton style={{ width: "100%", height: "100%", fontSize: "1rem" }}>
+            <PrimaryButton>
               Começar jornada
             </PrimaryButton>
-          </div>
         </ButtonWrapper>
       </Content>
       <Footer />
@@ -91,4 +89,5 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 2.5rem;
+  width: 15rem;
 `

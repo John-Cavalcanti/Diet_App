@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 204px;
+  width: 12.75rem;
 `
 
 const ImageCard = styled.div`
