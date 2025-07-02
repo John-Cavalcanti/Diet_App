@@ -37,4 +37,9 @@ describe('AuthController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+  
+  it('should sign a user up', () => {
+    expect(controller.signUp({name: 'joao'}))
+  });
+
 });
