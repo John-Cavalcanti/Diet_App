@@ -2,18 +2,20 @@
 import { TestingModule, Test } from '@nestjs/testing';
 import { AuthGuard } from './auth.guard';
 import { JwtService } from '@nestjs/jwt';
+import { createMock } from '@golevelup/ts-jest';
 import { ConfigService } from '@nestjs/config';
+import { ExecutionContext } from '@nestjs/common';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
 
   const mockConfigService = {
-    canActivate: jest.fn().mockImplementation(() => {
+    getSecret: jest.fn().mockImplementation(() => {
       return 'aa1c449ffad844d25049e737e0bd41c487f4e3ea6f57e163b74e4a41b77b55a5'; // essa jwt secret é falsa
     })
   };
   const mockJwtService = {
-    canActivate: jest.fn().mockReturnValue({
+    verifyAsync: jest.fn().mockReturnValue({
       sub: 1,
 	    email: 'fernanda.oliveira@example.com',
 	    iat: 1751546076,
@@ -42,10 +44,15 @@ describe('AuthGuard', () => {
 
   describe('Quando é necessário a autenticação de um token', () => {
     it('deveria retornar true', async () => {
-      expect(guard.canActivate(
-        
-      ))
-    })
+      const context = createMock<ExecutionContext>();
+      context.switchToHttp().getRequest.mockReturnValue({
+        headers: {
+          authorization: 'auth',
+        },
+      });
+      
+      expect(guard.canActivate(context)).toBeTruthy()
+    });
   });
 
 
