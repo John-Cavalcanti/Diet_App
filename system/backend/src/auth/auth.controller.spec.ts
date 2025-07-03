@@ -6,7 +6,7 @@ import { AuthGuard } from './auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { User } from '../users/entities/user.entity';
-import { BadRequestException, ConflictException } from '@nestjs/common';
+import { BadRequestException, ConflictException, UnauthorizedException } from '@nestjs/common';
 
 describe('AuthController', () => {
   let controller: AuthController;
@@ -23,6 +23,14 @@ describe('AuthController', () => {
               acess_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZmVybmFuZGEub2xpdmVpcmFAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTEyMDk0NzgsImV4cCI6MTc1MTIxMzA3OH0.TN48QRk_GHKb6R1yqbXpgy05osvc3pKoMaVyNTNuoRs',
             };
           }), 
+          profile: jest.fn().mockImplementation(() => {
+            return {
+              sub: 1,
+              email: 'fernanda.oliveira@example.com',
+              iat: 1751212858,
+              exp: 1751216458,
+            }
+          }),
         };
   const mockAuthGuard = {};
   const mockJwtService = {};
@@ -146,7 +154,28 @@ describe('AuthController', () => {
       });
     });
     
-  
+    describe('Quando cliente passa informações incorretas, seja email ou senha', () => {
+      it('deveria emitir unauthorized error', async () => {
+        mockAuthService.logIn.mockImplementationOnce( async () => {
+          throw new UnauthorizedException();
+        })
+        await expect(controller.logIn(
+          {
+            email: 'fernanda.oliveira@example.com',
+            password: 'SenhaForte2024',
+          }
+        )).rejects.toThrow(UnauthorizedException)
+      });
+    });
+  });
+
+  describe('GET', () => {
+    describe('Quando o usuário possui o token de acesso na header', () => {
+      it('deveria retornar o payload do usuário', () => {
+
+      });
+    });
+
   });
 
 
