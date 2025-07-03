@@ -7,6 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { User } from '../users/entities/user.entity';
 import { BadRequestException, ConflictException, Request, UnauthorizedException } from '@nestjs/common';
+import { rejects } from 'assert';
 
 describe('AuthController', () => {
   let controller: AuthController;
@@ -174,16 +175,16 @@ describe('AuthController', () => {
       it('deveria retornar o payload do usuário', () => {
         expect(controller.getProfile(
           {
-            sub: 1,
-            email: 'fernanda.oliveira@example.com',
-            iat: 1751507817,
-            exp: 1751511417,
+            user: {
+              sub: 1,
+              email: 'fernanda.oliveira@example.com',
+              iat: 1751507817,
+              exp: 1751511417,
+            }
           }
         )).toBeDefined()
       });
     });
-
   });
-
 
 });
