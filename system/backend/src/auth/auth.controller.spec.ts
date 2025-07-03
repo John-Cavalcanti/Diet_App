@@ -6,7 +6,7 @@ import { AuthGuard } from './auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { User } from '../users/entities/user.entity';
-import { BadRequestException, ConflictException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, ConflictException, Request, UnauthorizedException } from '@nestjs/common';
 
 describe('AuthController', () => {
   let controller: AuthController;
@@ -172,7 +172,14 @@ describe('AuthController', () => {
   describe('GET', () => {
     describe('Quando o usuário possui o token de acesso na header', () => {
       it('deveria retornar o payload do usuário', () => {
-
+        expect(controller.getProfile(
+          {
+            sub: 1,
+            email: 'fernanda.oliveira@example.com',
+            iat: 1751507817,
+            exp: 1751511417,
+          }
+        )).toBeDefined()
       });
     });
 
