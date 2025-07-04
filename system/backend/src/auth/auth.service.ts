@@ -46,6 +46,6 @@ export class AuthService {
     };
 
     // finalmente cria o cliente no banco de dados / memória
-    this.usersService.create(createUserDto);
+    return this.usersService.create(createUserDto);
   }
 }
