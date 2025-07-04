@@ -1,8 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
+import { mockLogInAccessToken } from './constants/constants';
 
 describe('AuthService', () => {
   let service: AuthService;
+
+  const mockJwtService = {
+    verifyAsync: jest.fn().mockResolvedValue(mockLogInAccessToken),
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({

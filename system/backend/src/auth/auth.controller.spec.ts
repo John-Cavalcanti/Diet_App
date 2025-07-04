@@ -6,8 +6,8 @@ import { AuthGuard } from './auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { User } from '../users/entities/user.entity';
-import { BadRequestException, ConflictException, Request, UnauthorizedException } from '@nestjs/common';
-import { rejects } from 'assert';
+import { BadRequestException, ConflictException, UnauthorizedException } from '@nestjs/common';
+import { mockLogInAccessToken } from './constants/constants';
 
 describe('AuthController', () => {
   let controller: AuthController;
@@ -20,9 +20,7 @@ describe('AuthController', () => {
             });
           }),
           logIn: jest.fn().mockImplementation(() => {
-            return {
-              acess_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZmVybmFuZGEub2xpdmVpcmFAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTEyMDk0NzgsImV4cCI6MTc1MTIxMzA3OH0.TN48QRk_GHKb6R1yqbXpgy05osvc3pKoMaVyNTNuoRs',
-            };
+            return mockLogInAccessToken;
           }), 
           profile: jest.fn().mockImplementation(() => {
             return {

@@ -5,13 +5,14 @@ import { JwtService } from '@nestjs/jwt';
 import { createMock } from '@golevelup/ts-jest';
 import { ConfigService } from '@nestjs/config';
 import { ExecutionContext, UnauthorizedException } from '@nestjs/common';
+import { mockGetJWTSECRET, mockAuthorizationHeader } from './constants/constants';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
 
   const mockConfigService = {
     get: jest.fn().mockImplementation(() => {
-      return 'aa1c449ffad844d25049e737e0bd41c487f4e3ea6f57e163b74e4a41b77b55a5'; // essa jwt secret é falsa
+      return mockGetJWTSECRET; // essa jwt secret é falsa
     })
   };
   const mockJwtService = {
@@ -47,7 +48,7 @@ describe('AuthGuard', () => {
       const context = createMock<ExecutionContext>();
       context.switchToHttp().getRequest.mockReturnValue({
         headers: {
-          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZmVybmFuZGEub2xpdmVpcmFAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTE1OTc2MjksImV4cCI6MTc1MTYwMTIyOX0.ACKa7l_yuEgVr8AC1J7_oiYf-k23wumrymMs4cRyx2o',
+          authorization: mockAuthorizationHeader,
         },
       });
       
