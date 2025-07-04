@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { FeatureCard } from "./components/feature-card"
 import { Footer } from "./components/footer"
 import { PrimaryButton } from "../../componens/primary-button"
+import { Link } from "react-router-dom"
 
 import img1 from "../../assets/home/saudavel1.png"
 import img2 from "../../assets/home/saudavel2.png"
@@ -32,9 +33,11 @@ export default function Home() {
           />
         </Cards>
         <ButtonWrapper>
+          <StyledLink to="/login">
             <PrimaryButton>
               Começar jornada
             </PrimaryButton>
+          </StyledLink>
         </ButtonWrapper>
       </Content>
       <Footer />
@@ -90,4 +93,11 @@ const ButtonWrapper = styled.div`
   justify-content: center;
   margin-bottom: 2.5rem;
   width: 15rem;
+`
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `

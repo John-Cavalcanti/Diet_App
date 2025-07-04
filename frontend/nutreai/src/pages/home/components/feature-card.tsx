@@ -27,8 +27,8 @@ const Wrapper = styled.div`
 `
 
 const ImageCard = styled.div`
-  width: 204px;
-  height: 250px;
+  width: 12.75rem;
+  height: 15.62rem;
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 4px 10px 0 rgba(0,0,0,0.25);
