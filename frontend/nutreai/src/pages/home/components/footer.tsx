@@ -18,7 +18,7 @@ const FooterContainer = styled.footer`
   background: #106861;
   color: #fff;
   text-align: center;
-  padding: 16px 0 8px 0;
+  padding: 1rem 0 0.5rem 0;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -31,7 +31,7 @@ const FooterContainer = styled.footer`
 
 const Info = styled.div`
   font-weight: extra-bold;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.05rem;
   font-size: 0.875rem;
 `
 

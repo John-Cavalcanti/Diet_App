@@ -48,7 +48,7 @@ const Image = styled.img`
 const Title = styled.h3`
   font-size: 1.1rem;
   font-weight: bold;
-  margin: 12px 0 4px 0;
+  margin: 0.75rem 0 0.25rem 0;
   text-align: center;
 `
 
