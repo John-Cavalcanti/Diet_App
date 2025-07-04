@@ -79,7 +79,7 @@ const InputsContainer = styled.div`
     margin-bottom: 1.2rem;
 `
 const ButtonWrapper = styled.div`
-  width: 133px;
-  height: 44px;
+  width: 8.3rem;
+  height: 2.75rem;
   margin: 0 auto;
 `

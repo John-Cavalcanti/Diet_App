@@ -33,9 +33,9 @@ const Label = styled.label`
 `
 
 const Input = styled.input`
-  width: 280px;      // ajuste aqui a largura desejada
-  height: 44px;      // ajuste aqui a altura desejada
-  padding: 10px 12px;
+  width: 17.5rem;      
+  height: 2.75rem;     
+  padding: 0.625rem 0.75rem;
   font-size: 1rem;
   border: 1.5px solid #d1d1d1;
   border-radius: 8px;
