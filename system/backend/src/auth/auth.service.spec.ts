@@ -51,10 +51,6 @@ describe('AuthService', () => {
     ),
   };
 
-  const mockBcrypt = {
-    compare: jest.fn().mockReturnValue(true),
-  };
-
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [AuthService, JwtService, UsersService],
