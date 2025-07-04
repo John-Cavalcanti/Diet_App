@@ -1,37 +1,35 @@
-import { useForm, FormProvider } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import styled from "styled-components"
 import { PrimaryButton } from "../../../componens/primary-button"
 import { Link } from "react-router-dom"
-import { FormInput } from "../../form/components/form-inputs"
+import { LoginInput } from "./login-input"
 
 export function LoginForm() {
-  const methods = useForm()
-  function handleSubmit(data: any) {
+  const { register, handleSubmit } = useForm()
+  function onSubmit(data: any) {
     // Por enquanto, não faz nada
   }
 
   return (
-    <FormProvider {...methods}>
-      <FormContainer onSubmit={methods.handleSubmit(handleSubmit)}>
-        <Title>Entrar</Title>
-        <InputsContainer>
-            <FormInput id="email" label="E-mail" type="email" />
-            <FormInput id="password" label="Senha" type="password" />
-        </InputsContainer>
-        <ForgotPassword href="#">Esqueci a minha senha</ForgotPassword>
-        <SignupContainer>
-          Não tem uma conta?{" "}
-          <Link to="/weekly-diet-form">
-            <b>Criar Conta</b>
-          </Link>
-        </SignupContainer>
-        <ButtonWrapper>
-          <PrimaryButton type="submit" style={{ width: "100%", height: "100%" }}>
-            Entrar
-          </PrimaryButton>
-        </ButtonWrapper>
-      </FormContainer>
-    </FormProvider>
+    <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      <Title>Entrar</Title>
+      <InputsContainer>
+        <LoginInput id="email" label="E-mail" type="email" {...register("email")} />
+        <LoginInput id="password" label="Senha" type="password" {...register("password")} />
+      </InputsContainer>
+      <ForgotPassword href="#">Esqueci a minha senha</ForgotPassword>
+      <SignupContainer>
+        Não tem uma conta?{" "}
+        <Link to="/weekly-diet-form">
+          <b>Criar Conta</b>
+        </Link>
+      </SignupContainer>
+      <ButtonWrapper>
+        <PrimaryButton type="submit">
+          Entrar
+        </PrimaryButton>
+      </ButtonWrapper>
+    </FormContainer>
   )
 }
 
