@@ -6,6 +6,7 @@ import { DietForm } from './pages/form/index.tsx'
 import { Confirmation } from './pages/confirmation/index.tsx'
 import { FormStepsProvider } from './contexts/form-steps-context.tsx'
 
+
 const router = createBrowserRouter([
   {
     path: '/',
