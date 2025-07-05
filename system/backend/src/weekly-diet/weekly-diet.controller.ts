@@ -4,7 +4,7 @@ import { CreateWeeklyDietDto } from './dto/create-weekly-diet.dto';
 import { UpdateWeeklyDietDto } from './dto/update-weekly-diet.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Request } from '@nestjs/common';
-import { WeeklyDietDocsCreate } from 'src/users/decorators/weeklydiet-swagger-create.decorators';
+import { WeeklyDietDocsCreate } from 'src/weekly-diet/decorators/weeklydiet-swagger-create.decorators';
 
 @Controller('weekly-diet')
 export class WeeklyDietController {
