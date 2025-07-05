@@ -4,6 +4,7 @@ import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { DietForm } from './pages/form/index.tsx'
 import { Confirmation } from './pages/confirmation/index.tsx'
+import { MyPlans } from './pages/myplans/index.tsx' 
 import { FormStepsProvider } from './contexts/form-steps-context.tsx'
 
 
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: '/weekly-diet-confirmation',
         element: <Confirmation />
+      },
+      {
+        path: '/myplans',
+        element: <MyPlans />
       }
     ]
   }
