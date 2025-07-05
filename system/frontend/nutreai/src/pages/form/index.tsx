@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { postForm } from "../../services/form"
 import { useUsersInformations } from "../../contexts/user-informations"
 import { useNavigate } from "react-router-dom"
+import { parse } from 'date-fns'
 
 const DietFormSchema = z.object({
     email: z.string(),
@@ -58,11 +59,12 @@ export function DietForm() {
     }
 
     const handleFormSubmit: SubmitHandler<DietFormItems> = async (data) => {
+        console.log(data)
         const preferencies = data.foodPreferences.join(", ")
         const restrictions = data.foodRestrictions.join(", ")
         const weightNumber = Number(data.weight)
         const heightNumber = Number(data.height)
-        const birthdayISO = new Date(data.birthday).toISOString()
+        const birthdayISO = parse(data.birthday, 'dd/MM/yyyy', new Date()).toISOString()
 
         const userId = await postForm({
             name: data.name,
