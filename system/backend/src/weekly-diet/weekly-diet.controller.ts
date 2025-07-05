@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { WeeklyDietService } from './weekly-diet.service';
 import { CreateWeeklyDietDto } from './dto/create-weekly-diet.dto';
 import { UpdateWeeklyDietDto } from './dto/update-weekly-diet.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { Request } from '@nestjs/common';
 
 @Controller('weekly-diet')
 export class WeeklyDietController {
@@ -17,9 +19,10 @@ export class WeeklyDietController {
     return this.weeklyDietService.findAll();
   }
 
-  @Get(':id')
-  findWeeklyDietByUserId(@Param('id') id: string) {
-    return this.weeklyDietService.findWeeklyDietByUserId(+id);
+  @UseGuards(AuthGuard)
+  @Get('me')
+  findWeeklyDietByUserId(@Request() req) {
+    return this.weeklyDietService.findWeeklyDietByUserId(req.user.sub);
   }
 
   @Patch(':id')
