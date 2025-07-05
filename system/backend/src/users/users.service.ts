@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './users.repository';
@@ -30,12 +30,31 @@ export class UsersService {
 
   async update(id: number, updateUserDto: UpdateUserDto) {
     const dto: UpdateUserDto = await this.encode(updateUserDto);
+    if (!(await this.emailCheckUpdate(dto, id))) {
+      throw new UnauthorizedException(
+        'Não é permitido modificar informações de outros usuários',
+      );
+    }
     const user = this.userRepository.updateUser(id, new User(dto));
     // após update, o id do usuário fica null. necessário corrigir isso
     return user;
   }
 
-  async encode(dto: UpdateUserDto): Promise<UpdateUserDto> {
+  private async emailCheckUpdate(
+    dto: UpdateUserDto,
+    id: number,
+  ): Promise<boolean> {
+    const user = await this.userRepository.findUserById(id);
+    if (!user) {
+      return false;
+    }
+    if (user.getEmail() != dto.email) {
+      return false;
+    }
+    return true;
+  }
+
+  private async encode(dto: UpdateUserDto): Promise<UpdateUserDto> {
     const hashedPassword: string = await bcrypt.hash(dto.password, 10);
     const updateUserDto: UpdateUserDto = {
       ...dto,
