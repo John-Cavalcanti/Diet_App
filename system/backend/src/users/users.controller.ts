@@ -5,6 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { UsersDocsCreate } from './decorators/users-swagger-create.decorators';
+import { UsersDocsFindOne } from './decorators/users-swagger-findone.decorators';
 
 @Controller('users')
 export class UsersController {
@@ -21,6 +22,7 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @UsersDocsFindOne()
   @UseGuards(AuthGuard)
   @Get('me')
   findOne(@Request() req) {
