@@ -2,9 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { WeeklyDietService } from './weekly-diet.service';
 import { CreateWeeklyDietDto } from './dto/create-weekly-diet.dto';
 import { UpdateWeeklyDietDto } from './dto/update-weekly-diet.dto';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { Request } from '@nestjs/common';
-import { WeeklyDietDocsCreate } from 'src/weekly-diet/decorators/weeklydiet-swagger-create.decorators';
+import { WeeklyDietDocsCreate } from './decorators/weeklydiet-swagger-create.decorators';
 import { WeeklyDietDocsFindOne } from './decorators/weeklydiet-swagger-findone.decorators';
 
 @Controller('weekly-diet')
