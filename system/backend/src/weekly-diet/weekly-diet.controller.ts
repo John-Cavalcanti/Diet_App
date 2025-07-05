@@ -4,11 +4,13 @@ import { CreateWeeklyDietDto } from './dto/create-weekly-diet.dto';
 import { UpdateWeeklyDietDto } from './dto/update-weekly-diet.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Request } from '@nestjs/common';
+import { WeeklyDietDocsCreate } from 'src/users/decorators/weeklydiet-swagger-create.decorators';
 
 @Controller('weekly-diet')
 export class WeeklyDietController {
   constructor(private readonly weeklyDietService: WeeklyDietService) {}
 
+  @WeeklyDietDocsCreate()
   @Post()
   create(@Body() createWeeklyDietDto: CreateWeeklyDietDto) {
     return this.weeklyDietService.create(createWeeklyDietDto);
