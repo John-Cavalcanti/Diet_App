@@ -7,6 +7,10 @@ export class UsersRepository {
   private id = 0;
   private readonly users: User[] = [];
 
+  getUsersAmount() {
+    return this.users.length;
+  }
+
   CreateUser(user: User): User {
     user.setId(++this.id);// lógica para mimificar auto increment do bd
     this.users.push(user);
