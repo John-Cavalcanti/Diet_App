@@ -126,6 +126,7 @@ export function Confirmation() {
 }
 
 const Container = styled.div`
+    width: 100%;
     position: relative;
     display: grid;
     grid-template-areas:
