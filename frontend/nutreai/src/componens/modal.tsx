@@ -5,9 +5,26 @@ import styled from 'styled-components';
 interface ModalProps {
     children: ReactNode // Conteudo do modal(div com o conteudo)
     isOpen: boolean; // Estado do modal (aberto ou fechado)
+    setIsOpen: (isOpen : boolean) => void; // Função para alterar o estado do modal
 }
 
 
+export function Modal({children,isOpen, setIsOpen}: ModalProps) {
+
+
+    if (!isOpen) return null; //Modal fechado
+    
+    return (
+        <Container>
+            <ModalContent>
+                <CloseModal>
+                    <CloseButton onClick={() =>{setIsOpen(!isOpen)}}>X</CloseButton>
+                </CloseModal>
+                {children}
+            </ModalContent>
+        </Container>
+    )
+}
 
 const Container = styled.div`
     width: 100vw;
@@ -40,18 +57,22 @@ const ModalContent = styled.div`
     flex-direction: column;
 `
 
+const CloseModal = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
 
+`
 
-export function Modal({children,isOpen}: ModalProps) {
-
-
-    if (!isOpen) return null; //Modal fechado
+const CloseButton = styled.button`
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: black;
+    font-weight: 600;
     
-    return (
-        <Container>
-            <ModalContent>
-                {children}
-            </ModalContent>
-        </Container>
-    )
-}
+
+    &:hover{
+        color: #2B7A4B
+    }
+`
