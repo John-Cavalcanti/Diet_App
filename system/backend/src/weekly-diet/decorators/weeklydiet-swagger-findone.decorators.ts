@@ -13,7 +13,7 @@ export function WeeklyDietDocsFindOne() {
     }),
     ApiOkResponse({
       description:
-        'Cliente informou um ID existente e que está ligado a alguma dieta',
+        'Cliente informou um Token válido e que o usuário está ligado a alguma dieta',
       schema: {
         example: {
           segunda: [
@@ -285,7 +285,7 @@ export function WeeklyDietDocsFindOne() {
 
     ApiBadRequestResponse({
       description:
-        'Cliente informou um ID que não tem nenhuma dieta ligada a ele',
+        'Cliente informou um Token inválido ou que o usuário não tem nenhuma dieta ligada a ele',
       schema: {
         example: {
           message: 'Esse plano alimentar não existe no banco de dados',
