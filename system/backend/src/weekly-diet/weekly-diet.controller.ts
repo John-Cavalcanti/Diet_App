@@ -5,6 +5,7 @@ import { UpdateWeeklyDietDto } from './dto/update-weekly-diet.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Request } from '@nestjs/common';
 import { WeeklyDietDocsCreate } from 'src/weekly-diet/decorators/weeklydiet-swagger-create.decorators';
+import { WeeklyDietDocsFindOne } from './decorators/weeklydiet-swagger-findone.decorators';
 
 @Controller('weekly-diet')
 export class WeeklyDietController {
@@ -21,6 +22,7 @@ export class WeeklyDietController {
     return this.weeklyDietService.findAll();
   }
 
+  @WeeklyDietDocsFindOne()
   @UseGuards(AuthGuard)
   @Get('me')
   findWeeklyDietByUserId(@Request() req) {
