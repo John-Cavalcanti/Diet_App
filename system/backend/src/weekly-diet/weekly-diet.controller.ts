@@ -26,7 +26,7 @@ export class WeeklyDietController {
   @UseGuards(AuthGuard)
   @Get('me')
   findWeeklyDietByUserId(@Request() req) {
-    return this.weeklyDietService.findWeeklyDietByUserId(req.user.sub);
+    return this.weeklyDietService.findWeeklyDietByUserId(req.user.sub); // extrai o id do payload
   }
 
   @Patch(':id')

@@ -8,7 +8,6 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { WeeklyDiet } from './entities/weekly-diet.entity';
 import { BadRequestException } from '@nestjs/common';
-import { error } from 'console';
 
 describe('WeeklyDietController', () => {
   let controller: WeeklyDietController;
@@ -66,7 +65,40 @@ describe('WeeklyDietController', () => {
       mockWeeklyDietService.create.mockImplementationOnce(async () => {
         throw new Error;
       });
-      await expect(controller.create( {userId: 1} )).rejects.toThrow(Error);
+      await expect(controller.create({ userId: 1 })).rejects.toThrow(Error);
+    });
+  });
+
+  describe('Quando houver uma tentativa de acesso ao plano alimentar de um usuário', () => {
+    it('deveria retornar um Objeto descrevendo todas as refeições do usuário do Token caso o Token seja válido', async () => {
+      expect(controller.findWeeklyDietByUserId(
+        {
+          user: {
+            sub: 1,
+            email: 'fernanda.oliveira@example.com',
+            iat: 1751507817,
+            exp: 1751511417,
+          }
+        }
+      )).toBeDefined();
+    });
+ 
+    it('deveria retornar um BadRequest caso o Token não seja válido', async () => {
+      mockWeeklyDietService.findWeeklyDietByUserId.mockImplementationOnce(async () => {
+        throw new BadRequestException(
+          'Esse plano alimentar não existe no banco de dados',
+        );
+      });
+      await expect(controller.findWeeklyDietByUserId(
+        {
+          user: {
+            sub: 1,
+            email: 'fernanda.oliveira@example.com',
+            iat: 1751507817,
+            exp: 1751511417,
+          }
+        }
+      )).rejects.toThrow(BadRequestException);
     });
   });
 });
