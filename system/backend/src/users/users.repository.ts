@@ -12,13 +12,13 @@ export class UsersRepository {
   }
 
   CreateUser(user: User): User {
-    user.setId(++this.id);// lógica para mimificar auto increment do bd
+    user.setId(++this.id); // lógica para mimificar auto increment do bd
     this.users.push(user);
     return user;
   }
 
   findUserById(id: number): User | undefined {
-    return this.users.find(user => user.getId() === id);
+    return this.users.find((user) => user.getId() === id);
   }
 
   findAll(): User[] {
@@ -26,21 +26,19 @@ export class UsersRepository {
   }
 
   findByEmail(email: string): User | undefined {
-    return this.users.find(user => user.getEmail() === email);
+    return this.users.find((user) => user.getEmail() === email);
   }
 
-  updateUser(id: number, user: User): User
-  {
-    const index = this.users.findIndex(user => user.getId() === id);
+  updateUser(id: number, user: User): User {
+    const index = this.users.findIndex((user) => user.getId() === id);
     this.users[index] = user;
     user.setId(id);
     // quando update é usado, não é verificado se as informações "destino" já existem no banco de dados, deixando uma brecha para dois usuários com mesmo email
     return user;
   }
 
-  deleteById(id: number)
-  {
-    const index = this.users.findIndex(user => user.getId() === id);
+  deleteById(id: number) {
+    const index = this.users.findIndex((user) => user.getId() === id);
     const user = this.users[index];
     this.users.splice(index, 1);
     return user;
