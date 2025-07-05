@@ -28,7 +28,7 @@ export function Sidebar() {
 
 const Container = styled.aside`
   width: 4.5rem;
-  background: #c8e6c9;
+  background: ${({ theme }) => theme["green-100"]};
   min-height: 100vh;
   display: flex;
   flex-direction: column;
