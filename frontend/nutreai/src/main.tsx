@@ -5,8 +5,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { DietForm } from './pages/form/index.tsx'
 import { Confirmation } from './pages/confirmation/index.tsx'
 import { FormStepsProvider } from './contexts/form-steps-context.tsx'
+import { LoginPage } from './pages/login/index.tsx'
 import Home from './pages/home/index.tsx'
-
 
 const router = createBrowserRouter([
   {
@@ -16,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
+      },
+      {
+        path: '/login',
+        element: <LoginPage />
       },
       {
         path: '/weekly-diet-form',
