@@ -7,7 +7,7 @@ import { User } from '../users/entities/user.entity';
 import { aiGeneratedText, weeklyDietExample } from './constants/constants';
 import { WeeklyDiet } from './entities/weekly-diet.entity';
 import { MealsService } from '../meals/meals.service';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, UnauthorizedException } from '@nestjs/common';
 
 describe('WeeklyDietService', () => {
   let service: WeeklyDietService;
@@ -103,4 +103,18 @@ describe('WeeklyDietService', () => {
     });
   });
 
+  describe('Quando houver uma tentativa de encontrar um plano alimentar por meio do id', () => {
+    it('deveria retornar o plano alimentar desejado se houver alguma dieta ligada àquele id', async () => {
+      expect(service.findWeeklyDietByUserId(1)).toBeInstanceOf(Object);
+    });
+
+    it('deveria lançar um Bad request exception caso não houver nenhum plano alimentar ligado àquele id', async () => {
+      mockDietRepository.findWeeklyDietByUserId.mockResolvedValueOnce(
+        undefined,
+      );
+      await expect(service.findWeeklyDietByUserId(1)).rejects.toThrow(
+        BadRequestException,
+      );
+    });
+  });
 });
