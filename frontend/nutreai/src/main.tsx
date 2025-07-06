@@ -7,6 +7,8 @@ import { Confirmation } from './pages/confirmation/index.tsx'
 import { FormStepsProvider } from './contexts/form-steps-context.tsx'
 import { LoginPage } from './pages/login/index.tsx'
 import Home from './pages/home/index.tsx'
+import { UserFormCard } from './componens/card_info_pessoais.tsx'
+import { enableMSW } from './tests/mocks/setup.ts'
 
 const router = createBrowserRouter([
   {
@@ -41,8 +43,10 @@ const router = createBrowserRouter([
   }
 ])
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
-)
+enableMSW().then(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>,
+  )
+})
