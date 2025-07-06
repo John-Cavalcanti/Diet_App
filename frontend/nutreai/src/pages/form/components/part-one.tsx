@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { FormCard } from "./form-card"
 import { FormInput } from "./form-inputs"
+import { FormSelect } from "./form-select"
 
 export function PartOne() {
     return (
@@ -10,16 +11,6 @@ export function PartOne() {
             percentageOfFomsCompletion={20}
         >
             <InputsContainer>
-                <FormInput 
-                    id="name" 
-                    label={"Nome"} 
-                    placeholder="Nome" 
-                />
-                <FormInput 
-                    id="email" 
-                    label={"Email"} 
-                    placeholder="Email" 
-                />
                 <FormInput 
                     id="birthday" 
                     label={"Data de nascimento"} 
@@ -38,11 +29,7 @@ export function PartOne() {
                     placeholder="Altura (centímetros)" 
                     type="number"
                 />
-                <FormInput 
-                    id="sexo" 
-                    label={"Sexo"} 
-                    placeholder="Sexo"
-                />
+                <FormSelect />
             </InputsContainer>
         </FormCard>
     )
