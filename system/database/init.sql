@@ -1,7 +1,7 @@
 CREATE USER jvpsc WITH PASSWORD 'jvpscDesPW';
 
 CREATE TABLE IF NOT EXISTS USERS(
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(), -- Using UUID for primary key
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   username VARCHAR(50) NOT NULL,
   email VARCHAR(100) UNIQUE NOT NULL,
   password_hash VARCHAR(255) NOT NULL,
@@ -16,9 +16,8 @@ CREATE TABLE IF NOT EXISTS USERS(
 );
 
 CREATE TABLE IF NOT EXISTS WEEKLY_DIET(
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(), -- Using UUID for primary key
-  user_id UUID NOT NULL,
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES USERS(id),
   meals JSONB NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
