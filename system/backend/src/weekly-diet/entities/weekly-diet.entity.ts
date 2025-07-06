@@ -41,6 +41,11 @@ export class WeeklyDiet {
     return this._id;
   }
 
+  getUserId()
+  {
+    return this._userId;
+  }
+
   getCreatedAtDate() {
     return this._createdAt;
   }
