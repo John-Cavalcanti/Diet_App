@@ -10,7 +10,11 @@ export function MyPlans() {
       </HeaderWrapper>
       <Sidebar />
       <MainContent>
-        {/* Conteúdo da página Meus Planos */}
+        <TitleRow>
+          <Title>Meus planos</Title>
+          <Line />
+        </TitleRow>
+        
       </MainContent>
     </Container>
   )
@@ -35,7 +39,26 @@ const MainContent = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 80px; // largura da sidebar
-  margin-top: 72px;  // altura do header (ajuste conforme necessário)
+  margin-left: 5rem;
+  margin-top: 4.5rem;  
   padding: 2rem;
+`
+const TitleRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+`
+const Title = styled.h1`
+  font-size: 2rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: ${({ theme }) => theme["green-700"]};
+  margin: 0;
+`
+const Line = styled.div`
+  width: 100%;
+  height: 2px;
+  background: ${({ theme }) => theme["green-100"]};
 `
