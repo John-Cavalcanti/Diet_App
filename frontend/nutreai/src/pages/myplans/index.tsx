@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { Sidebar } from "../../componens/sidebar"
 import { Header } from "../../componens/header"
 
+
 export function MyPlans() {
   return (
     <Container>
@@ -12,7 +13,12 @@ export function MyPlans() {
       <MainContent>
         <TitleRow>
           <Title>Meus planos</Title>
-          <Line />
+          <LineRow>
+            <Line />
+            <NewPlanButton>
+              + Gerar nova dieta
+            </NewPlanButton>
+          </LineRow>
         </TitleRow>
         
       </MainContent>
@@ -43,22 +49,44 @@ const MainContent = styled.div`
   margin-top: 4.5rem;  
   padding: 2rem;
 `
+
 const TitleRow = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
-  margin-bottom: 2.5rem;
 `
+
+const LineRow = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    
+`
+
 const Title = styled.h1`
   font-size: 2rem;
-  font-family: 'Inter', sans-serif;
   font-weight: 600;
   color: ${({ theme }) => theme["green-700"]};
-  margin: 0;
 `
+
 const Line = styled.div`
-  width: 100%;
-  height: 2px;
+  flex: 100%;
+  height: 3px;
   background: ${({ theme }) => theme["green-100"]};
+`
+
+const NewPlanButton = styled.button`
+  background: ${({theme}) => theme["green-700"]};
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.6rem 1.5rem;
+  margin-right: 8.5rem;
+  border: none;
+  border-radius: 24px;
+  width: 16.4rem;
+  height: 2.75rem;
+  cursor: pointer;
 `
