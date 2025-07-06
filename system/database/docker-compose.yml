@@ -1,16 +1,16 @@
 services:
   db:
     image: postgres:latest
-    container_name: my_postgres_db
+    container_name: diet_app_db
     environment:
-      POSTGRES_DB: myprojectdb
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432" # Maps host port 5432 to container port 5432
     volumes:
       - postgres_data:/var/lib/postgresql/data # Persistent storage for your data
-      - ./system/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   postgres_data:
