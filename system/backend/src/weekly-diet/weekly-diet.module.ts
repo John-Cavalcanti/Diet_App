@@ -4,10 +4,25 @@ import { WeeklyDietController } from './weekly-diet.controller';
 import { MealsModule } from 'src/meals/meals.module';
 import { AiModule } from 'src/ai/ai.module';
 import { UsersModule } from 'src/users/users.module';
+import { WeeklyDietRepository } from './weekly-diet.repository';
+import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
-  imports: [MealsModule, AiModule, UsersModule],
+  imports: [
+    MealsModule,
+    AiModule,
+    UsersModule,
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: { expiresIn: '3600s' },
+      }),
+      inject: [ConfigService],
+    }),
+  ],
   controllers: [WeeklyDietController],
-  providers: [WeeklyDietService],
+  providers: [WeeklyDietService, WeeklyDietRepository],
 })
 export class WeeklyDietModule {}
