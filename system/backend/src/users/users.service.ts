@@ -9,6 +9,9 @@ import * as bcrypt from 'bcryptjs';
 export class UsersService {
   constructor(private readonly userRepository: UsersRepository) {}
   create(createUserDto: CreateUserDto) {
+    if (new Date(createUserDto.birthday) > new Date()) {
+      throw new BadRequestException('Time traveler?');
+    }
     const user = this.userRepository.CreateUser(new User(createUserDto));
     return user;
   }
