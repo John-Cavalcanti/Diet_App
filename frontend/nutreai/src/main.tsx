@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { DietForm } from './pages/form/index.tsx'
 import { Confirmation } from './pages/confirmation/index.tsx'
 import { FormStepsProvider } from './contexts/form-steps-context.tsx'
+import CardInfoRefeicoesPage from './pages/CardInfoRefeicoesPage'
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: '/weekly-diet-confirmation',
         element: <Confirmation />
+      },
+      {
+        path: '/card-info-refeicoes',
+        element: <CardInfoRefeicoesPage />
       }
     ]
   }
