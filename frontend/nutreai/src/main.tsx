@@ -7,6 +7,7 @@ import { Confirmation } from './pages/confirmation/index.tsx'
 import { FormStepsProvider } from './contexts/form-steps-context.tsx'
 import Home from './pages/home/index.tsx'
 
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/weekly-diet-confirmation',
         element: <Confirmation />
+      },
+      {
+        path: '/card-info-pessoais',
+        element: <UserFormCard />
       }
     ]
   }
