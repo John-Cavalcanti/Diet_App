@@ -54,14 +54,14 @@ export function Confirmation() {
     }, [id]);
 
     if(refeicoesAgrupadas.length == 0){
-         return <ClipLoader color="#123abc" loading={true} size={50} />;
+         return <ClipLoader data-testid="loading" color="#123abc" loading={true} size={50} />;
     }
 
     return (
         <Container>
             <Header>
                 <h1><img src={logo} /></h1>
-                <h2>Seu plano alimentar</h2>
+                <h2 data-testid='heading'>Seu plano alimentar</h2>
                 <h3>Este é seu plano alimentar personalizado.</h3>
             </Header>
             <Card>

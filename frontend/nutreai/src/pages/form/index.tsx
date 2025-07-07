@@ -107,7 +107,7 @@ export function DietForm() {
             />
             <Container>
                 <Header />
-                <form id="diet" onSubmit={handleSubmit(handleFormSubmit)}>
+                <form id="diet" data-testid="diet" onSubmit={handleSubmit(handleFormSubmit)}>
                     {renderStep()}
                 </form>
             </Container>

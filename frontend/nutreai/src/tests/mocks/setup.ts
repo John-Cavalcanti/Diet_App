@@ -12,4 +12,4 @@ export async function enableMSW() {
     }
   
     await worker.start()
-  }
+}
