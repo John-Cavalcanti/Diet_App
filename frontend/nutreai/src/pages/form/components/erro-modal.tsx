@@ -5,7 +5,7 @@ import { Card } from '../../../componens/card'
 interface ErrorModalProps {
     isOpen: boolean,
     handleClose: () => void
-    error: string[]
+    error: string
 }
 
 export function ErrorModal({ isOpen, handleClose, error }: ErrorModalProps) {
@@ -17,7 +17,7 @@ export function ErrorModal({ isOpen, handleClose, error }: ErrorModalProps) {
                     <Title>Houve um erro ao finalizar o cadastro!</Title>
                     <Messages>
                         {
-                            error.map(e => <p>{e}</p>)
+                            <p>{error}</p>
                         }
                     </Messages>
                 </CardContainer>

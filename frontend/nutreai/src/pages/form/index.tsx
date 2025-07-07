@@ -17,14 +17,17 @@ import { ErrorModal } from "./components/erro-modal"
 import { useState } from "react"
 
 const DietFormSchema = z.object({
-    email: z.string(),
-    name: z.string(),
-    password: z.string(),
-    birthday: z.string(),
-    height: z.string(),
-    weight: z.string(),
-    workoutsFrequency: z.string(),
-    goals: z.string(),
+    email: z.string().email("Email inválido"),
+    name: z.string().min(4, "Nome deve conter pelo menos 4 letras"),
+    password: z.string().regex(
+        /^(?=.*[A-Z])(?=.*\d).{8,}$/,
+        'A senha precisa ter no mínimo 8 caracteres, incluindo 1 letra maiúscula e 1 número.',
+    ),
+    birthday: z.string().nonempty("Insira sua data de nascimento."),
+    height: z.string().nonempty("Insira sua altura em centímetros."),
+    weight: z.string().nonempty("Insira seu peso."),
+    workoutsFrequency: z.string().nonempty("Insira a frequência que você faz atividade física."),
+    goals: z.string().nonempty("Insira suas metas."),
     foodRestrictions: z.array(z.string()),
     foodPreferences: z.array(z.string()),
 })
@@ -36,8 +39,8 @@ export function DietForm() {
     const { step } = useFormSteps()
     const navigate = useNavigate();
 
-    const [ shouldErrorModalBeOpen, setShouldErrorModalBeOpen ] = useState(false)
-    const [ errorMessage, setErrorMessage ] = useState([])
+    const [shouldErrorModalBeOpen, setShouldErrorModalBeOpen] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
     const formMethods = useForm<DietFormItems>({
         resolver: zodResolver(DietFormSchema)
@@ -97,10 +100,10 @@ export function DietForm() {
 
     return (
         <FormProvider {...formMethods}>
-            <ErrorModal 
-                isOpen={shouldErrorModalBeOpen} 
-                handleClose={() => setShouldErrorModalBeOpen(false)} 
-                error={errorMessage} 
+            <ErrorModal
+                isOpen={shouldErrorModalBeOpen}
+                handleClose={() => setShouldErrorModalBeOpen(false)}
+                error={errorMessage}
             />
             <Container>
                 <Header />

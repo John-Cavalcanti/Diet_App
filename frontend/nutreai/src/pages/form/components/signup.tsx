@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { FormCard } from "./form-card";
 import { FormInput } from "./form-inputs";
+import { useFormContext } from "react-hook-form";
+import type { DietFormItems } from "..";
 
 export function SignUp() {
+    const { formState: { errors } } = useFormContext<DietFormItems>()
     return (
         <FormCard 
             title={"Crie sua conta"} 
@@ -14,18 +17,21 @@ export function SignUp() {
                 <FormInput
                     id="name"
                     label={"Nome"}
-                    placeholder="Nome"
+                    placeholder="Nome"  
+                    error={errors.name}             
                 />
                 <FormInput
                     id="email"
                     label={"Email"}
                     placeholder="Email"
+                    error={errors.email}
                 />
                 <FormInput
                     id="password"
                     label={"Senha"}
                     placeholder="Senha"
                     type="password"
+                    error={errors.password}
                 />
             </InputsContainer>
         </FormCard>

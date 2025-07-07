@@ -3,9 +3,10 @@ import { FoodCheckbox } from "./food-checkbox"
 import { FormCard } from "./form-card"
 import styled from "styled-components"
 import { type DietFormItems } from ".."
+import { InputError } from "../../../componens/input-error"
 
 export function PartFive() {
-    const { control } = useFormContext<DietFormItems>()
+    const { control, formState: { errors } } = useFormContext<DietFormItems>()
     return (
         <FormCard
             title={"Quais alimentos você gosta?"}
@@ -13,6 +14,10 @@ export function PartFive() {
             percentageOfFomsCompletion={100}
             shouldShowPercentage
         >
+            {
+                errors.foodPreferences &&
+                <InputError errorMessage={errors.foodPreferences.message} />
+            }
             <Controller
                 control={control}
                 name="foodPreferences"
@@ -33,28 +38,28 @@ export function PartFive() {
                             <FoodCheckbox value="Frango" onCheckedChange={toggle}>
                                 <p><span>🍗</span>Frango</p>
                             </FoodCheckbox >
-                            <FoodCheckbox value="Arroz"  onCheckedChange={toggle}>
+                            <FoodCheckbox value="Arroz" onCheckedChange={toggle}>
                                 <p><span>🍚</span>Arroz</p>
                             </FoodCheckbox>
-                            <FoodCheckbox value="Morango"  onCheckedChange={toggle}>
+                            <FoodCheckbox value="Morango" onCheckedChange={toggle}>
                                 <p><span>🍓</span>Morango</p>
                             </FoodCheckbox>
-                            <FoodCheckbox value="Pao"  onCheckedChange={toggle}>
+                            <FoodCheckbox value="Pao" onCheckedChange={toggle}>
                                 <p><span>🍞</span>Pão</p>
                             </FoodCheckbox>
-                            <FoodCheckbox value="Peixe"  onCheckedChange={toggle}>
+                            <FoodCheckbox value="Peixe" onCheckedChange={toggle}>
                                 <p><span>🐟</span>Peixe</p>
                             </FoodCheckbox>
-                            <FoodCheckbox value="Banana"  onCheckedChange={toggle}>
+                            <FoodCheckbox value="Banana" onCheckedChange={toggle}>
                                 <p><span>🍌</span>Banana</p>
                             </FoodCheckbox>
-                            <FoodCheckbox value="Ovo"  onCheckedChange={toggle}>
+                            <FoodCheckbox value="Ovo" onCheckedChange={toggle}>
                                 <p><span>🥚</span>Ovo</p>
                             </FoodCheckbox>
-                            <FoodCheckbox value="Abacate"  onCheckedChange={toggle}>
+                            <FoodCheckbox value="Abacate" onCheckedChange={toggle}>
                                 <p><span>🥑</span>Abacate</p>
                             </FoodCheckbox>
-                            <FoodCheckbox value="Macarrao"  onCheckedChange={toggle}>
+                            <FoodCheckbox value="Macarrao" onCheckedChange={toggle}>
                                 <p><span>🍝</span>Macarrão</p>
                             </FoodCheckbox>
                         </CheckBoxContainer>
