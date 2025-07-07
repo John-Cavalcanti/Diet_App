@@ -6,8 +6,7 @@ import { WeeklyDietRepository } from './weekly-diet.repository';
 import { User } from '../users/entities/user.entity';
 import { aiGeneratedText, weeklyDietExample } from './constants/constants';
 import { WeeklyDiet } from './entities/weekly-diet.entity';
-import { MealsService } from '../meals/meals.service';
-import { BadRequestException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException} from '@nestjs/common';
 
 describe('WeeklyDietService', () => {
   let service: WeeklyDietService;
@@ -40,8 +39,6 @@ describe('WeeklyDietService', () => {
       .mockResolvedValue(new WeeklyDiet(1, weeklyDietExample)),
   };
 
-  const mockMealsService = {};
-
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -49,7 +46,6 @@ describe('WeeklyDietService', () => {
         UsersService,
         AiService,
         WeeklyDietRepository,
-        MealsService,
       ],
     })
       .overrideProvider(UsersService)
@@ -60,9 +56,6 @@ describe('WeeklyDietService', () => {
 
       .overrideProvider(WeeklyDietRepository)
       .useValue(mockDietRepository)
-
-      .overrideProvider(MealsService)
-      .useValue(mockMealsService)
 
       .compile();
 

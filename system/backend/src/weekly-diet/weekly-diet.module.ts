@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { WeeklyDietService } from './weekly-diet.service';
 import { WeeklyDietController } from './weekly-diet.controller';
-import { MealsModule } from 'src/meals/meals.module';
 import { AiModule } from 'src/ai/ai.module';
 import { UsersModule } from 'src/users/users.module';
 import { WeeklyDietRepository } from './weekly-diet.repository';
@@ -10,7 +9,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    MealsModule,
     AiModule,
     UsersModule,
     JwtModule.registerAsync({
