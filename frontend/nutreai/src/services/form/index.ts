@@ -3,6 +3,7 @@ import api from "../axios"
 interface PostFormProps {
     name: string,
     email: string,
+    password: string,
     birthday: string,
     height: number,
     weight: number,
@@ -27,9 +28,10 @@ interface PostFormResponse {
 
 export async function postForm(dados: PostFormProps) {
     try {
-        const response = await api.post<PostFormResponse>('/api/users', dados)
+        const response = await api.post<PostFormResponse>('/api/auth/signup', dados)
         return response.data._id
     } catch (error: any) {
         console.error('Erro ao enviar:', error.response?.data)
+        throw error
     }
 }
