@@ -8,12 +8,16 @@ import { Confirmation } from './pages/confirmation/index.tsx'
 import { FormStepsProvider } from './contexts/form-steps-context.tsx'
 import { LoginPage } from './pages/login/index.tsx'
 import Home from './pages/home/index.tsx'
+import { RouteNotFound } from './pages/route-not-found/index.tsx'
+import { ThemeProvider } from 'styled-components'
+import { defaultTheme } from './styles/themes/default'
 
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ThemeProvider theme={defaultTheme}><RouteNotFound /></ThemeProvider>,
     children: [
       {
         path: '/',
