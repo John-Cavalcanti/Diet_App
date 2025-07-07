@@ -6,6 +6,8 @@ import { DietForm } from './pages/form/index.tsx'
 import { Confirmation } from './pages/confirmation/index.tsx'
 import { MyPlans } from './pages/myplans/index.tsx' 
 import { FormStepsProvider } from './contexts/form-steps-context.tsx'
+import { LoginPage } from './pages/login/index.tsx'
+import Home from './pages/home/index.tsx'
 
 
 const router = createBrowserRouter([
@@ -13,6 +15,14 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/login',
+        element: <LoginPage />
+      },
       {
         path: '/weekly-diet-form',
         element: (
@@ -28,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: '/myplans',
         element: <MyPlans />
+      },
+      {
+        path: '/card-info-pessoais',
+        element: <UserFormCard />
       }
     ]
   }

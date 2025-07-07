@@ -9,6 +9,7 @@ import {
   IsOptional,
   Length,
   MinLength,
+  IsPositive,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -55,6 +56,7 @@ export class CreateUserDto {
     description: 'utilizado para definir o peso (em Kg) do usuário',
     example: 60,
   })
+  @IsPositive()
   @IsNotEmpty()
   @IsNumber()
   weight: number;
@@ -63,6 +65,7 @@ export class CreateUserDto {
     description: 'utilizado para definir a altura (em cm) do usuário',
     example: 167,
   })
+  @IsPositive()
   @IsNotEmpty()
   @IsNumber()
   height: number;
