@@ -5,6 +5,7 @@ import { UpdateWeeklyDietDto } from './dto/update-weekly-diet.dto';
 import { UsersService } from '../users/users.service';
 import { WeeklyDiet } from './entities/weekly-diet.entity';
 import { WeeklyDietRepository } from './weekly-diet.repository';
+import { InternalServerError } from 'groq-sdk';
 
 @Injectable()
 export class WeeklyDietService {
@@ -48,7 +49,7 @@ export class WeeklyDietService {
     } catch (err) {
       console.error('Erro ao fazer parse da resposta da IA:', err);
       console.error('Conteúdo bruto:', content);
-      throw new Error('Resposta da IA não está em formato JSON válido.');
+      throw new InternalServerError(500, err, 'Erro ao fazer parse da resposta da IA', content);
     }
   }
 
