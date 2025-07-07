@@ -1,17 +1,23 @@
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, type FieldError } from 'react-hook-form'
 import styled from 'styled-components'
+import { InputError } from '../../../componens/input-error'
 
 interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement>{
     id: string
     label: string
+    error: FieldError | undefined
 }
 
-export function FormInput({id, placeholder, label}: FormInputProps) {
+export function FormInput({id, placeholder, label, error, ...rest}: FormInputProps) {
     const { register } = useFormContext()
     return (
         <Container>
             <Label htmlFor={id}>{label}</Label>
-            <Input id={id} placeholder={placeholder} {...register(id)}/>
+            <Input id={id} placeholder={placeholder} {...register(id)} {...rest} />
+            {
+                error &&
+                <InputError errorMessage={error.message!} />
+            }
         </Container>
     )
 }
@@ -33,7 +39,7 @@ const Label = styled.label`
     margin-bottom: -0.5rem;
     margin-left: 1rem;
 
-    z-index: 1;
+    z-index: 0;
 `
 
 const Input = styled.input`

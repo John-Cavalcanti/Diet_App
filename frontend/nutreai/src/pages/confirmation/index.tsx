@@ -170,6 +170,7 @@ const Bar = styled.hr`
 
 const MealPlanCard = styled.div`
     grid-area: mealplan;
+    width: 100%;
     padding: 2rem;
 `
 

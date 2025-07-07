@@ -12,15 +12,22 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { postForm } from "../../services/form"
 import { useUsersInformations } from "../../contexts/user-informations"
 import { useNavigate } from "react-router-dom"
+import { SignUp } from "./components/signup"
+import { ErrorModal } from "../../componens/erro-modal"
+import { useState } from "react"
 
 const DietFormSchema = z.object({
-    email: z.string(),
-    name: z.string(),
-    birthday: z.string(),
-    height: z.string(),
-    weight: z.string(),
-    workoutsFrequency: z.string(),
-    goals: z.string(),
+    email: z.string().email("Email inválido"),
+    name: z.string().min(4, "Nome deve conter pelo menos 4 letras"),
+    password: z.string().regex(
+        /^(?=.*[A-Z])(?=.*\d).{8,}$/,
+        'A senha precisa ter no mínimo 8 caracteres, incluindo 1 letra maiúscula e 1 número.',
+    ),
+    birthday: z.string().nonempty("Insira sua data de nascimento."),
+    height: z.string().nonempty("Insira sua altura em centímetros."),
+    weight: z.string().nonempty("Insira seu peso."),
+    workoutsFrequency: z.string().nonempty("Insira a frequência que você faz atividade física."),
+    goals: z.string().nonempty("Insira suas metas."),
     foodRestrictions: z.array(z.string()),
     foodPreferences: z.array(z.string()),
 })
@@ -31,6 +38,9 @@ export function DietForm() {
     const { createUser } = useUsersInformations()
     const { step } = useFormSteps()
     const navigate = useNavigate();
+
+    const [shouldErrorModalBeOpen, setShouldErrorModalBeOpen] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
     const formMethods = useForm<DietFormItems>({
         resolver: zodResolver(DietFormSchema)
@@ -43,14 +53,16 @@ export function DietForm() {
     const renderStep = () => {
         switch (step) {
             case 0:
-                return <PartOne />
+                return <SignUp />
             case 1:
-                return <PartTwo />
+                return <PartOne />
             case 2:
-                return <PartThree />
+                return <PartTwo />
             case 3:
-                return <PartFour />
+                return <PartThree />
             case 4:
+                return <PartFour />
+            case 5:
                 return <PartFive />
             default:
                 return <PartOne />
@@ -64,26 +76,35 @@ export function DietForm() {
         const heightNumber = Number(data.height)
         const birthdayISO = new Date(data.birthday).toISOString()
 
-        const userId = await postForm({
-            name: data.name,
-            email: data.email,
-            birthday: birthdayISO,
-            height: heightNumber,
-            weight: weightNumber,
-            workoutsFrequency: data.workoutsFrequency,
-            goals: data.goals,
-            foodPreferences: preferencies,
-            foodRestrictions: restrictions
-        })
+        try {
+            const userId = await postForm({
+                name: data.name,
+                email: data.email,
+                password: data.password,
+                birthday: birthdayISO,
+                height: heightNumber,
+                weight: weightNumber,
+                workoutsFrequency: data.workoutsFrequency,
+                goals: data.goals,
+                foodPreferences: preferencies,
+                foodRestrictions: restrictions
+            })
 
-        if (userId != undefined) {
             createUser(userId!)
-            navigate("/weekly-diet-confirmation");
+            navigate("/weekly-diet-confirmation")
+        } catch (error: any) {
+            setErrorMessage(error.response?.data.message)
+            setShouldErrorModalBeOpen(true)
         }
     }
 
     return (
         <FormProvider {...formMethods}>
+            <ErrorModal
+                isOpen={shouldErrorModalBeOpen}
+                handleClose={() => setShouldErrorModalBeOpen(false)}
+                error={errorMessage}
+            />
             <Container>
                 <Header />
                 <form id="diet" onSubmit={handleSubmit(handleFormSubmit)}>
