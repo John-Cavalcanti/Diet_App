@@ -33,7 +33,7 @@ const Label = styled.label`
     margin-bottom: -0.5rem;
     margin-left: 1rem;
 
-    z-index: 1;
+    z-index: 0;
 `
 
 const Input = styled.input`

@@ -11,9 +11,10 @@ interface FormCardProps {
     title: string
     description: string
     percentageOfFomsCompletion: number
+    shouldShowPercentage: boolean
 }
 
-export function FormCard({ title, description, percentageOfFomsCompletion, children }: FormCardProps) {
+export function FormCard({ title, description, percentageOfFomsCompletion, shouldShowPercentage, children }: FormCardProps) {
     const { handlePreviuosStep, handleNextStep } = useFormSteps()
 
     const isLastStep = percentageOfFomsCompletion == 100 ? true : false
@@ -22,7 +23,10 @@ export function FormCard({ title, description, percentageOfFomsCompletion, child
 
     return (
         <Container>
-            <ProgressBar percentage={percentageOfFomsCompletion} />
+            {
+                shouldShowPercentage &&
+                <ProgressBar percentage={percentageOfFomsCompletion} />
+            }
             <Card>
                 <CardContainer>
                     <Title>{title}</Title>

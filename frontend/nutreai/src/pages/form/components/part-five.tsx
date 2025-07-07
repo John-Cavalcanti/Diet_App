@@ -11,6 +11,7 @@ export function PartFive() {
             title={"Quais alimentos você gosta?"}
             description={"Isso nos ajuda a montar refeições que combinam com seu paladar."}
             percentageOfFomsCompletion={100}
+            shouldShowPercentage
         >
             <Controller
                 control={control}

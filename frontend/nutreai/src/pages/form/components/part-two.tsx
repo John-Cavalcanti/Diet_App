@@ -10,6 +10,7 @@ export function PartTwo() {
             title="Com que frequencia você realiza atividades físicas?"
             description="Entender seu nível de atividade nos ajuda a ajustar sua dieta e metas."
             percentageOfFomsCompletion={40}
+            shouldShowPercentage
         >
             <RadioContainer>
                 <input 

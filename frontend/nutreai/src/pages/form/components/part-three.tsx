@@ -10,6 +10,7 @@ export function PartThree() {
             title={"Qual é o seu objetivo?"}
             description={"Isso nos ajuda a criar um plano mais adequado para você."}
             percentageOfFomsCompletion={60}
+            shouldShowPercentage
         >
             <RadioContainer>
                 <input 

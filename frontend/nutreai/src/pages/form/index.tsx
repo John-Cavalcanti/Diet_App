@@ -12,10 +12,14 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { postForm } from "../../services/form"
 import { useUsersInformations } from "../../contexts/user-informations"
 import { useNavigate } from "react-router-dom"
+import { SignUp } from "./components/signup"
+import { ErrorModal } from "./components/erro-modal"
+import { useState } from "react"
 
 const DietFormSchema = z.object({
     email: z.string(),
     name: z.string(),
+    password: z.string(),
     birthday: z.string(),
     height: z.string(),
     weight: z.string(),
@@ -32,6 +36,9 @@ export function DietForm() {
     const { step } = useFormSteps()
     const navigate = useNavigate();
 
+    const [ shouldErrorModalBeOpen, setShouldErrorModalBeOpen ] = useState(false)
+    const [ errorMessage, setErrorMessage ] = useState([])
+
     const formMethods = useForm<DietFormItems>({
         resolver: zodResolver(DietFormSchema)
     })
@@ -43,14 +50,16 @@ export function DietForm() {
     const renderStep = () => {
         switch (step) {
             case 0:
-                return <PartOne />
+                return <SignUp />
             case 1:
-                return <PartTwo />
+                return <PartOne />
             case 2:
-                return <PartThree />
+                return <PartTwo />
             case 3:
-                return <PartFour />
+                return <PartThree />
             case 4:
+                return <PartFour />
+            case 5:
                 return <PartFive />
             default:
                 return <PartOne />
@@ -64,26 +73,35 @@ export function DietForm() {
         const heightNumber = Number(data.height)
         const birthdayISO = new Date(data.birthday).toISOString()
 
-        const userId = await postForm({
-            name: data.name,
-            email: data.email,
-            birthday: birthdayISO,
-            height: heightNumber,
-            weight: weightNumber,
-            workoutsFrequency: data.workoutsFrequency,
-            goals: data.goals,
-            foodPreferences: preferencies,
-            foodRestrictions: restrictions
-        })
+        try {
+            const userId = await postForm({
+                name: data.name,
+                email: data.email,
+                password: data.password,
+                birthday: birthdayISO,
+                height: heightNumber,
+                weight: weightNumber,
+                workoutsFrequency: data.workoutsFrequency,
+                goals: data.goals,
+                foodPreferences: preferencies,
+                foodRestrictions: restrictions
+            })
 
-        if (userId != undefined) {
             createUser(userId!)
-            navigate("/weekly-diet-confirmation");
+            navigate("/weekly-diet-confirmation")
+        } catch (error: any) {
+            setErrorMessage(error.response?.data.message)
+            setShouldErrorModalBeOpen(true)
         }
     }
 
     return (
         <FormProvider {...formMethods}>
+            <ErrorModal 
+                isOpen={shouldErrorModalBeOpen} 
+                handleClose={() => setShouldErrorModalBeOpen(false)} 
+                error={errorMessage} 
+            />
             <Container>
                 <Header />
                 <form id="diet" onSubmit={handleSubmit(handleFormSubmit)}>

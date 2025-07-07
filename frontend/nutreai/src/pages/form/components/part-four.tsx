@@ -10,6 +10,7 @@ export function PartFour() {
             title={"Você possui alguma restrição alimentar?"}
             description={"Informe se possui alergias, intolerâncias ou adota uma dieta específica (vegetariana, vegana etc.). "}
             percentageOfFomsCompletion={80}
+            shouldShowPercentage
         >
             <CheckboxContainer>
                 <input 

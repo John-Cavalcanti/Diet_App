@@ -9,6 +9,7 @@ export function PartOne() {
             title="Vamos te conhecer melhor!"
             description="Informe alguns dados para criar seu plano alimentar. Essas informações são importantes para personalizar sua alimentação."
             percentageOfFomsCompletion={20}
+            shouldShowPercentage
         >
             <InputsContainer>
                 <FormInput 
