@@ -14,7 +14,7 @@ export function ErrorModal({ isOpen, handleClose, error }: ErrorModalProps) {
             <Card>
                 <CardContainer>
                     <CloseButton onClick={handleClose}>X</CloseButton>
-                    <Title>Houve um erro ao finalizar o cadastro!</Title>
+                    <Title>Houve um erro ao finalizar ao realizar sua requisição!</Title>
                     <Messages>
                         {
                             <p>{error}</p>
