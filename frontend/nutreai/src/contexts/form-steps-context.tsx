@@ -11,7 +11,7 @@ export function FormStepsProvider({ children }: { children: ReactNode }) {
     const [step, setStep] = useState<number>(0)
 
     function handleNextStep () {
-        if(step <= 3){
+        if(step <= 4){
             setStep(state => state + 1)
             console.log(step)
         }

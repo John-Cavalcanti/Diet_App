@@ -1,18 +1,16 @@
-import type {ReactNode} from 'react';
+import {useState, type ReactNode} from 'react';
 import styled from 'styled-components';
 
 
 interface ModalProps {
     children: ReactNode // Conteudo do modal(div com o conteudo)
-    isOpen: boolean; // Estado do modal (aberto ou fechado)
-    setIsOpen: (isOpen : boolean) => void; // Função para alterar o estado do modal
 }
 
 
-export function Modal({children,isOpen, setIsOpen}: ModalProps) {
+export function Modal({children}: ModalProps) {
+    const [ isOpen, setIsOpen ] = useState(false)
 
-
-    if (!isOpen) return null; //Modal fechado
+    if (!isOpen) return null
     
     return (
         <Container>
@@ -27,8 +25,8 @@ export function Modal({children,isOpen, setIsOpen}: ModalProps) {
 }
 
 const Container = styled.div`
-    width: 100vw;
-    height: 100vh;
+    width: 50vw;
+    height: 30vh;
 
     display: flex;
     flex-direction: column;
