@@ -219,7 +219,7 @@ const fakeDiet: WeeklyDiet = {
 }
       
 
-export const postWeeklyDiet =   http.post('/api/weekly-diet', async ({ request }) => {
+export const postWeeklyDietMock = http.post('/api/weekly-diet', async ({ request }) => {
     const body = (await request.json()) as { userId: number };
 
     console.log('Requisição recebida p/ /weekly-diet ⇒', body);
