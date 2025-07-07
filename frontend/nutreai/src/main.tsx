@@ -11,7 +11,7 @@ import Home from './pages/home/index.tsx'
 import { RouteNotFound } from './pages/route-not-found/index.tsx'
 import { ThemeProvider } from 'styled-components'
 import { defaultTheme } from './styles/themes/default'
-
+import { enableMSW } from './tests/mocks/setup.ts'
 
 const router = createBrowserRouter([
   {
@@ -45,8 +45,10 @@ const router = createBrowserRouter([
 
 Modal.setAppElement('#root');
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
-)
+enableMSW().then(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>,
+  )
+})
