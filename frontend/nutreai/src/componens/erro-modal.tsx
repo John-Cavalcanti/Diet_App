@@ -1,6 +1,6 @@
 import Modal from 'react-modal'
 import styled from 'styled-components'
-import { Card } from '../../../componens/card'
+import { Card } from './card'
 
 interface ErrorModalProps {
     isOpen: boolean,

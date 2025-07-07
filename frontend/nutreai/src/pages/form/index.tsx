@@ -13,7 +13,7 @@ import { postForm } from "../../services/form"
 import { useUsersInformations } from "../../contexts/user-informations"
 import { useNavigate } from "react-router-dom"
 import { SignUp } from "./components/signup"
-import { ErrorModal } from "./components/erro-modal"
+import { ErrorModal } from "../../componens/erro-modal"
 import { useState } from "react"
 
 const DietFormSchema = z.object({
