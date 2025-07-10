@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UtilitariesService } from './utilitaries.service';
 import { UpdateUserDto } from '../users/dto/update-user.dto';
-import { invalidUserDto, validUserDto } from './constants/constants';
+import { validUserDto, validSecondUserDto } from './constants/constants';
 import { User } from '../users/entities/user.entity';
 
 describe('UtilitariesService', () => {
@@ -36,9 +36,25 @@ describe('UtilitariesService', () => {
     });
 
     it('deveria retornar false (emails não correspondem)', async () => {
-      const user = new User(invalidUserDto);
+      const user = new User(validSecondUserDto);
       const dto = validUserDto;
       expect(await service.emailCheckUpdate(dto, user)).toBeFalsy();
     });
   });
+
+  describe('Quando chamada a função checkAge', () => {
+    it('deveria retornar a idade correta (aniversário já ocorreu no ano corrente)', () => {
+      const birthday = validUserDto.birthday;
+      const userAge = service.calculateAge(birthday);
+      expect(userAge).toEqual(30);
+    });
+
+    it('deveria retornar a idade correta (aniversário ainda não ocorreu no ano corrente', () => {
+      const birthday = validSecondUserDto.birthday;
+      const userAge = service.calculateAge(birthday);
+      expect(userAge).toEqual(38);
+    });
+  });
+
+  // TODO: imterpolateTemplate
 });
