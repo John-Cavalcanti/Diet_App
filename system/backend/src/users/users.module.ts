@@ -1,4 +1,4 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { UsersRepository } from './users.repository';
@@ -19,7 +19,7 @@ import { UtilitariesModule } from 'src/utilitaries/utilitaries.module';
       }),
       inject: [ConfigService],
     }),
-    forwardRef(() => UtilitariesModule),
+    UtilitariesModule,
   ],
 })
 export class UsersModule {}
