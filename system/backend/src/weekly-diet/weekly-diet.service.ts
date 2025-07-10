@@ -7,6 +7,7 @@ import { UsersService } from '../users/users.service';
 import { WeeklyDiet } from './entities/weekly-diet.entity';
 import { WeeklyDietRepository } from './weekly-diet.repository';
 import { BadRequestException } from '@nestjs/common';
+import { UtilitariesService } from 'src/utilitaries/utilitaries.service';
 
 @Injectable()
 export class WeeklyDietService {
@@ -15,6 +16,7 @@ export class WeeklyDietService {
     private readonly mealsService: MealsService,
     private readonly usersService: UsersService,
     private readonly weeklyDietRepository: WeeklyDietRepository,
+    private readonly utilitariesService: UtilitariesService,
   ) {}
 
   async create(createWeeklyDietDto: CreateWeeklyDietDto) {
@@ -28,7 +30,7 @@ export class WeeklyDietService {
     }
 
     const userData = {
-      age: this.calculateAge(userObj.birthday),
+      age: this.utilitariesService.calculateAge(userObj.birthday),
       weigth: userObj.weight,
       height: userObj.height,
       workouts: userObj.workoutsFrequency,
@@ -53,22 +55,6 @@ export class WeeklyDietService {
       console.error('Conteúdo bruto:', content);
       throw new Error('Resposta da IA não está em formato JSON válido.');
     }
-  }
-
-  private calculateAge(birthday: string | Date): number {
-    const birthDate = new Date(birthday);
-    const today = new Date();
-
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    const dayDiff = today.getDate() - birthDate.getDate();
-
-    // Adjust if the birthday hasn't occurred yet this year
-    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-      age--;
-    }
-
-    return age;
   }
 
   findAll() {

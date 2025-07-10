@@ -7,6 +7,7 @@ import { UsersModule } from 'src/users/users.module';
 import { WeeklyDietRepository } from './weekly-diet.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { UtilitariesModule } from 'src/utilitaries/utilitaries.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       }),
       inject: [ConfigService],
     }),
+    UtilitariesModule,
   ],
   controllers: [WeeklyDietController],
   providers: [WeeklyDietService, WeeklyDietRepository],
