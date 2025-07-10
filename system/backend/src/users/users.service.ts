@@ -1,14 +1,18 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './users.repository';
 import { User } from './entities/user.entity';
-import * as bcrypt from 'bcryptjs';
 import { UtilitariesService } from 'src/utilitaries/utilitaries.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly userRepository: UsersRepository,
+  constructor(
+    private readonly userRepository: UsersRepository,
     private readonly utilitariesService: UtilitariesService,
   ) {}
   create(createUserDto: CreateUserDto) {
@@ -37,27 +41,17 @@ export class UsersService {
   async update(id: number, updateUserDto: UpdateUserDto) {
     // eslint-disable-next-line prettier/prettier
     const dto: UpdateUserDto = await this.utilitariesService.encode(updateUserDto);
-    if (!(await this.emailCheckUpdate(dto, id))) {
+    const oldUser = this.userRepository.findUserById(id);
+    if (!oldUser) {
+      throw new BadRequestException();
+    }
+    if (!(await this.utilitariesService.emailCheckUpdate(dto, oldUser))) {
       throw new UnauthorizedException(
         'Não é permitido modificar informações de outros usuários',
       );
     }
     const user = this.userRepository.updateUser(id, new User(dto)); //
     return user;
-  }
-
-  private async emailCheckUpdate(
-    dto: UpdateUserDto,
-    id: number,
-  ): Promise<boolean> {
-    const user = await this.userRepository.findUserById(id);
-    if (!user) {
-      return false;
-    }
-    if (user.getEmail() != dto.email) {
-      return false;
-    }
-    return true;
   }
 
   remove(id: number) {

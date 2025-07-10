@@ -1,14 +1,14 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { UsersRepository } from './users.repository';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { UtilitariesService } from 'src/utilitaries/utilitaries.service';
+import { UtilitariesModule } from 'src/utilitaries/utilitaries.module';
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService, UsersRepository, UtilitariesService],
+  providers: [UsersService, UsersRepository],
   exports: [UsersService],
   imports: [
     JwtModule.registerAsync({
@@ -19,6 +19,7 @@ import { UtilitariesService } from 'src/utilitaries/utilitaries.service';
       }),
       inject: [ConfigService],
     }),
+    forwardRef(() => UtilitariesModule),
   ],
 })
 export class UsersModule {}

@@ -5,7 +5,7 @@ import { UsersModule } from './users/users.module';
 import { WeeklyDietModule } from './weekly-diet/weekly-diet.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
-import { UtilitariesService } from './utilitaries/utilitaries.service';
+import { UtilitariesModule } from './utilitaries/utilitaries.module';
 
 @Module({
   imports: [
@@ -13,8 +13,9 @@ import { UtilitariesService } from './utilitaries/utilitaries.service';
     WeeklyDietModule,
     AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
+    UtilitariesModule,
   ],
   controllers: [AppController],
-  providers: [AppService, UtilitariesService],
+  providers: [AppService],
 })
 export class AppModule {}
