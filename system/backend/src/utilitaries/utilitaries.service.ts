@@ -40,4 +40,11 @@ export class UtilitariesService {
 
     return age;
   }
+
+  interpolateTemplate(template: string, data: Record<string, any>): string {
+    return template.replace(/{{(.*?)}}/g, (_, key) => {
+      const trimmedKey = key.trim();
+      return data[trimmedKey] !== undefined ? String(data[trimmedKey]) : '';
+    });
+  }
 }
