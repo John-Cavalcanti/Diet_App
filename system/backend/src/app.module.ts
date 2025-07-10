@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { WeeklyDietModule } from './weekly-diet/weekly-diet.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { UtilitariesService } from './utilitaries/utilitaries.service';
 
 @Module({
   imports: [
@@ -14,6 +15,6 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({ isGlobal: true }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, UtilitariesService],
 })
 export class AppModule {}

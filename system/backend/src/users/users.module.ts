@@ -4,10 +4,11 @@ import { UsersController } from './users.controller';
 import { UsersRepository } from './users.repository';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { UtilitariesService } from 'src/utilitaries/utilitaries.service';
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService, UsersRepository],
+  providers: [UsersService, UsersRepository, UtilitariesService],
   exports: [UsersService],
   imports: [
     JwtModule.registerAsync({
