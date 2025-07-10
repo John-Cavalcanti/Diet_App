@@ -1,17 +1,14 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 import * as bcrypt from 'bcryptjs';
 import { SignUpDto } from 'src/auth/dto/sign-up.dto';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class UtilitariesService {
-  async encode(
-    dto: UpdateUserDto | SignUpDto,
-  ): Promise<UpdateUserDto | CreateUserDto> {
+  async encode(dto: UpdateUserDto | SignUpDto) {
     const hashedPassword: string = await bcrypt.hash(dto.password, 10);
-    const newDto: UpdateUserDto | CreateUserDto = {
+    const newDto = {
       ...dto,
       password: hashedPassword,
     };

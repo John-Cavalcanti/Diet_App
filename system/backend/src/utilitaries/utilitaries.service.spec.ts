@@ -1,5 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UtilitariesService } from './utilitaries.service';
+import { UpdateUserDto } from '../users/dto/update-user.dto';
+import { invalidUserDto, validUserDto } from './constants/constants';
+import { User } from '../users/entities/user.entity';
 
 describe('UtilitariesService', () => {
   let service: UtilitariesService;
@@ -17,22 +20,25 @@ describe('UtilitariesService', () => {
   });
 
   describe('Quando chamada a função encode', () => {
-    it('deveria retornar um UpdateUserDto com a senha criptografada', async () => {
-      const entryDto = {
-        name: 'Fernanda Oliveira',
-        email: 'fernanda.oliveira@example.com',
-        password: 'SenhaForte2024',
-        birthday: '1995-04-10',
-        weight: 60,
-        height: 167,
-        workoutsFrequency: '5 vezes por semana',
-        goals: 'Definir músculos e manter energia',
-        foodRestrictions: 'Lactose, nozes',
-        foodPreferences: 'Vegetariana, prefere pratos quentes no almoço',
-      }
-      const newDto = service.encode(entryDto)
-      expect((await newDto).password).
+    it('deveria retornar um Object com a senha criptografada', async () => {
+      const entryDto: UpdateUserDto = validUserDto;
+      const newDto = await service.encode(entryDto);
+      expect(newDto.password.slice(0, 2)).toEqual('$2'); // as senha criptografadas sempre começam com $2
+      expect(newDto).toBeInstanceOf(Object);
     });
   });
 
+  describe('Quando chamada a função emailCheck', () => {
+    it('deveria retornar true (emails correspondem)', async () => {
+      const user = new User(validUserDto);
+      const dto = validUserDto;
+      expect(await service.emailCheckUpdate(dto, user)).toBeTruthy();
+    });
+
+    it('deveria retornar false (emails não correspondem)', async () => {
+      const user = new User(invalidUserDto);
+      const dto = validUserDto;
+      expect(await service.emailCheckUpdate(dto, user)).toBeFalsy();
+    });
+  });
 });
