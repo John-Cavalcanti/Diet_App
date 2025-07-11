@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
@@ -5,7 +6,7 @@ import { LogInDto } from './dto/log-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
 import * as bcrypt from 'bcryptjs';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import { UtilitariesService } from 'src/utilitaries/utilitaries.service';
+import { UtilitariesService } from '../utilitaries/utilitaries.service';
 
 @Injectable()
 export class AuthService {
@@ -40,7 +41,6 @@ export class AuthService {
       throw new ConflictException('Email já está em uso.');
     }
     // criptografa a senha digitada pelo cliente
-    // eslint-disable-next-line prettier/prettier
     const createUserDto: CreateUserDto = await this.utilitariesService.encode(signUpDto);
 
     // finalmente cria o cliente no banco de dados / memória
