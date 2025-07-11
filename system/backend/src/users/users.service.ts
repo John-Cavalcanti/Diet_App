@@ -7,7 +7,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './users.repository';
 import { User } from './entities/user.entity';
-import { UtilitariesService } from 'src/utilitaries/utilitaries.service';
+import { UtilitariesService } from '../utilitaries/utilitaries.service';
 
 @Injectable()
 export class UsersService {
