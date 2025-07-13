@@ -12,8 +12,11 @@ export class WeeklyDietController {
   constructor(private readonly weeklyDietService: WeeklyDietService) {}
 
   @WeeklyDietDocsCreate()
+  @UseGuards(AuthGuard)
   @Post()
-  create(@Body() createWeeklyDietDto: CreateWeeklyDietDto) {
+  create(@Request() req) {
+    const createWeeklyDietDto = new CreateWeeklyDietDto();
+    createWeeklyDietDto.userId = req.user.sub;
     return this.weeklyDietService.create(createWeeklyDietDto);
   }
 
