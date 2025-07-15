@@ -9,6 +9,7 @@ export class WeeklyDietRepository {
 
   createDiet(weeklyDiet: WeeklyDiet): WeeklyDiet {
     weeklyDiet.setId(++this.id); // lógica para mimificar auto increment do bd
+    console.log(weeklyDiet.getId());
     this.weeklyDiets.push(weeklyDiet);
     return weeklyDiet;
   }

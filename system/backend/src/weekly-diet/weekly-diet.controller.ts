@@ -6,12 +6,14 @@ import { AuthGuard } from '../auth/auth.guard';
 import { Request } from '@nestjs/common';
 import { WeeklyDietDocsCreate } from './decorators/weeklydiet-swagger-create.decorators';
 import { WeeklyDietDocsFindOne } from './decorators/weeklydiet-swagger-findone.decorators';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller('weekly-diet')
 export class WeeklyDietController {
   constructor(private readonly weeklyDietService: WeeklyDietService) {}
 
   @WeeklyDietDocsCreate()
+  @ApiBody({ type: CreateWeeklyDietDto })
   @UseGuards(AuthGuard)
   @Post()
   create(@Request() req) {

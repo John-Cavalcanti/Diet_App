@@ -5,6 +5,7 @@ import {
   ApiUnauthorizedResponse,
   ApiBadRequestResponse,
 } from '@nestjs/swagger';
+import { mockGetToken } from '../constants/constants';
 
 export function AuthSwaggerDocsLogIn() {
   return applyDecorators(
@@ -16,8 +17,7 @@ export function AuthSwaggerDocsLogIn() {
       description: 'Cliente passou email e senha válidos.',
       schema: {
         example: {
-          access_token:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZmVybmFuZGEub2xpdmVpcmFAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTEyMDk0NzgsImV4cCI6MTc1MTIxMzA3OH0.TN48QRk_GHKb6R1yqbXpgy05osvc3pKoMaVyNTNuoRs',
+          access_token: mockGetToken,
         },
       },
     }),
