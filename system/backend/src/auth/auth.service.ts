@@ -28,7 +28,7 @@ export class AuthService {
       throw new UnauthorizedException('A senha está incorreta');
     }
 
-    const payload = { sub: user?.getId(), email: user?.getEmail() };
+    const payload = { sub: user.getId(), email: user.getEmail() };
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
@@ -36,14 +36,12 @@ export class AuthService {
 
   async signUp(signUpDto: SignUpDto) {
     const user = /*await*/ this.usersService.findByEmail(signUpDto.email);
-    // verifica se o cliente digitou um email já existente
     if (user) {
       throw new ConflictException('Email já está em uso.');
     }
-    // criptografa a senha digitada pelo cliente
+    
     const createUserDto: CreateUserDto = await this.utilitariesService.encode(signUpDto);
 
-    // finalmente cria o cliente no banco de dados / memória
     this.usersService.create(createUserDto);
 
     return this.logIn({ email: signUpDto.email, password: signUpDto.password });

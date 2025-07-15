@@ -42,6 +42,7 @@ export class UsersService {
     // eslint-disable-next-line prettier/prettier
     const dto: UpdateUserDto = await this.utilitariesService.encode(updateUserDto);
     const oldUser = this.userRepository.findUserById(id);
+
     if (!oldUser) {
       throw new BadRequestException();
     }
@@ -50,7 +51,7 @@ export class UsersService {
         'Não é permitido modificar informações de outros usuários',
       );
     }
-    const user = this.userRepository.updateUser(id, new User(dto)); //
+    const user = this.userRepository.updateUser(id, new User(dto));
     return user;
   }
 

@@ -1,6 +1,6 @@
 import { MealsService } from './../meals/meals.service';
 import { AiService } from './../ai/ai.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateWeeklyDietDto } from './dto/create-weekly-diet.dto';
 import { UpdateWeeklyDietDto } from './dto/update-weekly-diet.dto';
 import { UsersService } from '../users/users.service';
@@ -21,27 +21,20 @@ export class WeeklyDietService {
 
   async create(createWeeklyDietDto: CreateWeeklyDietDto) {
     const user = this.usersService.findOne(createWeeklyDietDto.userId);
-    let userObj: any;
-
     if (!user) {
       throw new BadRequestException('User not found');
-    } else {
-      userObj = user.toObject();
     }
 
-    const userData = {
-      age: this.utilitariesService.calculateAge(userObj.birthday),
-      weigth: userObj.weight,
-      height: userObj.height,
-      workouts: userObj.workoutsFrequency,
-      objetivo: userObj.goals,
-      restricoes: userObj.foodRestrictions,
-      alimentosFavoritos: userObj.foodPreferences,
-    };
+    const userObj = user.toObject();
+
+    const userData = this.utilitariesService.transformObject(userObj);
 
     const aiResponse = await this.aiService.groqGenerateWeeklyDiet(userData);
 
     let content = aiResponse ?? "Nenhuma resposta";
+    if (content === 'Nenhuma resposta') {
+      throw new InternalServerErrorException();
+    }
 
     content = content.replace(/```json|```/g, '').trim();
 
@@ -53,7 +46,9 @@ export class WeeklyDietService {
     } catch (err) {
       console.error('Erro ao fazer parse da resposta da IA:', err);
       console.error('Conteúdo bruto:', content);
-      throw new Error('Resposta da IA não está em formato JSON válido.');
+      throw new InternalServerErrorException(
+        'Resposta da IA não está em formato JSON válido.',
+      );
     }
   }
 

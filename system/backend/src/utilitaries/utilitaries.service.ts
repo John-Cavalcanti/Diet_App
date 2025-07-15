@@ -44,4 +44,17 @@ export class UtilitariesService {
       return data[trimmedKey] !== undefined ? String(data[trimmedKey]) : '';
     });
   }
+
+  transformObject(userObj) {
+    const userData = {
+      age: this.calculateAge(userObj.birthday),
+      weigth: userObj.weight,
+      height: userObj.height,
+      workouts: userObj.workoutsFrequency,
+      objetivo: userObj.goals,
+      restricoes: userObj.foodRestrictions,
+      alimentosFavoritos: userObj.foodPreferences,
+    };
+    return userData;
+  }
 }
