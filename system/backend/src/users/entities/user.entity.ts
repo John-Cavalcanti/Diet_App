@@ -1,25 +1,48 @@
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 
+@Entity('users')
+@Unique(['email'])
 export class User {
+  @PrimaryGeneratedColumn()
   private _id: number | null;
+
+  @Column({name: 'username', type: 'varchar', length: 50, nullable: false})
   private _name: string;
+  
+  @Column({name: 'email', type: 'varchar', length: 100, nullable: false})
   private _email: string;
+  
+  @Column({name: 'birthday', type: 'date', nullable: false})
   private _birthday: Date;
+
+  @Column({name: 'weight', type: 'float', nullable: false})
   private _weight: number;
+
+  @Column({name: 'height', type: 'float', nullable: false})
   private _height: number;
+
+  @Column({name: 'password', type: 'varchar', length: 255, nullable: false})
   private _password: string;
 
+  @Column({name: 'workouts_frequency', type: 'varchar', length: 255, nullable: false})
   private _workoutsFrequency: string;
 
+  @Column({name: 'goals', type: 'varchar', length: 255, nullable: false})
   private _goals: string;
 
+  @Column({name: 'food_restrictions', type: 'varchar', length: 255, nullable: false})
   private _foodRestrictions?: string;
 
+  @Column({name: 'food_preferences', type: 'varchar', length: 255, nullable: false})
   private _foodPreferences?: string;
 
+  @CreateDateColumn({name: 'created_at', type: 'timestamp', nullable: false})
+  private _createdAt: Date;
+
   constructor(dto: CreateUserDto | UpdateUserDto) {
-    this._id = null;
+    this._id = (dto as any).id || null;
     this._name = dto.name;
     this._email = dto.email;
     this._birthday = new Date(dto.birthday);
@@ -120,6 +143,10 @@ export class User {
     this._foodPreferences = foodPreferences;
   }
 
+  getCreatedAt(): Date {
+    return this._createdAt;
+  }
+
   toObject() {
     return {
       id: this._id,
@@ -132,6 +159,7 @@ export class User {
       goals: this._goals,
       foodRestrictions: this._foodRestrictions,
       foodPreferences: this._foodPreferences,
+      createdAt: this._createdAt,
     };
   }
 }

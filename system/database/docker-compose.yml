@@ -7,9 +7,9 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "5432:5432" # Maps host port 5432 to container port 5432
+      - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data # Persistent storage for your data
+      - postgres_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
