@@ -22,12 +22,6 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get('diet/:id')
-  dietplan(@Param('id') id: number) {
-    const user = this.usersService.findOne(id);
-    return user?.getDietPlan();
-  }
-
   @UsersDocsFindOne()
   @UseGuards(AuthGuard)
   @Get('me')

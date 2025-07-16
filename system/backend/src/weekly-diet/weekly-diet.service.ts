@@ -41,7 +41,6 @@ export class WeeklyDietService {
     try {
       const parsed = JSON.parse(content);
       const weeklyDiet = new WeeklyDiet(createWeeklyDietDto.userId, parsed.planoAlimentarSemanal);
-      user.setDietPlan(weeklyDiet.getMeals());
       this.weeklyDietRepository.createDiet(weeklyDiet);
       return parsed.planoAlimentarSemanal; // ou return parsed se quiser tudo
     } catch (err) {
@@ -58,13 +57,13 @@ export class WeeklyDietService {
   }
 
   async findWeeklyDietByUserId(id: number) {
-    const diet = await this.weeklyDietRepository.findWeeklyDietByUserId(id);
-    if (!diet) {
+    const dietsArray = await this.weeklyDietRepository.findWeeklyDietByUserId(id);
+    if (!dietsArray.length) {
       throw new BadRequestException(
-        'Esse plano alimentar não existe no banco de dados',
+        'Não há planos alimentares ligados a esse usuário.',
       );
     }
-    return diet?.getMeals();
+    return dietsArray;
   }
 
   update(id: number, updateWeeklyDietDto: UpdateWeeklyDietDto) {

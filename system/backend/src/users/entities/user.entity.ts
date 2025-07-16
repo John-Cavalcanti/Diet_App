@@ -18,8 +18,6 @@ export class User {
 
   private _foodPreferences?: string;
 
-  private _DietPlans?: Array<object>;
-
   constructor(dto: CreateUserDto | UpdateUserDto) {
     this._id = null;
     this._name = dto.name;
@@ -32,7 +30,6 @@ export class User {
     this._foodRestrictions = dto.foodRestrictions;
     this._foodPreferences = dto.foodPreferences;
     this._password = dto.password;
-    this._DietPlans = [];
   }
 
   getId(): number | null {
@@ -117,14 +114,6 @@ export class User {
 
   setFoodPreferences(foodPreferences: string): void {
     this._foodPreferences = foodPreferences;
-  }
-
-  setDietPlan(dietPlan: object): void {
-    this._DietPlans?.push(dietPlan);
-  }
-
-  getDietPlan(): any {
-    return this._DietPlans;
   }
 
   toObject() {

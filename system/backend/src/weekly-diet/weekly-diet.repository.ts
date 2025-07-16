@@ -15,6 +15,6 @@ export class WeeklyDietRepository {
   }
 
   findWeeklyDietByUserId(id: number) {
-    return this.weeklyDiets.find(diet => diet.getId() === id);
+    return this.weeklyDiets.filter(diet => diet.getUserId() === id);
   }
 }
