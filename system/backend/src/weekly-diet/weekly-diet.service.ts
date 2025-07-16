@@ -41,7 +41,8 @@ export class WeeklyDietService {
     try {
       const parsed = JSON.parse(content);
       const weeklyDiet = new WeeklyDiet(createWeeklyDietDto.userId, parsed.planoAlimentarSemanal);
-      this.weeklyDietRepository.createDiet(weeklyDiet, user);
+      user.setDietPlan(weeklyDiet.getMeals());
+      this.weeklyDietRepository.createDiet(weeklyDiet);
       return parsed.planoAlimentarSemanal; // ou return parsed se quiser tudo
     } catch (err) {
       console.error('Erro ao fazer parse da resposta da IA:', err);
