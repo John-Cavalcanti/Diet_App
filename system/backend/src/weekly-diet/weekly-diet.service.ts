@@ -7,7 +7,7 @@ import { UsersService } from '../users/users.service';
 import { WeeklyDiet } from './entities/weekly-diet.entity';
 import { WeeklyDietRepository } from './weekly-diet.repository';
 import { BadRequestException } from '@nestjs/common';
-import { UtilitariesService } from 'src/utilitaries/utilitaries.service';
+import { UtilitariesService } from '../utilitaries/utilitaries.service';
 
 @Injectable()
 export class WeeklyDietService {

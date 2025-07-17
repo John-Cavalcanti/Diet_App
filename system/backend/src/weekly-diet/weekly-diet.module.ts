@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { WeeklyDietService } from './weekly-diet.service';
 import { WeeklyDietController } from './weekly-diet.controller';
-import { MealsModule } from 'src/meals/meals.module';
-import { AiModule } from 'src/ai/ai.module';
-import { UsersModule } from 'src/users/users.module';
+import { MealsModule } from '../meals/meals.module';
+import { AiModule } from '../ai/ai.module';
+import { UsersModule } from '../users/users.module';
 import { WeeklyDietRepository } from './weekly-diet.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UtilitariesModule } from 'src/utilitaries/utilitaries.module';
+import { UtilitariesModule } from '../utilitaries/utilitaries.module';
 
 @Module({
   imports: [

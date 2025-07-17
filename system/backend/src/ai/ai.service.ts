@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { promises as fs } from 'fs';
 import { AiWebService } from './ai.webservice';
 import * as path from 'path';
-import { UtilitariesService } from 'src/utilitaries/utilitaries.service';
+import { UtilitariesService } from '../utilitaries/utilitaries.service';
 
 @Injectable()
 export class AiService {

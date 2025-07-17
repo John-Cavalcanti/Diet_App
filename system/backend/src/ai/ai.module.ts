@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AiService } from './ai.service';
 import { AiWebService } from './ai.webservice';
 import { Groq } from 'groq-sdk';
-import { UtilitariesModule } from 'src/utilitaries/utilitaries.module';
+import { UtilitariesModule } from '../utilitaries/utilitaries.module';
 
 const groqProvider = {
   provide: Groq,
