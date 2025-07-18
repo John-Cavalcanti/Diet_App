@@ -3,6 +3,7 @@ import { Sidebar } from "../../componens/sidebar"
 import { Header } from "../../componens/header"
 
 
+
 export function MyPlans() {
   return (
     <Container>
@@ -20,7 +21,6 @@ export function MyPlans() {
             </NewPlanButton>
           </LineRow>
         </TitleRow>
-        
       </MainContent>
     </Container>
   )
