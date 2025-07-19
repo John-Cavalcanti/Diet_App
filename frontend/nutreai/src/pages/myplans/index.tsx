@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { Sidebar } from "../../componens/sidebar"
 import { Header } from "../../componens/header"
 import { WeekDays } from "./components/week-days"
+import { MealsList } from "./components/meal-card"
 import { useState } from "react"
 
 
@@ -34,7 +35,7 @@ export function MyPlans() {
         <Title>
           {weekDayNames[activeDay]}, {formattedDate}
         </Title>
-        
+        <MealsList />
       </MainContent>
     </Container>
   )
@@ -67,6 +68,6 @@ const MainContent = styled.div`
 const Title = styled.h2`
   font-size: 1.5rem;
   color: #217A47;
-  margin-bottom: 2rem;
+  margin-bottom: 3.5rem;
   padding-left: 0.5rem;
 `
