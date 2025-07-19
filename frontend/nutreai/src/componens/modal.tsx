@@ -1,76 +1,82 @@
-import {useState, type ReactNode} from 'react';
+import { type ReactNode } from 'react';
 import styled from 'styled-components';
 
 
 interface ModalProps {
-    children: ReactNode // Conteudo do modal(div com o conteudo)
+  isOpen: boolean;
+  onClose: () => void;
+  children: ReactNode;
+  title?: string;
 }
 
 
-export function Modal({children}: ModalProps) {
-    const [ isOpen, setIsOpen ] = useState(false)
+export function Modal({ isOpen, onClose, title, children }: ModalProps) {
+  if (!isOpen) {
+    return null;
+  }
 
-    if (!isOpen) return null
-    
-    return (
-        <Container>
-            <ModalContent>
-                <CloseModal>
-                    <CloseButton onClick={() =>{setIsOpen(!isOpen)}}>X</CloseButton>
-                </CloseModal>
-                {children}
-            </ModalContent>
-        </Container>
-    )
+  return (
+    <Overlay onClick={onClose}>
+      <Container onClick={(e) => e.stopPropagation()}>
+        <Header hasTitle={!!title}>
+          {title && <Title>{title}</Title>}
+          <CloseButton onClick={onClose}>&times;</CloseButton>
+        </Header>
+        {children}
+      </Container>
+    </Overlay>
+  );
 }
+
+// adição de overlay para fundo do popup
+const Overlay = styled.div`
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+`;
 
 const Container = styled.div`
-    width: 50vw;
-    height: 30vh;
+  background: white;
+  color: ${(props) => props.theme['text-color']};
+  
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.8);
+  min-width: 320px;
+  max-width: 50rem;
+  width: auto;
+`;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+// header para título do popup
+const Header = styled.header<{ hasTitle: boolean }>`
+  display: flex;
+  justify-content: ${(props) => (props.hasTitle ? 'space-between' : 'flex-end')};
+  align-items: center;
+  margin-bottom: ${(props) => (props.hasTitle ? '1.5rem' : '0')};
+  gap: 1rem;
+`;
 
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    background-color: rgba(0, 0, 0, 0.5);
-   
-    padding: 20px;
-    box-sizing: border-box;
-`
-
-const ModalContent = styled.div`
-    width: fit-content;
-    height: fit-content;
-
-    background: white;
-
-    border-radius: 5px;
-
-    display: flex;
-    flex-direction: column;
-`
-
-const CloseModal = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px;
-
-`
+const Title = styled.h2`
+  font-size: 1.25rem;
+  color: ${(props) => props.theme['green-700']};
+`;
 
 const CloseButton = styled.button`
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: black;
-    font-weight: 600;
-    
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: ${(props) => props.theme['text-color']};
+  font-size: 2rem;
+  line-height: 1;
 
-    &:hover{
-        color: #2B7A4B
-    }
-`
+  &:hover {
+    color: ${(props) => props.theme['green-700']};
+  }
+`;
