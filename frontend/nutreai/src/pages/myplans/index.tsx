@@ -1,10 +1,14 @@
 import styled from "styled-components"
 import { Sidebar } from "../../componens/sidebar"
 import { Header } from "../../componens/header"
+import { WeekDays } from "./components/week-days"
+import { useState } from "react"
 
 
 
 export function MyPlans() {
+  const [activeDay, setActiveDay] = useState<number>(new Date().getDay())
+
   return (
     <Container>
       <HeaderWrapper>
@@ -12,15 +16,7 @@ export function MyPlans() {
       </HeaderWrapper>
       <Sidebar />
       <MainContent>
-        <TitleRow>
-          <Title>Meus planos</Title>
-          <LineRow>
-            <Line />
-            <NewPlanButton>
-              + Gerar nova dieta
-            </NewPlanButton>
-          </LineRow>
-        </TitleRow>
+        <WeekDays activeDay={activeDay} onChange={setActiveDay} />
       </MainContent>
     </Container>
   )
@@ -45,48 +41,7 @@ const MainContent = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 5rem;
-  margin-top: 4.5rem;  
+  margin-left: 1rem;
+  margin-top: 4rem;  
   padding: 2rem;
-`
-
-const TitleRow = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-`
-
-const LineRow = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    width: 100%;
-    
-`
-
-const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme["green-700"]};
-`
-
-const Line = styled.div`
-  flex: 100%;
-  height: 3px;
-  background: ${({ theme }) => theme["green-100"]};
-`
-
-const NewPlanButton = styled.button`
-  background: ${({theme}) => theme["green-700"]};
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0.6rem 1.5rem;
-  margin-right: 8.5rem;
-  border: none;
-  border-radius: 24px;
-  width: 16.4rem;
-  height: 2.75rem;
-  cursor: pointer;
 `
