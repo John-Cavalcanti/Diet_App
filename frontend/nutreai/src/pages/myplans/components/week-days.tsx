@@ -36,7 +36,7 @@ export function WeekDays({ activeDay, onChange }: WeekDaysProps) {
 const DaysRow = styled.div`
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 `
 
 const DayButton = styled.button<{ active: boolean }>`

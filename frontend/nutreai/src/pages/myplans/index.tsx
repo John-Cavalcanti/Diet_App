@@ -6,8 +6,22 @@ import { useState } from "react"
 
 
 
+const weekDayNames = [
+  "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"
+]
+
 export function MyPlans() {
   const [activeDay, setActiveDay] = useState<number>(new Date().getDay())
+
+ 
+  const today = new Date()
+  const selectedDate = new Date(today)
+  selectedDate.setDate(today.getDate() + (activeDay - today.getDay()))
+
+  const formattedDate = selectedDate.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "long"
+  })
 
   return (
     <Container>
@@ -17,6 +31,10 @@ export function MyPlans() {
       <Sidebar />
       <MainContent>
         <WeekDays activeDay={activeDay} onChange={setActiveDay} />
+        <Title>
+          {weekDayNames[activeDay]}, {formattedDate}
+        </Title>
+        
       </MainContent>
     </Container>
   )
@@ -44,4 +62,11 @@ const MainContent = styled.div`
   margin-left: 1rem;
   margin-top: 4rem;  
   padding: 2rem;
+`
+
+const Title = styled.h2`
+  font-size: 1.5rem;
+  color: #217A47;
+  margin-bottom: 2rem;
+  padding-left: 0.5rem;
 `
