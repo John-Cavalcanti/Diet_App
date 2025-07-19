@@ -5,14 +5,14 @@ import { JwtService } from '@nestjs/jwt';
 import { createMock } from '@golevelup/ts-jest';
 import { ConfigService } from '@nestjs/config';
 import { ExecutionContext, UnauthorizedException } from '@nestjs/common';
-import { mockGetJWTSECRET, mockAuthorizationHeader } from './constants/constants';
+import { mockGetToken, mockAuthorizationHeader } from './constants/constants';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
 
   const mockConfigService = {
     get: jest.fn().mockImplementation(() => {
-      return mockGetJWTSECRET; // essa jwt secret é falsa
+      return mockGetToken; // essa jwt secret é falsa
     })
   };
   const mockJwtService = {

@@ -3,9 +3,14 @@ jest.mock('bcryptjs', () => ({
   hash: jest.fn(() => Promise.resolve('hashed-password')),
 }));
 
+import { UtilitariesService } from '../utilitaries/utilitaries.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
-import { mockLogInAccessToken } from './constants/constants';
+import {
+  mockEncryptedPassword,
+  mockGetToken,
+  mockLogInAccessToken,
+} from './constants/constants';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/entities/user.entity';
@@ -16,7 +21,7 @@ describe('AuthService', () => {
   let service: AuthService;
 
   const mockJwtService = {
-    signAsync: jest.fn().mockResolvedValue(mockLogInAccessToken),
+    signAsync: jest.fn().mockResolvedValue(mockGetToken),
   };
 
   const mockUsersService = {
@@ -51,15 +56,22 @@ describe('AuthService', () => {
     ),
   };
 
+  const mockUtilitariesService = {
+    encode: jest.fn().mockResolvedValue(mockEncryptedPassword),
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [AuthService, JwtService, UsersService],
+      providers: [AuthService, JwtService, UsersService, UtilitariesService],
     })
       .overrideProvider(JwtService)
       .useValue(mockJwtService)
 
       .overrideProvider(UsersService)
       .useValue(mockUsersService)
+
+      .overrideProvider(UtilitariesService)
+      .useValue(mockUtilitariesService)
 
       .compile();
 
@@ -70,12 +82,12 @@ describe('AuthService', () => {
     expect(service).toBeDefined();
   });
 
-  describe('Quando o cliente tentar fazer o signup', () => {
-    it('deveria retornar um instancia de User', async () => {
+  describe('Quando a função signup for chamada', () => {
+    it('deveria retornar um token Jwt se bem sucedido', async () => {
       mockUsersService.findByEmail.mockReturnValueOnce(undefined);
 
-      expect(
-        await service.signUp({
+      await expect(
+        service.signUp({
           name: 'Carlos Mendes',
           email: 'carlos.mendes@example.com',
           password: 'SenhaForte123',
@@ -87,10 +99,10 @@ describe('AuthService', () => {
           foodRestrictions: '',
           foodPreferences: 'Prefere comidas caseiras e evita frituras',
         }),
-      ).toBeInstanceOf(User);
+      ).resolves.toEqual(mockLogInAccessToken);
     });
 
-    it('deveria emitir conflict error', async () => {
+    it('deveria emitir conflict error se o email já existe', async () => {
       await expect(
         service.signUp({
           name: 'Fernanda Oliveira',
@@ -108,7 +120,7 @@ describe('AuthService', () => {
     });
   });
 
-  describe('Quando o cliente tentar fazer o login', () => {
+  describe('Quando a função login for acionada', () => {
     it('deveria retornar o token de acesso quando as informações forem corretas', async () => {
       expect(
         await service.logIn({

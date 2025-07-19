@@ -1,13 +1,20 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './users.repository';
 import { User } from './entities/user.entity';
-import * as bcrypt from 'bcryptjs';
+import { UtilitariesService } from '../utilitaries/utilitaries.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly userRepository: UsersRepository) {}
+  constructor(
+    private readonly userRepository: UsersRepository,
+    private readonly utilitariesService: UtilitariesService,
+  ) {}
   create(createUserDto: CreateUserDto) {
     if (new Date(createUserDto.birthday) > new Date()) {
       throw new BadRequestException('Time traveler?');
@@ -32,38 +39,20 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    const dto: UpdateUserDto = await this.encode(updateUserDto);
-    if (!(await this.emailCheckUpdate(dto, id))) {
+    // eslint-disable-next-line prettier/prettier
+    const dto: UpdateUserDto = await this.utilitariesService.encode(updateUserDto);
+    const oldUser = this.userRepository.findUserById(id);
+
+    if (!oldUser) {
+      throw new BadRequestException();
+    }
+    if (!(await this.utilitariesService.emailCheckUpdate(dto, oldUser))) {
       throw new UnauthorizedException(
         'Não é permitido modificar informações de outros usuários',
       );
     }
     const user = this.userRepository.updateUser(id, new User(dto));
-    // após update, o id do usuário fica null. necessário corrigir isso
     return user;
-  }
-
-  private async emailCheckUpdate(
-    dto: UpdateUserDto,
-    id: number,
-  ): Promise<boolean> {
-    const user = await this.userRepository.findUserById(id);
-    if (!user) {
-      return false;
-    }
-    if (user.getEmail() != dto.email) {
-      return false;
-    }
-    return true;
-  }
-
-  private async encode(dto: UpdateUserDto): Promise<UpdateUserDto> {
-    const hashedPassword: string = await bcrypt.hash(dto.password, 10);
-    const updateUserDto: UpdateUserDto = {
-      ...dto,
-      password: hashedPassword,
-    };
-    return updateUserDto;
   }
 
   remove(id: number) {
