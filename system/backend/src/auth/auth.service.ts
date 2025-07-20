@@ -14,7 +14,7 @@ export class AuthService {
   ) {}
 
   async logIn(logInDto: LogInDto): Promise<{ access_token: string }> {
-    const user = /*await*/ this.usersService.findByEmail(logInDto.email);
+    const user = await this.usersService.findByEmail(logInDto.email);
     if (!user) {
       throw new UnauthorizedException('Usuário não encontrado');
     }
@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   async signUp(signUpDto: SignUpDto) {
-    const user = /*await*/ this.usersService.findByEmail(signUpDto.email);
+    const user = await this.usersService.findByEmail(signUpDto.email);
     // verifica se o cliente digitou um email já existente
     if (user) {
       throw new ConflictException('Email já está em uso.');

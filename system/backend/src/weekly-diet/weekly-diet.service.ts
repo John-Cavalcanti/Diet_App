@@ -16,7 +16,7 @@ export class WeeklyDietService {
   ) {}
 
   async create(createWeeklyDietDto: CreateWeeklyDietDto) {
-    const user = this.usersService.findOne(createWeeklyDietDto.userId);
+    const user = await this.usersService.findOne(createWeeklyDietDto.userId);
     let userObj: any;
 
     if (!user) {
