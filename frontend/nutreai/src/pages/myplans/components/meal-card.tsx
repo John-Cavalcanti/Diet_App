@@ -22,8 +22,8 @@ export function MealCard({ icon, title, items, calories }: MealCardProps) {
         {items.map((item, idx) => (
           <li key={idx}>{item}</li>
         ))}
-      </Items>
       <Calories>{`≈ ${calories} kcal`}</Calories>
+      </Items>
       <Button>Ver mais</Button>
     </Card>
   )
@@ -82,8 +82,7 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: space-between; 
 `
 
 const Header = styled.div`
@@ -104,36 +103,36 @@ const Title = styled.h3`
 `
 
 const Items = styled.ul`
-  margin-left: 1rem;
   font-size: 0.9rem;
   color: #333;
   list-style: disc;
-  padding-left: 0;
+  padding-left: 1rem;
+  max-height: 8rem;
+  overflow-y: auto;
+  width: 100%;
 `
 
 const Calories = styled.div`
-  font-size: 0.95rem;
-  color: #888;
+  font-size: 0.9rem;
+  color: #4A4A4A;
+  background: #E9E9E9;
+  border-radius: 16px;
+  padding: 0.1rem 1rem;
+  display: inline-block;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 `
 
 const Button = styled.button`
-  background: #217A47;
+  background: ${({ theme }) => theme["green-700"]};
   color: #fff;
   border: none;
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0,0,0,0.08);
-  padding: 0.5rem 1.2rem;
-  font-size: 1rem;
+  width: 8.5rem;
+  height: 2.3rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  margin-top: auto;
   align-self: center;
-  transition: background 0.2s;
-  display: block; 
-
-  &:hover {
-    background: #2B7A4B;
-  }
 `
