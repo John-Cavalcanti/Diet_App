@@ -2,25 +2,6 @@ import styled from "styled-components";
 import { Modal } from "./modal";
 import { useMemo } from "react";
 
-/* Estrutura a ser passado ao componente do modal
-(adaptar com dados do backend)
-
-const mealMock: MealInput = {
-  id: "cafe-1",
-  name: "Café da Manhã",
-  ingredients: [
-    "2 ovos mexidos",
-    "1 fatia (50g) de pão integral",
-    "1 fruta (ex: banana, maçã ou 1 xícara de morangos)",
-  ],
-  macrosInGrams: {
-    carbs: 42,
-    protein: 17.5,
-    fat: 12.2,
-  },
-  calories: 335,
-}; */
-
 // dados padrão para macros
 const MACRO_DEFAULTS = {
   carbs: { name: "Carboidratos", color: "#A060BE", label: "carb" },
@@ -37,7 +18,7 @@ export interface MealInput {
     protein: number;
     fat: number;
   };
-  calories: number;
+  totalCalories: number;
 }
 
 interface MealDetailsModalProps {
@@ -79,6 +60,25 @@ export function MealDetailsModal({ isOpen, onClose, meal }: MealDetailsModalProp
     }));
   }, [meal]);
 
+  // formatação da lista de ingredientes
+  const formattedIngredients = useMemo(() => {
+    if (!meal || meal.ingredients.length === 0) {
+      return [];
+    }
+    const descriptionString = meal.ingredients[0];
+
+    // Divide a string por " com " ou " e " e limpa espaços extras
+    return descriptionString
+      .split(/ com | e /)
+      .map(item => item.trim())
+      .filter(item => item.length > 0); // Remove itens vazios
+  }, [meal]);
+
+  // função para colocar a primeira letra como maiúscula
+  function capitalizeFirstLetter(val: string) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+  }
+
   // confirmação de dados necessários para abrir popup
   if (!isOpen || !meal) {
     return null;
@@ -89,7 +89,7 @@ export function MealDetailsModal({ isOpen, onClose, meal }: MealDetailsModalProp
       <CustomHeader>
         <h2>{meal.name}</h2>
         <CaloriesInfo>
-          <span>≃ {meal.calories} kcal</span>
+          <span>≃ {meal.totalCalories} kcal</span>
         </CaloriesInfo>
       </CustomHeader>
 
@@ -99,8 +99,8 @@ export function MealDetailsModal({ isOpen, onClose, meal }: MealDetailsModalProp
         <IngredientsSection>
           <h3>Ingredientes</h3>
           <ul>
-            {meal.ingredients.map((item, index) => (
-              <li key={index}>{item}</li>
+            {formattedIngredients.map((item, index) => (
+              <li key={index}>{capitalizeFirstLetter(item)}</li>
             ))}
           </ul>
         </IngredientsSection>
