@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { Modal } from "./modal";
 import { useMemo } from "react";
+// importação de ícones
+import breakfastIcon from "../assets/icons/cafe-da-manha.png";
+import lunchIcon from "../assets/icons/almoco.png";
+import dinnerIcon from "../assets/icons/jantar.png";
+import snackIcon from "../assets/icons/lanche.png";
+import calorieIcon from "../assets/icons/calorie-icon.png"
 
 // dados padrão para macros
 const MACRO_DEFAULTS = {
@@ -79,6 +85,16 @@ export function MealDetailsModal({ isOpen, onClose, meal }: MealDetailsModalProp
     return String(val).charAt(0).toUpperCase() + String(val).slice(1);
   }
 
+  const icon = () => {
+    switch(meal?.name){
+      case "Café da Manhã": return breakfastIcon;
+      case "Almoço": return lunchIcon;
+      case "Jantar": return dinnerIcon;
+      case "Lanche": return snackIcon;
+      default: return " ";
+    }
+  }
+
   // confirmação de dados necessários para abrir popup
   if (!isOpen || !meal) {
     return null;
@@ -87,9 +103,13 @@ export function MealDetailsModal({ isOpen, onClose, meal }: MealDetailsModalProp
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <CustomHeader>
-        <h2>{meal.name}</h2>
+        <TitleContainer>
+          <Icon iconSize="36px" src={icon()} alt={"Ícone de " + meal.name} />
+          <h2>{meal.name}</h2>
+        </TitleContainer>
         <CaloriesInfo>
           <span>≃ {meal.totalCalories} kcal</span>
+          <Icon iconSize="28px" src={calorieIcon} alt="Ícone de calorias" />
         </CaloriesInfo>
       </CustomHeader>
 
@@ -150,14 +170,19 @@ const CustomHeader = styled.div`
 
 const CaloriesInfo = styled.div`
   display: flex;
-  align-items: center;
+  align-items: end;
   gap: 0.75rem;
-  margin-right: 2.5rem;
+  margin-right: 1rem;
   span {
     font-size: 1.125rem;
     font-weight: 500;
     color: ${(props) => props.theme["text-color"]};
   }
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Separator = styled.hr`
@@ -250,4 +275,10 @@ const MacroBarSegment = styled.div<{ width: number; color: string }>`
   font-weight: 600;
   white-space: nowrap;
   transition: width 0.3s ease-in-out;
+`;
+
+const Icon = styled.img<{ iconSize: string }>`
+  width: ${(props) => props.iconSize};
+  height: auto;
+  margin-right: 1rem;
 `;
