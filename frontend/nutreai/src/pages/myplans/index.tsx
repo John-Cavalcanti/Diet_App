@@ -4,6 +4,7 @@ import { Header } from "../../componens/header"
 import { WeekDays } from "./components/week-days"
 import { MealsList } from "./components/meal-card"
 import { useState } from "react"
+import { TopActions } from "./components/top-actions"
 
 
 
@@ -31,7 +32,10 @@ export function MyPlans() {
       </HeaderWrapper>
       <Sidebar />
       <MainContent>
-        <WeekDays activeDay={activeDay} onChange={setActiveDay} />
+        <ActionsWeekRow>
+          <WeekDays activeDay={activeDay} onChange={setActiveDay} />
+          <TopActions />
+        </ActionsWeekRow>
         <Title>
           {weekDayNames[activeDay]}, {formattedDate}
         </Title>
@@ -70,4 +74,12 @@ const Title = styled.h2`
   color: #217A47;
   margin-bottom: 3.5rem;
   padding-left: 0.5rem;
+`
+
+const ActionsWeekRow = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 4rem;
+  margin-top: 1rem;
+  gap: 21rem; 
 `
