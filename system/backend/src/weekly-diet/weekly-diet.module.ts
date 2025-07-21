@@ -6,8 +6,16 @@ import { UsersModule } from 'src/users/users.module';
 import { WeeklyDietRepository } from './weekly-diet.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { WeeklyDiet } from './entities/weekly-diet.entity';
 
 @Module({
+  controllers: [WeeklyDietController],
+  providers: [WeeklyDietService, WeeklyDietRepository],
+  exports: [
+    TypeOrmModule.forFeature([WeeklyDiet]),
+    WeeklyDietService
+  ],
   imports: [
     AiModule,
     UsersModule,
@@ -19,8 +27,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       }),
       inject: [ConfigService],
     }),
-  ],
-  controllers: [WeeklyDietController],
-  providers: [WeeklyDietService, WeeklyDietRepository],
+  ]
 })
 export class WeeklyDietModule {}

@@ -3,76 +3,74 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity('weekly_diet')
 export class WeeklyDiet {
   @PrimaryGeneratedColumn()
-  private _id: number;
+  id: number;
 
   @Column({name: 'user_id', type: 'int', nullable: false})
-  private _userId: number;
+  userId: number;
 
   @Column({name: 'meals', type: 'jsonb', nullable: false})
-  private _meals: object;
+  meals: object;
 
   @Column({name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', nullable: false})
-  private _createdAt: Date;
+  createdAt: Date;
 
   @Column({name: 'updated_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', nullable: false})
-  private _updatedAt: Date;
+  updatedAt: Date;
 
   constructor(userId: number, meals: object) {
-    this._id = 0;
-    this._userId = userId;
-    this._meals = meals;
-    //this._createdAt = new Date();
-    //this._updatedAt = new Date();
+    this.id = 0;
+    this.userId = userId;
+    this.meals = meals;
   }
 
   setId(id: number) {
-    this._id = id;
+    this.id = id;
   }
 
   setUserId(id: number) {
-    this._userId = id;
+    this.userId = id;
   }
 
   setMeals(meals: object) {
-    this._meals = meals;
+    this.meals = meals;
   }
 
   setCreatedAtDate(date: Date) {
-    this._createdAt = date;
+    this.createdAt = date;
   }
 
   setUpdatedAtDate(date: Date) {
-    this._updatedAt = date;
+    this.updatedAt = date;
   }
 
   getMeals() {
-    return this._meals;
+    return this.meals;
   }
 
   getId() {
-    return this._id;
+    return this.id;
   }
 
   getUserId()
   {
-    return this._userId;
+    return this.userId;
   }
 
   getCreatedAtDate() {
-    return this._createdAt;
+    return this.createdAt;
   }
 
   getUpdatedAtDate() {
-    return this._updatedAt;
+    return this.updatedAt;
   }
 
   toObject() {
     return {
-      id: this._id,
-      userId: this._userId,
-      meals: this._meals,
-      createdAt: this._createdAt,
-      updatedAt: this._updatedAt,
+      id: this.id,
+      userId: this.userId,
+      meals: this.meals,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
     };
   }
 }
