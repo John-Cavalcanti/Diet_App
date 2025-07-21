@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UtilitariesService } from './utilitaries.service';
-import { UpdateUserDto } from '../users/dto/update-user.dto';
-import { validUserDto, validSecondUserDto } from './constants/constants';
-import { User } from '../users/entities/user.entity';
+import { UtilitariesService } from '../../src/utilitaries/utilitaries.service';
+import { UpdateUserDto } from '../../src/users/dto/update-user.dto';
+import { validUserDto, validSecondUserDto } from '../utilitariesconstants/constants/constants';
+import { User } from '../../src/users/entities/user.entity';
 
 describe('UtilitariesService', () => {
   let service: UtilitariesService;

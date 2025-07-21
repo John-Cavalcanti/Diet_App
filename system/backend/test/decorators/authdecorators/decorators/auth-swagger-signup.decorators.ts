@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { applyDecorators } from "@nestjs/common";
 import { ApiOperation, ApiCreatedResponse, ApiConflictResponse, ApiBadRequestResponse } from "@nestjs/swagger";
-import { mockLogInAccessToken } from "../constants/constants";
+import { mockLogInAccessToken } from '../../../authconstants/constants';
 
 export function AuthSwaggerDocsSignUp() {
     return applyDecorators(

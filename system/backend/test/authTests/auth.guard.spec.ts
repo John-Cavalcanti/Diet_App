@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { TestingModule, Test } from '@nestjs/testing';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from '../../src/auth/auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { createMock } from '@golevelup/ts-jest';
 import { ConfigService } from '@nestjs/config';

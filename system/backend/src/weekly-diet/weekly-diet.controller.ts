@@ -4,8 +4,8 @@ import { CreateWeeklyDietDto } from './dto/create-weekly-diet.dto';
 import { UpdateWeeklyDietDto } from './dto/update-weekly-diet.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { Request } from '@nestjs/common';
-import { WeeklyDietDocsCreate } from './decorators/weeklydiet-swagger-create.decorators';
-import { WeeklyDietDocsFindOne } from './decorators/weeklydiet-swagger-findone.decorators';
+import { WeeklyDietDocsCreate } from '../../test/decorators/weeklydietdecorators/decorators/weeklydiet-swagger-create.decorators';
+import { WeeklyDietDocsFindOne } from '../../test/decorators/weeklydietdecorators/decorators/weeklydiet-swagger-findone.decorators';
 import { ApiBody } from '@nestjs/swagger';
 
 @Controller('weekly-diet')

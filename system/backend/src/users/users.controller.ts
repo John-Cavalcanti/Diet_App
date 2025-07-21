@@ -4,8 +4,8 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from '../auth/auth.guard';
-import { UsersDocsCreate } from './decorators/users-swagger-create.decorators';
-import { UsersDocsFindOne } from './decorators/users-swagger-findone.decorators';
+import { UsersDocsCreate } from '../../test/decorators/usersdecorators/decorators/users-swagger-create.decorators';
+import { UsersDocsFindOne } from '../../test/decorators/usersdecorators/decorators/users-swagger-findone.decorators';
 
 @Controller('users')
 export class UsersController {

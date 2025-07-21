@@ -5,7 +5,7 @@ import {
   ApiUnauthorizedResponse,
   ApiBadRequestResponse,
 } from '@nestjs/swagger';
-import { mockGetToken } from '../constants/constants';
+import { mockGetToken } from '../../../authconstants/constants'; 
 
 export function AuthSwaggerDocsLogIn() {
   return applyDecorators(

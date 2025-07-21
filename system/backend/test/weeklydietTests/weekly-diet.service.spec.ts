@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { WeeklyDietService } from './weekly-diet.service';
-import { UsersService } from '../users/users.service';
-import { AiService } from '../ai/ai.service';
-import { WeeklyDietRepository } from './weekly-diet.repository';
-import { User } from '../users/entities/user.entity';
-import { aiGeneratedText, weeklyDietExample } from './constants/constants';
-import { WeeklyDiet } from './entities/weekly-diet.entity';
-import { MealsService } from '../meals/meals.service';
+import { WeeklyDietService } from '../../src/weekly-diet/weekly-diet.service';
+import { UsersService } from '../../src/users/users.service';
+import { AiService } from '../../src/ai/ai.service';
+import { WeeklyDietRepository } from '../../src/weekly-diet/weekly-diet.repository';
+import { User } from '../../src/users/entities/user.entity';
+import { aiGeneratedText, weeklyDietExample } from '../weeklydietconstants/constants/constants';
+import { WeeklyDiet } from '../../src/weekly-diet/entities/weekly-diet.entity';
+import { MealsService } from '../../src/meals/meals.service';
 import { BadRequestException, UnauthorizedException } from '@nestjs/common';
-import { UtilitariesService } from '../utilitaries/utilitaries.service';
+import { UtilitariesService } from '../../src/utilitaries/utilitaries.service';
 
 describe('WeeklyDietService', () => {
   let service: WeeklyDietService;

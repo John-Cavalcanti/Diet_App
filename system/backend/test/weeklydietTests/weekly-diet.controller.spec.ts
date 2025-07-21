@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { Test, TestingModule } from '@nestjs/testing';
-import { WeeklyDietController } from './weekly-diet.controller';
-import { WeeklyDietService } from './weekly-diet.service';
-import { weeklyDietExample } from './constants/constants';
-import { AuthGuard } from '../auth/auth.guard';
+import { WeeklyDietController } from '../../src/weekly-diet/weekly-diet.controller';
+import { WeeklyDietService } from '../../src/weekly-diet/weekly-diet.service';
+import { weeklyDietExample } from '../weeklydietconstants/constants/constants';
+import { AuthGuard } from '../../src/auth/auth.guard';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { WeeklyDiet } from './entities/weekly-diet.entity';
+import { WeeklyDiet } from '../../src/weekly-diet/entities/weekly-diet.entity';
 import { BadRequestException } from '@nestjs/common';
 
 describe('WeeklyDietController', () => {

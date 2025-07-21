@@ -3,17 +3,17 @@ jest.mock('bcryptjs', () => ({
   hash: jest.fn(() => Promise.resolve('hashed-password')),
 }));
 
-import { UtilitariesService } from '../utilitaries/utilitaries.service';
+import { UtilitariesService } from '../../src/utilitaries/utilitaries.service';
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthService } from './auth.service';
+import { AuthService } from '../../src/auth/auth.service';
 import {
   mockEncryptedPassword,
   mockGetToken,
   mockLogInAccessToken,
 } from './constants/constants';
 import { JwtService } from '@nestjs/jwt';
-import { UsersService } from '../users/users.service';
-import { User } from '../users/entities/user.entity';
+import { UsersService } from '../../src/users/users.service';
+import { User } from '../../src/users/entities/user.entity';
 import * as bcrypt from 'bcryptjs';
 import { ConflictException, UnauthorizedException } from '@nestjs/common';
 

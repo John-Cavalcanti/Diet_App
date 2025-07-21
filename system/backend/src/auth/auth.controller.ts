@@ -5,9 +5,9 @@ import { LogInDto } from './dto/log-in.dto';
 import { AuthGuard } from './auth.guard';
 import { SignUpDto } from './dto/sign-up.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthSwaggerDocsLogIn } from './decorators/auth-swagger-login.decorators';
-import { AuthSwaggerDocsSignUp } from './decorators/auth-swagger-signup.decorators';
-import { AuthSwaggerDocsProfile } from './decorators/auth-swagger-profile.decorators';
+import { AuthSwaggerDocsLogIn } from '../../test/decorators/authdecorators/decorators/auth-swagger-login.decorators';
+import { AuthSwaggerDocsSignUp } from '../../test/decorators/authdecorators/decorators/auth-swagger-signup.decorators';
+import { AuthSwaggerDocsProfile } from '../../test/decorators/authdecorators/decorators/auth-swagger-profile.decorators';
 
 @ApiTags('Auth')
 @Controller('auth')

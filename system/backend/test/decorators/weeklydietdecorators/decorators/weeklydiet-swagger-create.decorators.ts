@@ -6,7 +6,7 @@ import {
   ApiInternalServerErrorResponse,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { weeklyDietExample } from '../constants/constants';
+import { weeklyDietExample } from '../../../weeklydietconstants/constants/constants';
 
 export function WeeklyDietDocsCreate() {
   return applyDecorators(

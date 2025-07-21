@@ -1,11 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth.guard';
+import { AuthController } from '../../src/auth/auth.controller';
+import { AuthService } from '../../src/auth/auth.service';
+import { AuthGuard } from '../../src/auth/auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { User } from '../users/entities/user.entity';
+import { User } from '../../src/users/entities/user.entity';
 import { BadRequestException, ConflictException, UnauthorizedException } from '@nestjs/common';
 import { mockLogInAccessToken } from './constants/constants';
 
