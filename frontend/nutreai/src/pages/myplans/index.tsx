@@ -32,14 +32,16 @@ export function MyPlans() {
       </HeaderWrapper>
       <Sidebar />
       <MainContent>
-        <ActionsWeekRow>
-          <WeekDays activeDay={activeDay} onChange={setActiveDay} />
-          <TopActions />
-        </ActionsWeekRow>
-        <Title>
-          {weekDayNames[activeDay]}, {formattedDate}
-        </Title>
-        <MealsList />
+        <Teste>
+          <ActionsWeekRow>
+            <WeekDays activeDay={activeDay} onChange={setActiveDay} />
+            <TopActions />
+          </ActionsWeekRow>
+          <Title>
+            {weekDayNames[activeDay]}, {formattedDate}
+          </Title>
+          <MealsList />
+        </Teste>
       </MainContent>
     </Container>
   )
@@ -61,14 +63,17 @@ const HeaderWrapper = styled.div`
 `
 
 const MainContent = styled.div`
-  flex: 1;
+  width: calc(100% - 4.5rem);
   display: flex;
   flex-direction: column;
-  margin-left: 1rem;
-  margin-top: 4rem;  
-  padding: 2rem;
-`
+  align-items: center;
+  padding-top: 6rem;
 
+`
+const Teste = styled.div`
+  width: fit-content;
+  height: fit-content;
+`
 const Title = styled.h2`
   font-size: 1.5rem;
   color: #217A47;
