@@ -4,15 +4,15 @@ import { CreateWeeklyDietDto } from './dto/create-weekly-diet.dto';
 import { UpdateWeeklyDietDto } from './dto/update-weekly-diet.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { Request } from '@nestjs/common';
-import { WeeklyDietDocsCreate } from './decorators/weeklydiet-swagger-create.decorators';
-import { WeeklyDietDocsFindOne } from './decorators/weeklydiet-swagger-findone.decorators';
+// import { WeeklyDietDocsCreate } from './decorators/weeklydiet-swagger-create.decorators';
+// import { WeeklyDietDocsFindOne } from './decorators/weeklydiet-swagger-findone.decorators';
 import { ApiBody } from '@nestjs/swagger';
 
 @Controller('weekly-diet')
 export class WeeklyDietController {
   constructor(private readonly weeklyDietService: WeeklyDietService) {}
 
-  @WeeklyDietDocsCreate()
+  //@WeeklyDietDocsCreate()
   @ApiBody({ type: CreateWeeklyDietDto })
   @UseGuards(AuthGuard)
   @Post()
@@ -27,7 +27,7 @@ export class WeeklyDietController {
     return this.weeklyDietService.findAll();
   }
 
-  @WeeklyDietDocsFindOne()
+  //@WeeklyDietDocsFindOne()
   @UseGuards(AuthGuard)
   @Get('me')
   findWeeklyDietByUserId(@Request() req) {
