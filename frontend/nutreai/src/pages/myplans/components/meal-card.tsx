@@ -9,9 +9,10 @@ interface MealCardProps {
   title: string
   items: string[]
   calories: number
+  onOpenMore: () => void
 }
 
-export function MealCard({ icon, title, items, calories }: MealCardProps) {
+export function MealCard({ icon, title, items, calories, onOpenMore }: MealCardProps) {
   return (
     <Card>
       <Header>
@@ -24,7 +25,7 @@ export function MealCard({ icon, title, items, calories }: MealCardProps) {
         ))}
       <Calories>{`≈ ${calories} kcal`}</Calories>
       </Items>
-      <Button>Ver mais</Button>
+      <Button onClick={onOpenMore}>Ver mais</Button>
     </Card>
   )
 }
@@ -36,17 +37,22 @@ const mealIcons: Record<string, string> = {
   lanche: lancheIcon,
 };
 
-export function MealsList({ meals }: { meals: any[] }) {
+interface MealsListProps{
+  meals: any[],
+  onOpenDetails: (meal: any)=>void
+}
+
+export function MealsList({ meals, onOpenDetails }: MealsListProps) {
   if (!meals) return null;
   return (
     <CardsRow>
       {meals.map((meal, idx) => (
-        <MealCard
+        <MealCard onOpenMore={() => onOpenDetails(meal)}
           key={idx}
           icon={mealIcons[meal.tipoRefeicao] || cafeDaManhaIcon}
           title={
             meal.tipoRefeicao
-              ? meal.tipoRefeicao.replace("_", " ").replace(/\b\w/g, (l: string) => l.toUpperCase())
+              ? meal.tipoRefeicao.replace(/_/g, " ").replace(/\b\w/g, (l:any) => l.toUpperCase())
               : "Refeição"
           }
           items={meal.descricao ? meal.descricao.split(",") : []}

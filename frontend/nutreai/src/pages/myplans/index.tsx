@@ -6,6 +6,7 @@ import { MealsList } from "./components/meal-card"
 import { useState, useEffect } from "react"
 import { TopActions } from "./components/top-actions"
 import { getWeeklyDiet } from "../../services/weekly-diet/get"
+import { MealDetailsModal, type MealInput } from "../../componens/meal-details-modal"
 
 const weekDayNames = [
   "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"
@@ -14,14 +15,24 @@ const weekDayKeys = [
   "domingo", "segunda", "terca", "quarta", "quinta", "sexta", "sabado"
 ]
 
+interface BackendMeal {
+  tipoRefeicao: string;
+  descricao: string;
+  calorias: number;
+  carboidratos: number;
+  proteinas: number;
+  gorduras: number;
+}
+
 export function MyPlans() {
   const [activeDay, setActiveDay] = useState<number>(new Date().getDay())
   const [weeklyDiet, setWeeklyDiet] = useState<any>(null)
+  const [selectedMeal, setSelectedMeal] = useState<MealInput | null>(null);
 
   useEffect(() => {
     async function fetchDiet() {
       const data = await getWeeklyDiet()
-      setWeeklyDiet(data)
+      setWeeklyDiet(data[0]._meals)
     }
     fetchDiet()
   }, [])
@@ -37,6 +48,37 @@ export function MyPlans() {
 
   const todayKey = weekDayKeys[activeDay]
 
+  const handleOpenDetails = (mealData: BackendMeal) => {
+    let formattedName = mealData.tipoRefeicao;
+    switch(mealData.tipoRefeicao){
+      case "cafe_da_manha": formattedName = "Café da Manhã";
+        break;
+      case "almoco": formattedName = "Almoço";
+        break;
+      case "jantar": formattedName = "Jantar";
+        break;
+      case "lanche": formattedName = "Lanche";
+        break;
+    }
+
+    const mealForModal: MealInput = {
+      name: formattedName,
+      totalCalories: mealData.calorias,
+      ingredients: [mealData.descricao],
+      macrosInGrams: {
+        carbs: mealData.carboidratos,
+        protein: mealData.proteinas,
+        fat: mealData.gorduras,
+      },
+    };
+    setSelectedMeal(mealForModal);
+  };
+  
+  const handleCloseModal = () => {
+    setSelectedMeal(null);
+  };
+
+
   return (
     <Container>
       <HeaderWrapper>
@@ -44,7 +86,7 @@ export function MyPlans() {
       </HeaderWrapper>
       <Sidebar />
       <MainContent>
-        <Teste>
+        <Content>
           <ActionsWeekRow>
             <WeekDays activeDay={activeDay} onChange={setActiveDay} />
             <TopActions />
@@ -53,10 +95,15 @@ export function MyPlans() {
             {weekDayNames[activeDay]}, {formattedDate}
           </Title>
           {weeklyDiet && weeklyDiet[todayKey] && (
-            <MealsList meals={weeklyDiet[todayKey]} />
+            <MealsList meals={weeklyDiet[todayKey]} onOpenDetails={handleOpenDetails} />
           )}
-        </Teste>
+        </Content>
       </MainContent>
+      <MealDetailsModal
+        isOpen={!!selectedMeal}
+        onClose={handleCloseModal}
+        meal={selectedMeal}
+      />
     </Container>
   )
 }
@@ -84,7 +131,7 @@ const MainContent = styled.div`
   padding-top: 6rem;
 
 `
-const Teste = styled.div`
+const Content = styled.div`
   width: fit-content;
   height: fit-content;
 `

@@ -16,7 +16,6 @@ const MACRO_DEFAULTS = {
 };
 
 export interface MealInput {
-  id: string;
   name: string;
   ingredients: string[];
   macrosInGrams: {
@@ -62,16 +61,16 @@ export function MealDetailsModal({ isOpen, onClose, meal }: MealDetailsModalProp
     return Object.entries(meal.macrosInGrams).map(([key, value]) => ({
       name: MACRO_DEFAULTS[key as keyof typeof MACRO_DEFAULTS].name,
       color: MACRO_DEFAULTS[key as keyof typeof MACRO_DEFAULTS].color,
-      amount: `${value.toFixed(1)}g`,
+      amount: `${(value || 0).toFixed(1)}g`,
     }));
   }, [meal]);
 
   // formatação da lista de ingredientes
   const formattedIngredients = useMemo(() => {
-    if (!meal || meal.ingredients.length === 0) {
+    const descriptionString = meal?.ingredients?.[0];
+    if (typeof descriptionString !== 'string') {
       return [];
     }
-    const descriptionString = meal.ingredients[0];
 
     // Divide a string por " com " ou " e " e limpa espaços extras
     return descriptionString
@@ -104,12 +103,12 @@ export function MealDetailsModal({ isOpen, onClose, meal }: MealDetailsModalProp
     <Modal isOpen={isOpen} onClose={onClose}>
       <CustomHeader>
         <TitleContainer>
-          <Icon iconSize="36px" src={icon()} alt={"Ícone de " + meal.name} />
+          <Icon $iconSize="36px" src={icon()} alt={"Ícone de " + meal.name} />
           <h2>{meal.name}</h2>
         </TitleContainer>
         <CaloriesInfo>
           <span>≃ {meal.totalCalories} kcal</span>
-          <Icon iconSize="28px" src={calorieIcon} alt="Ícone de calorias" />
+          <Icon $iconSize="28px" src={calorieIcon} alt="Ícone de calorias" />
         </CaloriesInfo>
       </CustomHeader>
 
@@ -128,7 +127,7 @@ export function MealDetailsModal({ isOpen, onClose, meal }: MealDetailsModalProp
         <NutritionSection>
           <NutritionList>
             {nutritionList.map((item) => (
-              <NutritionItem key={item.name} dotColor={item.color}>
+              <NutritionItem key={item.name} $dotColor={item.color}>
                 <div />
                 <span>
                   <strong>{item.amount}</strong> {item.name}
@@ -237,7 +236,7 @@ const NutritionList = styled.div`
   gap: 1.25rem;
 `;
 
-const NutritionItem = styled.div<{ dotColor: string }>`
+const NutritionItem = styled.div<{ $dotColor: string }>`
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -245,7 +244,7 @@ const NutritionItem = styled.div<{ dotColor: string }>`
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background-color: ${(props) => props.dotColor};
+    background-color: ${(props) => props.$dotColor};
   }
   span {
     color: ${(props) => props.theme["text-color"]};
@@ -277,8 +276,8 @@ const MacroBarSegment = styled.div<{ width: number; color: string }>`
   transition: width 0.3s ease-in-out;
 `;
 
-const Icon = styled.img<{ iconSize: string }>`
-  width: ${(props) => props.iconSize};
+const Icon = styled.img<{ $iconSize: string }>`
+  width: ${(props) => props.$iconSize};
   height: auto;
   margin-right: 1rem;
 `;
