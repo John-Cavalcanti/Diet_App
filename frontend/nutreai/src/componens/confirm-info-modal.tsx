@@ -3,20 +3,7 @@ import styled from "styled-components";
 import { PrimaryButton } from "./primary-button";
 import { SecondaryButton } from "./secondary-button";
 import { useMemo } from "react";
-
-export interface UserInfo {
-  _id: number;
-  _name: string;
-  _email: string;
-  _birthday: string;
-  _weight: number;
-  _height: number;
-  _password: string;
-  _workoutsFrequency: string;
-  _goals: string;
-  _foodRestrictions: string;
-  _foodPreferences: string;
-}
+import type {UserInfo} from "../@types/user-info";
 
 interface ConfirmInfoModalProps {
   isOpen: boolean;
@@ -46,12 +33,12 @@ export function ConfirmInfoModal({ isOpen, onClose, onConfirm, onEdit, userData 
       <InfoGrid>
         <InfoItem>
           <Label>Altura:</Label>
-          <Value>{userData._height}</Value>
+          <Value>{userData._height} cm</Value>
         </InfoItem>
 
         <InfoItem>
           <Label>Peso:</Label>
-          <Value>{userData._weight}</Value>
+          <Value>{userData._weight} kg</Value>
         </InfoItem>
 
         <InfoItem>
@@ -65,7 +52,7 @@ export function ConfirmInfoModal({ isOpen, onClose, onConfirm, onEdit, userData 
         </InfoItem>
 
         {restrictionsList.length > 0 && (
-          <InfoItem fullWidth>
+          <InfoItem $fullWidth>
             <Label>Restrições Alimentares:</Label>
             <RestrictionsList>
               {restrictionsList.map((item, index) => (
@@ -95,10 +82,10 @@ const InfoGrid = styled.div`
   padding-right: 8rem;
 `;
 
-const InfoItem = styled.div<{ fullWidth?: boolean }>`
+const InfoItem = styled.div<{ $fullWidth?: boolean }>`
   display: flex;
   align-items: baseline;
-  grid-column: ${(props) => (props.fullWidth ? "1 / -1" : "auto")};
+  grid-column: ${(props) => (props.$fullWidth ? "1 / -1" : "auto")};
 `;
 
 const Label = styled.span`

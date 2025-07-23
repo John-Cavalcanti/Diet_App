@@ -21,4 +21,5 @@ const Container = styled.button`
     padding-block: 0.75rem;
     border: none;
     border-radius: 8px;
+    cursor: pointer;
 `
