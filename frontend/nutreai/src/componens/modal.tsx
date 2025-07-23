@@ -18,7 +18,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
   return (
     <Overlay onClick={onClose}>
       <Container onClick={(e) => e.stopPropagation()}>
-        <Header hasTitle={!!title}>
+        <Header $hasTitle={!!title}>
           {title && <Title>{title}</Title>}
           <CloseButton onClick={onClose}>&times;</CloseButton>
         </Header>
@@ -55,11 +55,11 @@ const Container = styled.div`
 `;
 
 // header para título do popup
-const Header = styled.header<{ hasTitle: boolean }>`
+const Header = styled.header<{ $hasTitle: boolean }>`
   display: flex;
-  justify-content: ${(props) => (props.hasTitle ? 'space-between' : 'flex-end')};
+  justify-content: ${(props) => (props.$hasTitle ? 'space-between' : 'flex-end')};
   align-items: center;
-  margin-bottom: ${(props) => (props.hasTitle ? '1.5rem' : '0')};
+  margin-bottom: ${(props) => (props.$hasTitle ? '1.5rem' : '0')};
   gap: 1rem;
 `;
 
