@@ -7,11 +7,13 @@ import { DietForm } from './pages/form/index.tsx'
 import { Confirmation } from './pages/confirmation/index.tsx'
 import { FormStepsProvider } from './contexts/form-steps-context.tsx'
 import { LoginPage } from './pages/login/index.tsx'
+import { MyPlans } from './pages/myplans/index.tsx' 
 import Home from './pages/home/index.tsx'
 import { RouteNotFound } from './pages/route-not-found/index.tsx'
 import { ThemeProvider } from 'styled-components'
 import { defaultTheme } from './styles/themes/default'
 import { enableMSW } from './tests/mocks/setup.ts'
+
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: '/weekly-diet-confirmation',
         element: <Confirmation />
+      },
+      {
+        path: '/myplans',
+        element: <MyPlans />
       },
     ]
   }
