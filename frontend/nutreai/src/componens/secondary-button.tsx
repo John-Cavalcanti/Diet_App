@@ -21,4 +21,5 @@ const Container = styled.button`
     border: 1px solid ${({theme}) => theme["green-700"]};
     padding-block: 0.75rem;
     border-radius: 8px;
+    cursor: pointer;
 `

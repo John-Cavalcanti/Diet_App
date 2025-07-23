@@ -48,4 +48,8 @@ export class WeeklyDiet {
   getUpdatedAtDate() {
     return this._updatedAt;
   }
+
+  getUserId() {
+    return this._userId;
+  }
 }

@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { WeeklyDietModule } from './weekly-diet/weekly-diet.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { UtilitariesModule } from './utilitaries/utilitaries.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ConfigModule } from '@nestjs/config';
     WeeklyDietModule,
     AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
+    UtilitariesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

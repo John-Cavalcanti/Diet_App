@@ -4,6 +4,7 @@ import { UsersController } from './users.controller';
 import { UsersRepository } from './users.repository';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { UtilitariesModule } from '../utilitaries/utilitaries.module';
 
 @Module({
   controllers: [UsersController],
@@ -18,6 +19,7 @@ import { JwtModule } from '@nestjs/jwt';
       }),
       inject: [ConfigService],
     }),
+    UtilitariesModule,
   ],
 })
 export class UsersModule {}

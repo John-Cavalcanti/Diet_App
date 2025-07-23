@@ -1,11 +1,11 @@
 import type { WeeklyDiet } from "../../@types/meal-plan"
 import api from "../axios"
 
-interface postWeekltDietProps {
+export interface postWeeklyDietProps {
     userId: number
 }
 
-export async function postWeeklyDiet(userId: postWeekltDietProps) {
+export async function postWeeklyDiet(userId: postWeeklyDietProps) {
     try {
         const response = await api.post<WeeklyDiet>('/api/weekly-diet', userId)
         return response.data
