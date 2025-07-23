@@ -7,6 +7,10 @@ import { useState, useEffect } from "react"
 import { TopActions } from "./components/top-actions"
 import { getWeeklyDiet } from "../../services/weekly-diet/get"
 import { MealDetailsModal, type MealInput } from "../../componens/meal-details-modal"
+import { ConfirmInfoModal } from "../../componens/confirm-info-modal"
+import type { UserInfo } from "../../@types/user-info"
+import { getUserInfo } from "../../services/user"
+import { postWeeklyDiet } from "../../services/weekly-diet/post"
 
 const weekDayNames = [
   "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"
@@ -28,7 +32,10 @@ export function MyPlans() {
   const [activeDay, setActiveDay] = useState<number>(new Date().getDay())
   const [weeklyDiet, setWeeklyDiet] = useState<any>(null)
   const [selectedMeal, setSelectedMeal] = useState<MealInput | null>(null);
+  const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
+  const [userInformation, setUserInformation] = useState<UserInfo | null>(null);
 
+  // coleta de dados da dieta
   useEffect(() => {
     async function fetchDiet() {
       const data = await getWeeklyDiet()
@@ -36,6 +43,11 @@ export function MyPlans() {
     }
     fetchDiet()
   }, [])
+
+  // coleta de dados do usuário
+  useEffect(() => {
+    getUserInfo().then(data => setUserInformation(data));
+  }, []);
 
   const today = new Date()
   const selectedDate = new Date(today)
@@ -49,6 +61,8 @@ export function MyPlans() {
   const todayKey = weekDayKeys[activeDay]
 
   const handleOpenDetails = (mealData: BackendMeal) => {
+
+    console.log(weeklyDiet)
     let formattedName = mealData.tipoRefeicao;
     switch(mealData.tipoRefeicao){
       case "cafe_da_manha": formattedName = "Café da Manhã";
@@ -78,6 +92,23 @@ export function MyPlans() {
     setSelectedMeal(null);
   };
 
+  function handleNewDietModal(){
+    setIsConfirmModalVisible(true);
+  }
+
+  async function handleConfirm(){
+    if(!userInformation) return;
+
+    try{
+      console.log("Gerando dieta...");
+      const newDiet = await postWeeklyDiet({ userId: userInformation._id });
+      setIsConfirmModalVisible(false);
+      console.log("Dieta gerada com sucesso!\n", newDiet);
+
+    } catch(error){
+      console.error("Falha ao gerar a dieta: ", error);
+    }
+  }
 
   return (
     <Container>
@@ -89,7 +120,7 @@ export function MyPlans() {
         <Content>
           <ActionsWeekRow>
             <WeekDays activeDay={activeDay} onChange={setActiveDay} />
-            <TopActions />
+            <TopActions onNewDiet={handleNewDietModal} />
           </ActionsWeekRow>
           <Title>
             {weekDayNames[activeDay]}, {formattedDate}
@@ -103,6 +134,13 @@ export function MyPlans() {
         isOpen={!!selectedMeal}
         onClose={handleCloseModal}
         meal={selectedMeal}
+      />
+      <ConfirmInfoModal
+        isOpen={isConfirmModalVisible}
+        onClose={() => setIsConfirmModalVisible(false)}
+        onConfirm={handleConfirm}
+        onEdit={() => { /* implementar futuramente*/ }}
+        userData={userInformation}
       />
     </Container>
   )
