@@ -39,10 +39,10 @@ export function MyPlans() {
   useEffect(() => {
     async function fetchDiet() {
       const data = await getWeeklyDiet()
-      setWeeklyDiet(data[0]._meals)
+      setWeeklyDiet(data.at(-1)._meals) // retorna a última dieta gerada pelo usuário
     }
     fetchDiet()
-  }, [])
+  }, [weeklyDiet])
 
   // coleta de dados do usuário
   useEffect(() => {
@@ -61,8 +61,6 @@ export function MyPlans() {
   const todayKey = weekDayKeys[activeDay]
 
   const handleOpenDetails = (mealData: BackendMeal) => {
-
-    console.log(weeklyDiet)
     let formattedName = mealData.tipoRefeicao;
     switch(mealData.tipoRefeicao){
       case "cafe_da_manha": formattedName = "Café da Manhã";
@@ -104,6 +102,7 @@ export function MyPlans() {
       const newDiet = await postWeeklyDiet({ userId: userInformation._id });
       setIsConfirmModalVisible(false);
       console.log("Dieta gerada com sucesso!\n", newDiet);
+      setWeeklyDiet(newDiet);
 
     } catch(error){
       console.error("Falha ao gerar a dieta: ", error);
