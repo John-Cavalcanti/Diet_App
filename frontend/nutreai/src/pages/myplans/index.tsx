@@ -3,19 +3,29 @@ import { Sidebar } from "../../componens/sidebar"
 import { Header } from "../../componens/header"
 import { WeekDays } from "./components/week-days"
 import { MealsList } from "./components/meal-card"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { TopActions } from "./components/top-actions"
-
-
+import { getWeeklyDiet } from "../../services/weekly-diet/get"
 
 const weekDayNames = [
   "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"
 ]
+const weekDayKeys = [
+  "domingo", "segunda", "terca", "quarta", "quinta", "sexta", "sabado"
+]
 
 export function MyPlans() {
   const [activeDay, setActiveDay] = useState<number>(new Date().getDay())
+  const [weeklyDiet, setWeeklyDiet] = useState<any>(null)
 
- 
+  useEffect(() => {
+    async function fetchDiet() {
+      const data = await getWeeklyDiet()
+      setWeeklyDiet(data)
+    }
+    fetchDiet()
+  }, [])
+
   const today = new Date()
   const selectedDate = new Date(today)
   selectedDate.setDate(today.getDate() + (activeDay - today.getDay()))
@@ -24,6 +34,8 @@ export function MyPlans() {
     day: "2-digit",
     month: "long"
   })
+
+  const todayKey = weekDayKeys[activeDay]
 
   return (
     <Container>
@@ -40,7 +52,9 @@ export function MyPlans() {
           <Title>
             {weekDayNames[activeDay]}, {formattedDate}
           </Title>
-          <MealsList />
+          {weeklyDiet && weeklyDiet[todayKey] && (
+            <MealsList meals={weeklyDiet[todayKey]} />
+          )}
         </Teste>
       </MainContent>
     </Container>

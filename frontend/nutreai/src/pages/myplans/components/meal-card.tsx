@@ -29,40 +29,32 @@ export function MealCard({ icon, title, items, calories }: MealCardProps) {
   )
 }
 
-export function MealsList() {
+const mealIcons: Record<string, string> = {
+  cafe_da_manha: cafeDaManhaIcon,
+  almoco: almocoIcon,
+  jantar: jantarIcon,
+  lanche: lancheIcon,
+};
+
+export function MealsList({ meals }: { meals: any[] }) {
+  if (!meals) return null;
   return (
     <CardsRow>
-      <MealCard
-        icon={cafeDaManhaIcon}
-        title="Café da manhã"
-        items={["2 ovos mexidos", "1 fatia de pão integral", "1 fruta"]}
-        calories={300}
-      />
-      <MealCard
-        icon={almocoIcon}
-        title="Almoço"
-        items={[
-          "120g de peito de frango grelhado",
-          "4 colheres de sopa de arroz integral",
-          "1 concha de feijão",
-          "Salada à vontade"
-        ]}
-        calories={470}
-      />
-      <MealCard
-        icon={jantarIcon}
-        title="Jantar"
-        items={["Sopa de legumes com cubos de frango"]}
-        calories={280}
-      />
-      <MealCard
-        icon={lancheIcon}
-        title="Lanches"
-        items={["Iogurte natural", "1/2 xícara de frutas"]}
-        calories={200}
-      />
+      {meals.map((meal, idx) => (
+        <MealCard
+          key={idx}
+          icon={mealIcons[meal.tipoRefeicao] || cafeDaManhaIcon}
+          title={
+            meal.tipoRefeicao
+              ? meal.tipoRefeicao.replace("_", " ").replace(/\b\w/g, (l: string) => l.toUpperCase())
+              : "Refeição"
+          }
+          items={meal.descricao ? meal.descricao.split(",") : []}
+          calories={meal.calorias || 0}
+        />
+      ))}
     </CardsRow>
-  )
+  );
 }
 
 const CardsRow = styled.div`
