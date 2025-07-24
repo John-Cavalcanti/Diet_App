@@ -2,14 +2,14 @@ import styled from "styled-components"
 import clipboardIcon from "../../../assets/button/prancheta.png"
 import addIcon from "../../../assets/button/add.png"
 
-export function TopActions() {
+export function TopActions({onNewDiet}: {onNewDiet: () => void}) {
   return (
     <ActionsRow>
       <ActionButton>
         <Icon src={clipboardIcon} alt="Meus Dados" />
         Meus Dados
       </ActionButton>
-      <ActionButton>
+      <ActionButton onClick={onNewDiet}>
         <Icon src={addIcon} alt="Gerar Nova Dieta" />
         Gerar Nova Dieta
       </ActionButton>

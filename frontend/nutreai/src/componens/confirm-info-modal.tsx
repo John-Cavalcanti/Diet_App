@@ -11,9 +11,10 @@ interface ConfirmInfoModalProps {
   onConfirm: () => void;
   onEdit: () => void;
   userData: UserInfo | null;
+  isSubmitting: boolean
 }
 
-export function ConfirmInfoModal({ isOpen, onClose, onConfirm, onEdit, userData }: ConfirmInfoModalProps) {
+export function ConfirmInfoModal({ isOpen, onClose, onConfirm, onEdit, userData, isSubmitting }: ConfirmInfoModalProps) {
   if (!isOpen || !userData) {
     return null;
   }
@@ -66,7 +67,9 @@ export function ConfirmInfoModal({ isOpen, onClose, onConfirm, onEdit, userData 
       <ButtonContainer>
         <ButtonInnerContainer>
             <SecondaryButton onClick={onEdit}>Editar</SecondaryButton>
-            <PrimaryButton onClick={onConfirm}>Confirmar</PrimaryButton>
+            <PrimaryButton onClick={onConfirm} disabled = {isSubmitting}>
+              {isSubmitting ? "Carregando..." : "Confirmar"}
+            </PrimaryButton>
         </ButtonInnerContainer>
       </ButtonContainer>
     </Modal>

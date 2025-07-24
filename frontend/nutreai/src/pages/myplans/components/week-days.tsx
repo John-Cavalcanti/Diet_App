@@ -20,7 +20,7 @@ export function WeekDays({ activeDay, onChange }: WeekDaysProps) {
       {days.map((day, idx) => (
         <DayButton
           key={day}
-          active={selectedDay === idx}
+          $active={selectedDay === idx}
           onClick={() => {
             setSelectedDay(idx)
             onChange(idx)
@@ -38,9 +38,9 @@ const DaysRow = styled.div`
   gap: 1rem;
 `
 
-const DayButton = styled.button<{ active: boolean }>`
-  background: ${({ active, theme }) => active ? theme["green-100"] : "transparent"};
-  color: ${({ active, theme }) => active ? theme["green-700"] : "#222"};
+const DayButton = styled.button<{ $active: boolean }>`
+  background: ${({ $active, theme }) => $active ? theme["green-100"] : "transparent"};
+  color: ${({ $active, theme }) => $active ? theme["green-700"] : "#222"};
   border: none;
   border-radius: 24px;
   padding: 0.5rem 0.5rem;
