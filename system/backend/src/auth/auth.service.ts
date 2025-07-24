@@ -22,6 +22,9 @@ export class AuthService {
       throw new UnauthorizedException('Usuário não encontrado');
     }
 
+    console.log(logInDto.password);
+    console.log(user.getPassword());
+    //bcrypt.
     const passwordValid = await bcrypt.compare(logInDto.password, user.getPassword());
 
     if (!passwordValid) {
@@ -43,7 +46,7 @@ export class AuthService {
     
     const createUserDto: CreateUserDto = await this.utilitariesService.encode(signUpDto);
 
-    this.usersService.create(createUserDto);
+    await this.usersService.create(createUserDto);
 
     return this.logIn({ email: signUpDto.email, password: signUpDto.password });
   }
