@@ -1,26 +1,24 @@
-import { MealsService } from './../meals/meals.service';
 import { AiService } from './../ai/ai.service';
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, BadRequestException, InternalServerErrorException } from '@nestjs/common';
 import { CreateWeeklyDietDto } from './dto/create-weekly-diet.dto';
-import { UpdateWeeklyDietDto } from './dto/update-weekly-diet.dto';
 import { UsersService } from '../users/users.service';
 import { WeeklyDiet } from './entities/weekly-diet.entity';
 import { WeeklyDietRepository } from './weekly-diet.repository';
-import { BadRequestException } from '@nestjs/common';
+import { InternalServerError } from 'groq-sdk';
 import { UtilitariesService } from '../utilitaries/utilitaries.service';
 
 @Injectable()
 export class WeeklyDietService {
   constructor(
     private readonly aiService: AiService,
-    private readonly mealsService: MealsService,
     private readonly usersService: UsersService,
     private readonly weeklyDietRepository: WeeklyDietRepository,
     private readonly utilitariesService: UtilitariesService,
   ) {}
 
-  async create(createWeeklyDietDto: CreateWeeklyDietDto) {
-    const user = this.usersService.findOne(createWeeklyDietDto.userId);
+  async create(createWeeklyDietDto: CreateWeeklyDietDto): Promise<WeeklyDiet> {
+    const user = await this.usersService.findOne(createWeeklyDietDto.userId);
+
     if (!user) {
       throw new BadRequestException('User not found');
     }
@@ -41,36 +39,25 @@ export class WeeklyDietService {
     try {
       const parsed = JSON.parse(content);
       const weeklyDiet = new WeeklyDiet(createWeeklyDietDto.userId, parsed.planoAlimentarSemanal);
-      this.weeklyDietRepository.createDiet(weeklyDiet);
-      return parsed.planoAlimentarSemanal; // ou return parsed se quiser tudo
+      return this.weeklyDietRepository.createDiet(weeklyDiet);
     } catch (err) {
       console.error('Erro ao fazer parse da resposta da IA:', err);
       console.error('Conteúdo bruto:', content);
-      throw new InternalServerErrorException(
-        'Resposta da IA não está em formato JSON válido.',
-      );
+      throw new InternalServerError(500, err, 'Erro ao fazer parse da resposta da IA', content);
     }
   }
 
-  findAll() {
-    return 'This action returns all weeklyDiet';
+  async findAll(): Promise<WeeklyDiet[]> {
+    return  await this.weeklyDietRepository.findAll();
   }
 
-  async findWeeklyDietByUserId(id: number) {
-    const dietsArray = await this.weeklyDietRepository.findWeeklyDietByUserId(id);
-    if (!dietsArray.length) {
+  async findWeeklyDietByUserId(id: number): Promise<WeeklyDiet> {
+    const diet = await this.weeklyDietRepository.findWeeklyDietByUserId(id);
+    if (!diet) {
       throw new BadRequestException(
         'Não há planos alimentares ligados a esse usuário.',
       );
     }
-    return dietsArray;
-  }
-
-  update(id: number, updateWeeklyDietDto: UpdateWeeklyDietDto) {
-    return 'This action updates a #${id} weeklyDiet';
-  }
-
-  remove(id: number) {
-    return 'This action removes a #${id} weeklyDiet';
+    return diet;
   }
 }

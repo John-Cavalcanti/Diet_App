@@ -81,6 +81,27 @@ Dessa forma fica mais fácil para quem está revisando o código (seus líderes-
 
 - **Legibilidade:** O código é fácil de entender para alguém que não o escreveu? Existe código duplicado? (Princípio DRY - Don't Repeat Yourself)
 
+## Rodando o banco - Postgresql
+
+Antes de rodar o backend da aplicação precisaremos de um banco funcional com as tabelas necessárias para o funcionamento da aplicação.
+
+Inicialmente precisaremos do docker instalado, recomendamos o uso da ferramenta [docker desktop](https://docs.docker.com/get-started/).
+
+Com o docker desktop instalado e aberto, no diretório da aplicação em system/database precisaremos criar a instância do banco de dados.
+Neste diretório deve ser rodado o comando :
+
+```bash
+docker compose up -d
+```
+
+E dessa forma será criado tanto o banco como suas tabelas que podem ser visualizadas no docker desktop se o container do banco está rodando ou não com seu volume.
+Após isso já é possível rodar a aplicação com o back e o front.
+
+### Obs.: Arquivo .env
+
+O .env do backend será disponibilizado a todos os membros do grupo.
+
+
 ## Rodando o código - Backend (NestJS)
 
 O código do backend foi feito utilizando o framework Nestjs, contando nodemon para rodar o código em ambiente de desenvolvimento.

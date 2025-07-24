@@ -17,7 +17,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     description: 'utilizado para atualizar o nome do usuário',
     example: 'Fernanda Oliveira',
   })
-  @IsNotEmpty()
+  @IsOptional()
   @Length(2, 50)
   name: string;
 
@@ -25,7 +25,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     description: 'utilizado para atualizar o email do usuário',
     example: 'fernanda.oliveira@example.com',
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsEmail()
   email: string;
 
@@ -34,7 +34,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     description: 'utilizado para atualizar a senha do usuário. deve ter ao menos 8 caracteres no geral, sendo 1 caractere minúsculo, 1 maiúsculo e 1 número',
     example: 'SenhaForte2024',
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(8)
   @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/, {
@@ -48,7 +48,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     description: 'utilizado para atualizar o dia de nascimento do usuário, e, logo, sua idade',
     example: '1995-04-10T00:00:00.000Z',
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsDateString()
   birthday: string;
 
@@ -56,21 +56,21 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     description: 'utilizado para atualizar o peso (em Kg) do usuário',
     example: 60,
   })
-  @IsNotEmpty()
+  @IsOptional()
   weight: number;
 
   @ApiProperty({
     description: 'utilizado para atualizar a altura (em cm) do usuário',
     example: 167,
   })
-  @IsNotEmpty()
+  @IsOptional()
   height: number;
 
   @ApiProperty({
     description: 'descrição breve sobre a frequência de exercício do usuário',
     example: '5 vezes por semana',
   })
-  @IsNotEmpty()
+  @IsOptional()
   workoutsFrequency: string;
 
   @ApiProperty({
