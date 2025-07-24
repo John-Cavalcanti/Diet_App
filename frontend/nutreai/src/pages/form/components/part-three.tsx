@@ -2,19 +2,25 @@ import styled from "styled-components"
 import { FormCard } from "./form-card"
 import { useFormContext } from "react-hook-form"
 import { type DietFormItems } from ".."
+import { InputError } from "../../../componens/input-error"
 
 export function PartThree() {
-    const { register } = useFormContext<DietFormItems>()
+    const { register, formState: { errors } } = useFormContext<DietFormItems>()
     return (
         <FormCard
             title={"Qual é o seu objetivo?"}
             description={"Isso nos ajuda a criar um plano mais adequado para você."}
             percentageOfFomsCompletion={60}
+            shouldShowPercentage
         >
+            {
+                errors.goals &&
+                <InputError errorMessage={errors.goals.message} />
+            }
             <RadioContainer>
-                <input 
-                    id="Manter peso" 
-                    type="radio" 
+                <input
+                    id="Manter peso"
+                    type="radio"
                     value="Manter peso"
                     {...register('goals')}
                 />
@@ -24,9 +30,9 @@ export function PartThree() {
                 </label>
             </RadioContainer>
             <RadioContainer>
-                <input 
-                    id="Ganhar massa muscular" 
-                    type="radio" 
+                <input
+                    id="Ganhar massa muscular"
+                    type="radio"
                     value="Ganhar massa muscular"
                     {...register('goals')}
                 />
@@ -36,9 +42,9 @@ export function PartThree() {
                 </label>
             </RadioContainer>
             <RadioContainer>
-                <input 
-                    id="Perder peso" 
-                    type="radio" 
+                <input
+                    id="Perder peso"
+                    type="radio"
                     value="Perder peso"
                     {...register('goals')}
                 />
@@ -66,5 +72,5 @@ const RadioContainer = styled.div`
 
 const Description = styled.p`
     font-size: 0.875rem;
-    color: ${({theme}) => theme["text-color"]};
+    color: ${({ theme }) => theme["text-color"]};
 `

@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { WeeklyDiet } from './entities/weekly-diet.entity';
+import { UtilitariesModule } from '../utilitaries/utilitaries.module';
 
 @Module({
   controllers: [WeeklyDietController],
@@ -28,6 +29,7 @@ import { WeeklyDiet } from './entities/weekly-diet.entity';
       }),
       inject: [ConfigService],
     }),
-  ]
+    UtilitariesModule,
+  ],
 })
 export class WeeklyDietModule {}

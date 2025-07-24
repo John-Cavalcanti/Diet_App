@@ -2,15 +2,21 @@ import styled from "styled-components";
 import { FormCard } from "./form-card";
 import { useFormContext } from "react-hook-form";
 import type { DietFormItems } from "..";
+import { InputError } from "../../../componens/input-error";
 
 export function PartTwo() {
-    const { register } = useFormContext<DietFormItems>()
+    const { register, formState: { errors } } = useFormContext<DietFormItems>()
     return (
         <FormCard
             title="Com que frequencia você realiza atividades físicas?"
             description="Entender seu nível de atividade nos ajuda a ajustar sua dieta e metas."
             percentageOfFomsCompletion={40}
+            shouldShowPercentage
         >
+            {
+                errors.workoutsFrequency &&
+                <InputError errorMessage={errors.workoutsFrequency.message} />
+            }
             <RadioContainer>
                 <input 
                     id="Nunca ou quase nunca" 

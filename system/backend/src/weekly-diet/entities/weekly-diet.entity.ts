@@ -73,4 +73,8 @@ export class WeeklyDiet {
       updatedAt: this.updatedAt,
     };
   }
+
+  getUserId() {
+    return this._userId;
+  }
 }

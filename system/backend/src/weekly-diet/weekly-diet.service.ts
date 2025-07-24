@@ -1,10 +1,11 @@
 import { AiService } from './../ai/ai.service';
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException, InternalServerErrorException } from '@nestjs/common';
 import { CreateWeeklyDietDto } from './dto/create-weekly-diet.dto';
 import { UsersService } from '../users/users.service';
 import { WeeklyDiet } from './entities/weekly-diet.entity';
 import { WeeklyDietRepository } from './weekly-diet.repository';
 import { InternalServerError } from 'groq-sdk';
+import { UtilitariesService } from '../utilitaries/utilitaries.service';
 
 @Injectable()
 export class WeeklyDietService {
@@ -12,31 +13,26 @@ export class WeeklyDietService {
     private readonly aiService: AiService,
     private readonly usersService: UsersService,
     private readonly weeklyDietRepository: WeeklyDietRepository,
+    private readonly utilitariesService: UtilitariesService,
   ) {}
 
   async create(createWeeklyDietDto: CreateWeeklyDietDto): Promise<WeeklyDiet> {
     const user = await this.usersService.findOne(createWeeklyDietDto.userId);
-    let userObj: any;
 
     if (!user) {
       throw new BadRequestException('User not found');
-    } else {
-      userObj = user.toObject();
     }
 
-    const userData = {
-      age: this.calculateAge(userObj.birthday),
-      weigth: userObj.weight,
-      height: userObj.height,
-      workouts: userObj.workoutsFrequency,
-      objetivo: userObj.goals,
-      restricoes: userObj.foodRestrictions,
-      alimentosFavoritos: userObj.foodPreferences,
-    };
+    const userObj = user.toObject();
+
+    const userData = this.utilitariesService.transformObject(userObj);
 
     const aiResponse = await this.aiService.groqGenerateWeeklyDiet(userData);
 
     let content = aiResponse ?? "Nenhuma resposta";
+    if (content === 'Nenhuma resposta') {
+      throw new InternalServerErrorException();
+    }
 
     content = content.replace(/```json|```/g, '').trim();
 
@@ -51,22 +47,6 @@ export class WeeklyDietService {
     }
   }
 
-  private calculateAge(birthday: string | Date): number {
-    const birthDate = new Date(birthday);
-    const today = new Date();
-
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    const dayDiff = today.getDate() - birthDate.getDate();
-
-    // Adjust if the birthday hasn't occurred yet this year
-    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-      age--;
-    }
-
-    return age;
-  }
-
   async findAll(): Promise<WeeklyDiet[]> {
     return  await this.weeklyDietRepository.findAll();
   }
@@ -75,7 +55,7 @@ export class WeeklyDietService {
     const diet = await this.weeklyDietRepository.findWeeklyDietByUserId(id);
     if (!diet) {
       throw new BadRequestException(
-        'Esse plano alimentar não existe no banco de dados',
+        'Não há planos alimentares ligados a esse usuário.',
       );
     }
     return diet;

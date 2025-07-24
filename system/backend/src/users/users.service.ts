@@ -3,11 +3,13 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './users.repository';
 import { User } from './entities/user.entity';
-import * as bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly userRepository: UsersRepository) {}
+  constructor(
+    private readonly userRepository: UsersRepository
+  ) {}
   async create(createUserDto: CreateUserDto) {
     if (new Date(createUserDto.birthday) > new Date()) {
       throw new BadRequestException('Time traveler? Birhtday in the future?');
@@ -85,29 +87,6 @@ export class UsersService {
       }
       throw error;
     }
-  }
-
-  private async emailCheckUpdate(
-    dto: UpdateUserDto,
-    id: number,
-  ): Promise<boolean> {
-    const user = await this.userRepository.findUserById(id);
-    if (!user) {
-      return false;
-    }
-    if (user.getEmail() != dto.email) {
-      return false;
-    }
-    return true;
-  }
-
-  private async encode(dto: UpdateUserDto): Promise<UpdateUserDto> {
-    const hashedPassword: string = await bcrypt.hash(dto.password, 10);
-    const updateUserDto: UpdateUserDto = {
-      ...dto,
-      password: hashedPassword,
-    };
-    return updateUserDto;
   }
 
   async remove(id: number) {

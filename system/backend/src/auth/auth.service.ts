@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
@@ -5,12 +6,14 @@ import { LogInDto } from './dto/log-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
 import * as bcrypt from 'bcryptjs';
 import { CreateUserDto } from '../users/dto/create-user.dto';
+import { UtilitariesService } from '../utilitaries/utilitaries.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
+    private readonly utilitariesService: UtilitariesService,
   ) {}
 
   async logIn(logInDto: LogInDto): Promise<{ access_token: string }> {
@@ -25,7 +28,7 @@ export class AuthService {
       throw new UnauthorizedException('A senha está incorreta');
     }
 
-    const payload = { sub: user?.getId(), email: user?.getEmail() };
+    const payload = { sub: user.getId(), email: user.getEmail() };
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
@@ -37,15 +40,11 @@ export class AuthService {
     if (user) {
       throw new ConflictException('Email já está em uso.');
     }
-    // criptografa a senha digitada pelo cliente
-    const hashedPassword: string = await bcrypt.hash(signUpDto.password, 10);
+    
+    const createUserDto: CreateUserDto = await this.utilitariesService.encode(signUpDto);
 
-    const createUserDto: CreateUserDto = {
-      ...signUpDto,
-      password: hashedPassword,
-    };
+    this.usersService.create(createUserDto);
 
-    // finalmente cria o cliente no banco de dados / memória
-    return this.usersService.create(createUserDto);
+    return this.logIn({ email: signUpDto.email, password: signUpDto.password });
   }
 }

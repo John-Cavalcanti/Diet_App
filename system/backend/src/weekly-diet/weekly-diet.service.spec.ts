@@ -7,6 +7,7 @@ import { User } from '../users/entities/user.entity';
 import { aiGeneratedText, weeklyDietExample } from './constants/constants';
 import { WeeklyDiet } from './entities/weekly-diet.entity';
 import { BadRequestException} from '@nestjs/common';
+import { UtilitariesService } from '../utilitaries/utilitaries.service';
 
 describe('WeeklyDietService', () => {
   let service: WeeklyDietService;
@@ -36,7 +37,7 @@ describe('WeeklyDietService', () => {
     createDiet: jest.fn().mockReturnValue(new WeeklyDiet(1, weeklyDietExample)),
     findWeeklyDietByUserId: jest
       .fn()
-      .mockResolvedValue(new WeeklyDiet(1, weeklyDietExample)),
+      .mockResolvedValue([weeklyDietExample, weeklyDietExample]),
   };
 
   beforeEach(async () => {
@@ -46,6 +47,7 @@ describe('WeeklyDietService', () => {
         UsersService,
         AiService,
         WeeklyDietRepository,
+        UtilitariesService,
       ],
     })
       .overrideProvider(UsersService)
@@ -98,12 +100,12 @@ describe('WeeklyDietService', () => {
 
   describe('Quando houver uma tentativa de encontrar um plano alimentar por meio do id', () => {
     it('deveria retornar o plano alimentar desejado se houver alguma dieta ligada àquele id', async () => {
-      expect(service.findWeeklyDietByUserId(1)).toBeInstanceOf(Object);
+      expect(await service.findWeeklyDietByUserId(1)).toBeInstanceOf(Array);
     });
 
     it('deveria lançar um Bad request exception caso não houver nenhum plano alimentar ligado àquele id', async () => {
       mockDietRepository.findWeeklyDietByUserId.mockResolvedValueOnce(
-        undefined,
+        [],
       );
       await expect(service.findWeeklyDietByUserId(1)).rejects.toThrow(
         BadRequestException,

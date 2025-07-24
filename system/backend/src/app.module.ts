@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
 import { WeeklyDiet } from './weekly-diet/entities/weekly-diet.entity';
+import { UtilitariesModule } from './utilitaries/utilitaries.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { WeeklyDiet } from './weekly-diet/entities/weekly-diet.entity';
       isGlobal: true,
       //envFilePath: './system/backend/.env',
     }),
+    UtilitariesModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
