@@ -22,16 +22,17 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  findOneById(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOneById(@Param('id') id: string) {
+  //   return this.usersService.findOne(+id);
+  // }
 
   @UsersDocsFindOne()
-  //@UseGuards(AuthGuard)
+  @UseGuards(AuthGuard)
   @Get('me')
   findOne(@Request() req) {
-    return this.usersService.findOne(req.user.sub);
+    const userId = req.user?.sub
+    return this.usersService.findOne(userId);
   }
 
   @UseGuards(AuthGuard)
