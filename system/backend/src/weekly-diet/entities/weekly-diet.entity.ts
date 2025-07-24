@@ -5,7 +5,7 @@ export class WeeklyDiet {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({name: 'user_id', type: 'int', nullable: false})
+  @Column({name: 'userId', type: 'int', nullable: false})
   userId: number;
 
   @Column({name: 'meals', type: 'jsonb', nullable: false})
@@ -72,9 +72,5 @@ export class WeeklyDiet {
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     };
-  }
-
-  getUserId() {
-    return this._userId;
   }
 }

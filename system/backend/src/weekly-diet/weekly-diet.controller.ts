@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, UseGuards, Request } from '@nestjs/common';
 import { WeeklyDietService } from './weekly-diet.service';
 import { CreateWeeklyDietDto } from './dto/create-weekly-diet.dto';
 import { AuthGuard } from '../auth/auth.guard';
