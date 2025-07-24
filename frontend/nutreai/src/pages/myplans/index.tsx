@@ -34,6 +34,7 @@ export function MyPlans() {
   const [selectedMeal, setSelectedMeal] = useState<MealInput | null>(null);
   const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
   const [userInformation, setUserInformation] = useState<UserInfo | null>(null);
+  const [isLoadingNewDiet, setIsLoadingNewDiet] = useState(false);
 
   // coleta de dados da dieta
   useEffect(() => {
@@ -97,10 +98,15 @@ export function MyPlans() {
   async function handleConfirm(){
     if(!userInformation) return;
 
+    setIsLoadingNewDiet(true);
+
     try{
       console.log("Gerando dieta...");
       const newDiet = await postWeeklyDiet({ userId: userInformation._id });
       setIsConfirmModalVisible(false);
+      setIsLoadingNewDiet(false);
+      
+      // substituir por encaminhamento p/ página: Rotina gerada após ajustes
       console.log("Dieta gerada com sucesso!\n", newDiet);
       setWeeklyDiet(newDiet);
 
@@ -139,6 +145,7 @@ export function MyPlans() {
         onClose={() => setIsConfirmModalVisible(false)}
         onConfirm={handleConfirm}
         onEdit={() => { /* implementar futuramente*/ }}
+        isSubmitting = {isLoadingNewDiet}
         userData={userInformation}
       />
     </Container>

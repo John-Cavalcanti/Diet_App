@@ -4,9 +4,9 @@ import styled from "styled-components"
 interface PrimaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode
 }
-export function PrimaryButton({children, onClick}: PrimaryButtonProps){
+export function PrimaryButton({children, onClick, ...props}: PrimaryButtonProps){
     return (
-        <Container onClick={onClick}>
+        <Container {...props} onClick={onClick}>
             {children}
         </Container>
     )
@@ -22,4 +22,9 @@ const Container = styled.button`
     border: none;
     border-radius: 8px;
     cursor: pointer;
+
+    &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
 `
