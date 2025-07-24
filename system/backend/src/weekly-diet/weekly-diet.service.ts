@@ -1,7 +1,6 @@
 import { AiService } from './../ai/ai.service';
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { CreateWeeklyDietDto } from './dto/create-weekly-diet.dto';
-import { UpdateWeeklyDietDto } from './dto/update-weekly-diet.dto';
 import { UsersService } from '../users/users.service';
 import { WeeklyDiet } from './entities/weekly-diet.entity';
 import { WeeklyDietRepository } from './weekly-diet.repository';
@@ -80,13 +79,5 @@ export class WeeklyDietService {
       );
     }
     return diet;
-  }
-
-  update(id: number, updateWeeklyDietDto: UpdateWeeklyDietDto) {
-    return 'This action updates a #${id} weeklyDiet';
-  }
-
-  remove(id: number) {
-    return 'This action removes a #${id} weeklyDiet';
   }
 }
