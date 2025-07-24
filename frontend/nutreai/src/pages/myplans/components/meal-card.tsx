@@ -52,7 +52,7 @@ export function MealsList({ meals, onOpenDetails }: MealsListProps) {
           icon={mealIcons[meal.tipoRefeicao] || cafeDaManhaIcon}
           title={
             meal.tipoRefeicao
-              ? meal.tipoRefeicao.replace(/_/g, " ").replace(/\b\w/g, (l:any) => l.toUpperCase())
+              ? meal.tipoRefeicao.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase())
               : "Refeição"
           }
           items={meal.descricao ? meal.descricao.split(",") : []}

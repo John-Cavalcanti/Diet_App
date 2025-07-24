@@ -1,46 +1,86 @@
 // src/users/users.repository.ts
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { User } from './entities/user.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class UsersRepository {
-  private id = 0;
-  private readonly users: User[] = [];
 
-  getUsersAmount() {
-    return this.users.length;
+  constructor(
+    @InjectRepository(User)
+    private readonly usersRepository: Repository<User>,
+  ) {}
+
+  async getUsersAmount(): Promise<number> {
+    try{
+      return await this.usersRepository.count();
+    }catch(e)
+    {
+      throw new InternalServerErrorException('Failed to get users amount: ', e);
+    }
   }
 
-  CreateUser(user: User): User {
-    user.setId(++this.id); // lógica para mimificar auto increment do bd
-    this.users.push(user);
-    return user;
+
+  async CreateUser(user: User): Promise<User>
+  {
+    try{
+      const createdUser = await this.usersRepository.save(user);
+      return createdUser;
+    }catch(e){
+      throw new InternalServerErrorException('Failed to create user: ', e);
+    }
   }
 
-  findUserById(id: number): User | undefined {
-    return this.users.find((user) => user.getId() === id);
+  async findUserById(id: number): Promise<User | undefined> {
+    try{
+      const user = await this.usersRepository.findOne({where: { id}});
+      return user ?? undefined;
+    }catch(e){
+      throw new InternalServerErrorException('Failed to find user: ', e);
+    }
   }
 
-  findAll(): User[] {
-    return this.users;
+  async findAll(): Promise<User[]> {
+    try{
+      const users = await this.usersRepository.find();
+      return users;
+    }catch(e){
+      throw new InternalServerErrorException('Failed to find all users: ', e);
+    }
   }
 
-  findByEmail(email: string): User | undefined {
-    return this.users.find((user) => user.getEmail() === email);
+  async findByEmail(email: string): Promise<User | undefined> {
+    try{
+      const user = await this.usersRepository.findOne({where: { email }});
+      return user ?? undefined;
+    }catch(e)
+    {
+      throw new InternalServerErrorException('Failed to find user by email: ', e);
+    }
   }
 
-  updateUser(id: number, user: User): User {
-    const index = this.users.findIndex((user) => user.getId() === id);
-    this.users[index] = user;
-    user.setId(id);
-    // quando update é usado, não é verificado se as informações "destino" já existem no banco de dados, deixando uma brecha para dois usuários com mesmo email
-    return user;
+  async updateUser(id: number, user: User): Promise<User> {
+    try{
+      user.id = id;
+      const updatedUser = await this.usersRepository.save(user);
+      return updatedUser;
+    }catch(e)
+    {
+      throw new InternalServerErrorException('Failed to update user with id ' + id + '  : ', e);
+    }
   }
 
-  deleteById(id: number) {
-    const index = this.users.findIndex((user) => user.getId() === id);
-    const user = this.users[index];
-    this.users.splice(index, 1);
-    return user;
+  async deleteById(id: number) {
+    try{
+      const result = await this.usersRepository.delete(id);
+      if(result.affected === 0)
+      {
+        throw new InternalServerErrorException('User with ID ' + id + ' not found');
+      }
+    }catch(e)
+    {
+      throw new InternalServerErrorException('Failed to delete user with id ' + id + '  : ', e);
+    }
   }
 }

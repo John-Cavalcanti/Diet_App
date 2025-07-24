@@ -1,55 +1,76 @@
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+
+@Entity('weekly_diet')
 export class WeeklyDiet {
-  private _id: number;
-  private _userId: number;
-  private _meals: object;
-  private _createdAt: Date | null;
-  private _updatedAt: Date | null;
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({name: 'userId', type: 'int', nullable: false})
+  userId: number;
+
+  @Column({name: 'meals', type: 'jsonb', nullable: false})
+  meals: object;
+
+  @Column({name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', nullable: false})
+  createdAt: Date;
+
+  @Column({name: 'updated_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', nullable: false})
+  updatedAt: Date;
 
   constructor(userId: number, meals: object) {
-    this._id = 0;
-    this._userId = userId;
-    this._meals = meals;
-    this._createdAt = new Date();
-    this._updatedAt = new Date();
+    this.id = 0;
+    this.userId = userId;
+    this.meals = meals;
   }
 
   setId(id: number) {
-    this._id = id;
+    this.id = id;
   }
 
   setUserId(id: number) {
-    this._userId = id;
+    this.userId = id;
   }
 
   setMeals(meals: object) {
-    this._meals = meals;
+    this.meals = meals;
   }
 
   setCreatedAtDate(date: Date) {
-    this._createdAt = date;
+    this.createdAt = date;
   }
 
   setUpdatedAtDate(date: Date) {
-    this._updatedAt = date;
+    this.updatedAt = date;
   }
 
   getMeals() {
-    return this._meals;
+    return this.meals;
   }
 
   getId() {
-    return this._id;
+    return this.id;
+  }
+
+  getUserId()
+  {
+    return this.userId;
   }
 
   getCreatedAtDate() {
-    return this._createdAt;
+    return this.createdAt;
   }
 
   getUpdatedAtDate() {
-    return this._updatedAt;
+    return this.updatedAt;
   }
 
-  getUserId() {
-    return this._userId;
+  toObject() {
+    return {
+      id: this.id,
+      userId: this.userId,
+      meals: this.meals,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+    };
   }
 }
