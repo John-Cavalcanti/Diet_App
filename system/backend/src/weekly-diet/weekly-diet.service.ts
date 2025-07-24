@@ -15,7 +15,7 @@ export class WeeklyDietService {
     private readonly weeklyDietRepository: WeeklyDietRepository,
   ) {}
 
-  async create(createWeeklyDietDto: CreateWeeklyDietDto) {
+  async create(createWeeklyDietDto: CreateWeeklyDietDto): Promise<WeeklyDiet> {
     const user = await this.usersService.findOne(createWeeklyDietDto.userId);
     let userObj: any;
 
@@ -44,8 +44,7 @@ export class WeeklyDietService {
     try {
       const parsed = JSON.parse(content);
       const weeklyDiet = new WeeklyDiet(createWeeklyDietDto.userId, parsed.planoAlimentarSemanal);
-      this.weeklyDietRepository.createDiet(weeklyDiet);
-      return parsed.planoAlimentarSemanal; // ou return parsed se quiser tudo
+      return this.weeklyDietRepository.createDiet(weeklyDiet);
     } catch (err) {
       console.error('Erro ao fazer parse da resposta da IA:', err);
       console.error('Conteúdo bruto:', content);
@@ -69,18 +68,18 @@ export class WeeklyDietService {
     return age;
   }
 
-  findAll() {
-    return 'This action returns all weeklyDiet';
+  async findAll(): Promise<WeeklyDiet[]> {
+    return  await this.weeklyDietRepository.findAll();
   }
 
-  async findWeeklyDietByUserId(id: number) {
+  async findWeeklyDietByUserId(id: number): Promise<WeeklyDiet> {
     const diet = await this.weeklyDietRepository.findWeeklyDietByUserId(id);
     if (!diet) {
       throw new BadRequestException(
         'Esse plano alimentar não existe no banco de dados',
       );
     }
-    return diet?.getMeals();
+    return diet;
   }
 
   update(id: number, updateWeeklyDietDto: UpdateWeeklyDietDto) {

@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
+import { WeeklyDiet } from './weekly-diet/entities/weekly-diet.entity';
 
 @Module({
   imports: [
@@ -26,7 +27,10 @@ import { User } from './users/entities/user.entity';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User],
+        entities: [
+          User,
+          WeeklyDiet
+        ],
         synchronize: true,
         logging: true
       }),

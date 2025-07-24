@@ -41,6 +41,15 @@ export class WeeklyDietRepository {
     
   }
 
+  async findAll() {
+    try{
+      return await this.weeklyDietRepository.find();
+    }catch(e)
+    {
+      throw new InternalServerErrorException('Failed to find all weekly diets: ', e);
+    }
+  }
+
   /*
   findWeeklyDietByUserId(id: number) {
     return this.weeklyDiets.find(diet => diet.getId() === id);

@@ -17,6 +17,7 @@ import { WeeklyDiet } from './entities/weekly-diet.entity';
     WeeklyDietService
   ],
   imports: [
+    TypeOrmModule.forFeature([WeeklyDiet]),
     AiModule,
     UsersModule,
     JwtModule.registerAsync({
