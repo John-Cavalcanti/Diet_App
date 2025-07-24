@@ -22,9 +22,6 @@ export class AuthService {
       throw new UnauthorizedException('Usuário não encontrado');
     }
 
-    console.log(logInDto.password);
-    console.log(user.getPassword());
-    //bcrypt.
     const passwordValid = await bcrypt.compare(logInDto.password, user.getPassword());
 
     if (!passwordValid) {
