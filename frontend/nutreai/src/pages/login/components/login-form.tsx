@@ -9,6 +9,7 @@ import { PostLogin } from "../../../services/login"
 import { saveToken } from "../../../utils/save-token"
 import { useState } from "react"
 import { ErrorModal } from "../../../componens/erro-modal"
+import { useNavigate } from "react-router-dom"
 
 const LoginFormSchema = z.object({
   email: z.string().email("Email inválido"),
@@ -21,6 +22,8 @@ const LoginFormSchema = z.object({
 export type LoginFormItems = z.infer<typeof LoginFormSchema>
 
 export function LoginForm() {
+  const navigate = useNavigate();
+
   const { register, handleSubmit } = useForm<LoginFormItems>({
     resolver: zodResolver(LoginFormSchema)
   })
@@ -35,6 +38,7 @@ export function LoginForm() {
         password: data.password
       })
       saveToken(token)
+      navigate("/myplans")
     } catch (error: any) {
       setErrorMessage(error.response?.data.message)
       setShouldErrorModalBeOpen(true)

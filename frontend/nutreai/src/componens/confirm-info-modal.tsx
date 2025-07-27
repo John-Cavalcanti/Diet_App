@@ -21,9 +21,12 @@ export function ConfirmInfoModal({ isOpen, onClose, onConfirm, onEdit, userData,
 
   // converter string para lista
   const restrictionsList = useMemo(()=>{
-    const restrictions = userData._foodRestrictions;
+    const restrictions = userData.foodRestrictions;
+    if (typeof restrictions !== 'string' || restrictions.length === 0) {
+      return []; // Se não existir ou for vazia, retorna um array vazio
+    }
     const lista: string[] = restrictions.split(',').map(item => {
-      const trimmed = item.trim();  
+      const trimmed = item.trim();
       return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);;
     });
     return lista;
@@ -34,22 +37,22 @@ export function ConfirmInfoModal({ isOpen, onClose, onConfirm, onEdit, userData,
       <InfoGrid>
         <InfoItem>
           <Label>Altura:</Label>
-          <Value>{userData._height} cm</Value>
+          <Value>{userData.height} cm</Value>
         </InfoItem>
 
         <InfoItem>
           <Label>Peso:</Label>
-          <Value>{userData._weight} kg</Value>
+          <Value>{userData.weight} kg</Value>
         </InfoItem>
 
         <InfoItem>
           <Label>Frequência de Atividade Fisica:</Label>
-          <Value>{userData._workoutsFrequency}</Value>
+          <Value>{userData.workoutsFrequency}</Value>
         </InfoItem>
 
         <InfoItem>
           <Label>Objetivo:</Label>
-          <Value>{userData._goals}</Value>
+          <Value>{userData.goals}</Value>
         </InfoItem>
 
         {restrictionsList.length > 0 && (

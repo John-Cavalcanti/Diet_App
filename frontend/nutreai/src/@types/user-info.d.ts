@@ -1,13 +1,14 @@
 export interface UserInfo {
-  _id: number;
-  _name: string;
-  _email: string;
-  _birthday: string;
-  _weight: number;
-  _height: number;
-  _password: string;
-  _workoutsFrequency: string;
-  _goals: string;
-  _foodRestrictions: string;
-  _foodPreferences: string;
+  id: number;
+  name: string;
+  email: string;
+  birthday: string;
+  weight: number;
+  height: number;
+  password: string;
+  workoutsFrequency: string;
+  goals: string;
+  foodRestrictions: string;
+  foodPreferences: string;
+  createdAt: string;
 }

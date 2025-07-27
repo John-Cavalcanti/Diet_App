@@ -20,11 +20,8 @@ export class UsersService {
       throw new BadRequestException('User with this email already exists');
     }
 
-    const hashedPassword: string = await bcrypt.hash(createUserDto.password, 10);
-
     const user = new User({
-      ...createUserDto,
-      password: hashedPassword,
+      ...createUserDto
     });
 
     try{

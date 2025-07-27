@@ -39,11 +39,17 @@ export function MyPlans() {
   // coleta de dados da dieta
   useEffect(() => {
     async function fetchDiet() {
-      const data = await getWeeklyDiet()
-      setWeeklyDiet(data.at(-1)._meals) // retorna a última dieta gerada pelo usuário
+      try {
+        const data = await getWeeklyDiet();
+        if (data && data.meals) {
+          setWeeklyDiet(data.meals);
+        }
+      } catch (error) {
+        console.error("Falha ao buscar dieta inicial:", error);
+      }
     }
-    fetchDiet()
-  }, [weeklyDiet])
+    fetchDiet();
+  }, []);
 
   // coleta de dados do usuário
   useEffect(() => {
@@ -102,7 +108,9 @@ export function MyPlans() {
 
     try{
       console.log("Gerando dieta...");
-      const newDiet = await postWeeklyDiet({ userId: userInformation._id });
+      await postWeeklyDiet({ userId: userInformation.id });
+      const data = await getWeeklyDiet()
+      const newDiet = data.meals
       setIsConfirmModalVisible(false);
       setIsLoadingNewDiet(false);
       
