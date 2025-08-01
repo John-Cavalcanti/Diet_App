@@ -34,7 +34,10 @@ import { UtilitariesModule } from './utilitaries/utilitaries.module';
           WeeklyDiet
         ],
         synchronize: true,
-        logging: true
+        logging: true,
+        ssl:{
+          rejectUnauthorized: false
+        }
       }),
       inject: [ConfigService],
     })
