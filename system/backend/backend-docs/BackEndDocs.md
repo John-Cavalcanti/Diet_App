@@ -2,10 +2,16 @@
 
 ## 1 - Visão geral
 Este backend é responsável por fornecer uma ***API RESTful*** para a interface gráfica de uma aplicação web de **criação e gerenciamento de dietas** geradas por IA. 
-Para o desenvolvimento, foi usado **Node.JS**, **TypeScript** e **NestJS** e **PostgreSQL** como banco de dados.
+Para o desenvolvimento, foi usado **Node.JS**, **TypeScript**, **NestJS** e **PostgreSQL** como banco de dados.
 
 ## 2 - Arquitetura e Módulos
 Este backend segue o padrão arquitetural ***Controller-Service-Repository*** (CSR), uma arquitetura em camadas amplamente utilizada em projetos comerciais e acadêmicos.
+
+- **Controller**: Camada de interface com o consumidor da API. Nela é aplicada *pipes* iniciais, como **DTOs** e **Guards**. Suas funções são dividas por requisições **HTTP** e **rotas**. Para atender essas requisições, é necessário acessar a camada inferior.
+
+- **Service**: Camada que implementa a lógica de negócio e realiza tratamento de erros, como email inválido em requisições login.
+
+- **Repository**: Camada de acesso ao banco de dados. Nenhuma lógica de negócio é aplicada nesta camada, apenas tratamento mínimo de erros e comunicação com o banco de dados através do **TypeORM**.
 
 ![DiagramaCSR](csr-diag.png)
 
@@ -45,11 +51,18 @@ O processo de autenticação ocorre quando um usuário envia suas credenciais (e
 
 - **Envio do JWT**: O cliente armazena o JWT e o envia nas requisições subsequentes usando o cabeçalho *Authorization* e o modificador *Bearer*. 
 
-Em rotas protegidas, o **Guard** é responsável por verificar a validade do token enviado, retornando **true** caso todas as informações estão válidas e **Unauthorized** caso contrário.
+Em rotas protegidas, o **Guard** é responsável por verificar a validade do token enviado, retornando **true** caso todas as informações estão válidas e lançando uma exceção **Unauthorized** caso contrário.
 
 ## 6 - Users
+O módulo **Users** desta API é responsável pelo gerenciamento e criação dos usuários e suas informações. Esse módulo segue o padrão arquitetural definido, isto é, o *Controller* é a camada de recebimento das requisições, o *Service* aplica a lógica de negócio, e o *Repository* acessa o banco de dados.
+
+Além disso, o módulo Users contém o ***User.entity***, definindo os atributos que cada usuário terá no banco de dados.
 
 ## 7 - Weekly-diet
+O módulo **Weekly-diet** deste backend é responsável pela criação e visualização dos planos alimentares gerados pela IA. Esse módulo também segue a arquitetura em camadas proposta. 
+O endpoint de criar dieta tem uma direta relação com o módulo **AI**, visto que para a requisição da dieta ser atendida, é necessário a resposta do *LLM*.
+Assim como o módulo *Users*, **Weekly-diet** possui um ***weekly-diet.entity***, estrutura que desempenha a função de definir os atributos dos planos alimentares no banco de dados
+
 
 ## 8 - Testes
 Este backend possui um amplo conjunto de testes unitários de grande cobertura. Para isso, foi usado o *framework* **Jest**, também usado na criação de valores *mockados*. Na execução dos testes, foi usado o comando ***node test***.
