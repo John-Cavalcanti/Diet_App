@@ -75,7 +75,8 @@ Foi usado um banco de dados **PostgreSQL** para armazenamento das informações 
 
 Neste banco de dados existem 2 tabelas, para Users e Weekly-diet, as duas *entities* que compõem o funcionamento da API. **Users** e **Weekly-diet** estão relacionadas entre si por uma chave estrangeira **UserId**, que liga uma dieta a um usuário único.
 
-[imagem_aqui]()
+![imagem_aqui](tabela-users.png)
+![imagem_aqui](tabela-diet.png)
 
 Como dito anteriormente, para conectar o código do backend ao banco de dados foram usados os métodos da biblioteca **TypeORM**.
 
