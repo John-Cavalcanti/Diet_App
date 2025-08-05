@@ -29,3 +29,21 @@ Os arquivos ***package.json*** e ***package-lock.json*** contém as dependência
 npm install
 ```
 
+## 4 - Autenticação
+A autenticação deste backend é baseada em **JSON Web Token (JWT)** com o auxílio de **Guards** para proteger rotas e garantir que apenas usuários autenticados possam acessar determinados recursos.
+
+O processo de autenticação ocorre quando um usuário envia suas credenciais (email e senha) para o backend (realiza login). O backend valida essas credenciais e, se forem corretas, gera um **token JWT**. Este token será usado para autenticar o usuário nas requisições subsequentes.
+
+- **Envio das credenciais**: O cliente envia uma requisição POST para o endpoint de login com as credenciais do usuário.
+
+- **Validação no backend**: O backend verifica se as credenciais correspondem a um usuário válido no banco de dados.
+
+- **Geração do JWT**: Se as credenciais estiverem corretas, o backend gera um JWT e o retorna para o cliente.
+
+- **Envio do JWT**: O cliente armazena o JWT e o envia nas requisições subsequentes usando o cabeçalho *Authorization* e o modificador *Bearer*. 
+
+Em rotas protegidas, o **Guard** é responsável por verificar a validade do token enviado, retornando **true** caso todas as informações estão válidas e **Unauthorized** caso contrário.
+
+## 5 - Regras de negócio
+
+
