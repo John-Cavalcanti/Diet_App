@@ -29,7 +29,10 @@ Os arquivos ***package.json*** e ***package-lock.json*** contém as dependência
 npm install
 ```
 
-## 4 - Autenticação
+## 4 - AI
+O módulo **AI** deste backend é responsável pela comunicação e tratamento das respostas do *LLM* usado para geração dos planos alimentares. Neste backend, o agente escolhido foi o **Groq Compound-Beta**, que recebe informações essenciais do usuário para gerar as dietas (idade, peso, restrições alimentares, etc) e retorna, idealmente, um *JSON* de um plano alimentar semanal com 3 refeições diárias e 1 lanche, separados para cada dia.
+
+## 5 - Autenticação
 A autenticação deste backend é baseada em **JSON Web Token (JWT)** com o auxílio de **Guards** para proteger rotas e garantir que apenas usuários autenticados possam acessar determinados recursos.
 
 O processo de autenticação ocorre quando um usuário envia suas credenciais (email e senha) para o backend (realiza login). O backend valida essas credenciais e, se forem corretas, gera um **token JWT**. Este token será usado para autenticar o usuário nas requisições subsequentes.
@@ -44,13 +47,17 @@ O processo de autenticação ocorre quando um usuário envia suas credenciais (e
 
 Em rotas protegidas, o **Guard** é responsável por verificar a validade do token enviado, retornando **true** caso todas as informações estão válidas e **Unauthorized** caso contrário.
 
-## 5 - Testes
+## 6 - Users
+
+## 7 - Weekly-diet
+
+## 8 - Testes
 Este backend possui um amplo conjunto de testes unitários de grande cobertura. Para isso, foi usado o *framework* **Jest**, também usado na criação de valores *mockados*. Na execução dos testes, foi usado o comando ***node test***.
 Uma boa cobertura de testes foi alcançada, cerca de (adicionar valor depois)% das funções mapeadas e validadas.
 
 [imagem_aqui]()
 
-## 6 - Banco de dados
+## 9 - Banco de dados
 Foi usado um banco de dados **PostgreSQL** para armazenamento das informações dos usuários.
 
 Neste banco de dados existem 2 tabelas, para Users e Weekly-diet, as duas *entities* que compõem o funcionamento da API. **Users** e **Weekly-diet** estão relacionadas entre si por uma chave estrangeira **UserId**, que liga uma dieta a um usuário único.
@@ -59,8 +66,7 @@ Neste banco de dados existem 2 tabelas, para Users e Weekly-diet, as duas *entit
 
 Como dito anteriormente, para conectar o código do backend ao banco de dados foram usados os métodos da biblioteca **TypeORM**.
 
-## 7 - AI
-O módulo **AI** deste backend 
+
 
 
 
