@@ -44,6 +44,23 @@ O processo de autenticação ocorre quando um usuário envia suas credenciais (e
 
 Em rotas protegidas, o **Guard** é responsável por verificar a validade do token enviado, retornando **true** caso todas as informações estão válidas e **Unauthorized** caso contrário.
 
-## 5 - Regras de negócio
+## 5 - Testes
+Este backend possui um amplo conjunto de testes unitários de grande cobertura. Para isso, foi usado o *framework* **Jest**, também usado na criação de valores *mockados*. Na execução dos testes, foi usado o comando ***node test***.
+Uma boa cobertura de testes foi alcançada, cerca de (adicionar valor depois)% das funções mapeadas e validadas.
+
+[imagem_aqui]()
+
+## 6 - Banco de dados
+Foi usado um banco de dados **PostgreSQL** para armazenamento das informações dos usuários.
+
+Neste banco de dados existem 2 tabelas, para Users e Weekly-diet, as duas *entities* que compõem o funcionamento da API. **Users** e **Weekly-diet** estão relacionadas entre si por uma chave estrangeira **UserId**, que liga uma dieta a um usuário único.
+
+[imagem_aqui]()
+
+Como dito anteriormente, para conectar o código do backend ao banco de dados foram usados os métodos da biblioteca **TypeORM**.
+
+## 7 - AI
+O módulo **AI** deste backend 
+
 
 
