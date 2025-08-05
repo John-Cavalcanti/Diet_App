@@ -65,7 +65,10 @@ Assim como o módulo *Users*, **Weekly-diet** possui um ***weekly-diet.entity***
 
 
 ## 8 - Testes
-Este backend possui um amplo conjunto de testes unitários de grande cobertura. Para isso, foi usado o *framework* **Jest**, também usado na criação de valores *mockados*. Na execução dos testes, foi usado o comando ***node test***.
+Este backend possui um amplo conjunto de testes unitários de grande cobertura. Para isso, foi usado o *framework* **Jest**, também usado na criação de valores *mockados*. Na execução dos testes, foi usado o comando
+```bash
+npm test
+```
 Uma boa cobertura de testes foi alcançada, cerca de (adicionar valor depois)% das funções mapeadas e validadas.
 
 [imagem_aqui]()
