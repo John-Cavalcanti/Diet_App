@@ -38,7 +38,6 @@ export function Confirmation() {
 
     useEffect(() => {
         const fetchMealPlan = async () => {
-            console.log('ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc')
                 try {
                     const result = await postWeeklyDiet();
                     setRefeicoesAgrupadas(agruparRefeicoesPorTipo(result!))

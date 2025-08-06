@@ -36,20 +36,6 @@ export function MyPlans() {
   const [userInformation, setUserInformation] = useState<UserInfo | null>(null);
   const [isLoadingNewDiet, setIsLoadingNewDiet] = useState(false);
 
-  // coleta de dados da dieta
-  useEffect(() => {
-    async function fetchDiet() {
-      const data = await getWeeklyDiet()
-      setWeeklyDiet(data.at(-1)._meals) // retorna a última dieta gerada pelo usuário
-    }
-    fetchDiet()
-  }, [weeklyDiet])
-
-  // coleta de dados do usuário
-  useEffect(() => {
-    getUserInfo().then(data => setUserInformation(data));
-  }, []);
-
   const today = new Date()
   const selectedDate = new Date(today)
   selectedDate.setDate(today.getDate() + (activeDay - today.getDay()))
@@ -102,7 +88,7 @@ export function MyPlans() {
 
     try{
       console.log("Gerando dieta...");
-      const newDiet = await postWeeklyDiet({ userId: userInformation._id });
+      const newDiet = await postWeeklyDiet();
       setIsConfirmModalVisible(false);
       setIsLoadingNewDiet(false);
       
@@ -114,6 +100,20 @@ export function MyPlans() {
       console.error("Falha ao gerar a dieta: ", error);
     }
   }
+
+    // coleta de dados da dieta
+  useEffect(() => {
+    async function fetchDiet() {
+      const data = await getWeeklyDiet()
+      setWeeklyDiet(data.at(-1)._meals) // retorna a última dieta gerada pelo usuário
+    }
+    fetchDiet()
+  }, [weeklyDiet])
+
+  // coleta de dados do usuário
+  useEffect(() => {
+    getUserInfo().then(data => setUserInformation(data));
+  }, []);
 
   return (
     <Container>
