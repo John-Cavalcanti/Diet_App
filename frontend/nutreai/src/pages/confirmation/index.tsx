@@ -10,11 +10,9 @@ import { PrimaryButton } from "../../componens/primary-button"
 import { useEffect, useState } from "react"
 import type { Meal, WeeklyDiet } from "../../@types/meal-plan"
 import { postWeeklyDiet } from "../../services/weekly-diet/post"
-import { useUsersInformations } from "../../contexts/user-informations"
 import { ClipLoader } from "react-spinners"
 
 export function Confirmation() {
-    const { id } = useUsersInformations()
     const [refeicoesAgrupadas, setRefeicoesAgrupadas] = useState<
         { nome: string; opcoes: Meal[] }[]
     >([]);
@@ -40,18 +38,17 @@ export function Confirmation() {
 
     useEffect(() => {
         const fetchMealPlan = async () => {
-            if (id) {
+            console.log('ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc')
                 try {
-                    const result = await postWeeklyDiet({userId: id});
+                    const result = await postWeeklyDiet();
                     setRefeicoesAgrupadas(agruparRefeicoesPorTipo(result!))
                 } catch (error) {
                     console.error("Erro ao buscar plano alimentar:", error);
                 }
-            }
         };
 
         fetchMealPlan();
-    }, [id]);
+    }, []);
 
     if(refeicoesAgrupadas.length == 0){
          return <ClipLoader data-testid="loading" color="#123abc" loading={true} size={50} />;

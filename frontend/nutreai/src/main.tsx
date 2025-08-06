@@ -42,7 +42,7 @@ const router = createBrowserRouter([
         element: <Confirmation />
       },
       {
-        path: '/myplans',
+        path: '/my-plans',
         element: <MyPlans />
       },
     ]

@@ -77,7 +77,7 @@ export function DietForm() {
         const birthdayISO = new Date(data.birthday).toISOString()
 
         try {
-            const userId = await postForm({
+            const token = await postForm({
                 name: data.name,
                 email: data.email,
                 password: data.password,
@@ -90,7 +90,7 @@ export function DietForm() {
                 foodRestrictions: restrictions
             })
 
-            createUser(userId!)
+            createUser(token!)
             navigate("/weekly-diet-confirmation")
         } catch (error: any) {
             setErrorMessage(error.response?.data.message)

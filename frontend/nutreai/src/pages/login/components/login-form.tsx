@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
 import { PrimaryButton } from "../../../componens/primary-button"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { z } from "zod"
 import { LoginInput } from "./login-input"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -27,6 +27,7 @@ export function LoginForm() {
 
   const [shouldErrorModalBeOpen, setShouldErrorModalBeOpen] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
+  const navigate = useNavigate()
 
   async function onSubmit(data: LoginFormItems) {
     try {
@@ -35,6 +36,7 @@ export function LoginForm() {
         password: data.password
       })
       saveToken(token)
+      navigate("/my-plans")
     } catch (error: any) {
       setErrorMessage(error.response?.data.message)
       setShouldErrorModalBeOpen(true)
