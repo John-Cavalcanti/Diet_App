@@ -8,6 +8,7 @@ export interface Meal {
 }
 
 export interface WeeklyDiet{
+  meals: {
     segunda: Meal[],
     terca: Meal[],
     quarta: Meal[],
@@ -15,4 +16,5 @@ export interface WeeklyDiet{
     sexta: Meal[],
     sabado: Meal[],
     domingo: Meal[]
+  }
 }

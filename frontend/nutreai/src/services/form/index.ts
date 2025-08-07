@@ -14,22 +14,13 @@ interface PostFormProps {
 }
 
 interface PostFormResponse {
-	_id: number,
-	name: string,
-	email: string,
-	birthday: string,
-	weight: number,
-	height: number,
-	workoutsFrequency: string
-	goals: string,
-	foodRestrictions: string,
-	foodPreferences: string
+	access_token: string
 }
 
 export async function postForm(dados: PostFormProps) {
     try {
         const response = await api.post<PostFormResponse>('/api/auth/signup', dados)
-        return response.data._id
+        return response.data.access_token
     } catch (error: any) {
         console.error('Erro ao enviar:', error.response?.data)
         throw error

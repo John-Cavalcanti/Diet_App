@@ -30,6 +30,8 @@ export class WeeklyDietService {
     const aiResponse = await this.aiService.groqGenerateWeeklyDiet(userData);
 
     let content = aiResponse ?? "Nenhuma resposta";
+
+    console.log(content);
     if (content === 'Nenhuma resposta') {
       throw new InternalServerErrorException();
     }
@@ -41,8 +43,6 @@ export class WeeklyDietService {
       const weeklyDiet = new WeeklyDiet(createWeeklyDietDto.userId, parsed.planoAlimentarSemanal);
       return this.weeklyDietRepository.createDiet(weeklyDiet);
     } catch (err) {
-      console.error('Erro ao fazer parse da resposta da IA:', err);
-      console.error('Conteúdo bruto:', content);
       throw new InternalServerError(500, err, 'Erro ao fazer parse da resposta da IA', content);
     }
   }

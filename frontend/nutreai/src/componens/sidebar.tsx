@@ -12,7 +12,7 @@ export function Sidebar() {
         <IconLink to="/home">
           <img src={homeIcon} alt="Início" />
         </IconLink>
-        <IconLink to="/myplans">
+        <IconLink to="/my-plans">
           <img src={plansIcon} alt="Meus Planos" />
         </IconLink>
         <IconLink to="/perfil">

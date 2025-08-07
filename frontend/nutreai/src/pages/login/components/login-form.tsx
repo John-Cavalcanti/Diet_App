@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
 import { PrimaryButton } from "../../../componens/primary-button"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { z } from "zod"
 import { LoginInput } from "./login-input"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -9,6 +9,7 @@ import { PostLogin } from "../../../services/login"
 import { saveToken } from "../../../utils/save-token"
 import { useState } from "react"
 import { ErrorModal } from "../../../componens/erro-modal"
+import { useUsersInformations } from "../../../contexts/user-informations"
 
 const LoginFormSchema = z.object({
   email: z.string().email("Email inválido"),
@@ -25,8 +26,11 @@ export function LoginForm() {
     resolver: zodResolver(LoginFormSchema)
   })
 
+  const { createUser } = useUsersInformations()
+
   const [shouldErrorModalBeOpen, setShouldErrorModalBeOpen] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
+  const navigate = useNavigate()
 
   async function onSubmit(data: LoginFormItems) {
     try {
@@ -34,7 +38,8 @@ export function LoginForm() {
         email: data.email,
         password: data.password
       })
-      saveToken(token)
+      createUser(token)
+      navigate("/my-plans")
     } catch (error: any) {
       setErrorMessage(error.response?.data.message)
       setShouldErrorModalBeOpen(true)

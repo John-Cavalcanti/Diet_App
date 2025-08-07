@@ -10,14 +10,17 @@ import { PrimaryButton } from "../../componens/primary-button"
 import { useEffect, useState } from "react"
 import type { Meal, WeeklyDiet } from "../../@types/meal-plan"
 import { postWeeklyDiet } from "../../services/weekly-diet/post"
-import { useUsersInformations } from "../../contexts/user-informations"
 import { ClipLoader } from "react-spinners"
+import { useUsersInformations } from "../../contexts/user-informations"
+import { useNavigate } from "react-router-dom"
 
 export function Confirmation() {
-    const { id } = useUsersInformations()
     const [refeicoesAgrupadas, setRefeicoesAgrupadas] = useState<
         { nome: string; opcoes: Meal[] }[]
     >([]);
+    const navigate = useNavigate()
+
+    const { id, token } = useUsersInformations()
 
     const agruparRefeicoesPorTipo = (mealPlan: WeeklyDiet) => {
         const todasRefeicoes: Meal[] = Object.values(mealPlan).flat();
@@ -38,23 +41,27 @@ export function Confirmation() {
         return refeicoesAgrupadas;
     };
 
+    function handleConfirmMealPlan() {
+        navigate("/my-plans")
+    }
+
     useEffect(() => {
         const fetchMealPlan = async () => {
-            if (id) {
-                try {
-                    const result = await postWeeklyDiet({userId: id});
+            try {
+                if (token != undefined && id != 0) {
+                    const result = await postWeeklyDiet({ id, token });
                     setRefeicoesAgrupadas(agruparRefeicoesPorTipo(result!))
-                } catch (error) {
-                    console.error("Erro ao buscar plano alimentar:", error);
                 }
+            } catch (error) {
+                console.error("Erro ao buscar plano alimentar:", error);
             }
         };
 
         fetchMealPlan();
-    }, [id]);
+    }, [token, id]);
 
-    if(refeicoesAgrupadas.length == 0){
-         return <ClipLoader data-testid="loading" color="#123abc" loading={true} size={50} />;
+    if (refeicoesAgrupadas.length == 0) {
+        return <ClipLoader data-testid="loading" color="#123abc" loading={true} size={50} />;
     }
 
     return (
@@ -117,7 +124,7 @@ export function Confirmation() {
                     </FeedbacksCard>
                 </Card>
                 <section>
-                    <PrimaryButton>Confirmar Plano Alimentar</PrimaryButton>
+                    <PrimaryButton onClick={handleConfirmMealPlan}>Confirmar Plano Alimentar</PrimaryButton>
                 </section>
             </SecondColumnContainer>
             <BackgroundImage src={folha} />
