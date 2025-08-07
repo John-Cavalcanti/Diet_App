@@ -12,11 +12,13 @@ import type { Meal, WeeklyDiet } from "../../@types/meal-plan"
 import { postWeeklyDiet } from "../../services/weekly-diet/post"
 import { ClipLoader } from "react-spinners"
 import { useUsersInformations } from "../../contexts/user-informations"
+import { useNavigate } from "react-router-dom"
 
 export function Confirmation() {
     const [refeicoesAgrupadas, setRefeicoesAgrupadas] = useState<
         { nome: string; opcoes: Meal[] }[]
     >([]);
+    const navigate = useNavigate()
 
     const { id, token } = useUsersInformations()
 
@@ -38,6 +40,10 @@ export function Confirmation() {
 
         return refeicoesAgrupadas;
     };
+
+    function handleConfirmMealPlan() {
+        navigate("/my-plans")
+    }
 
     useEffect(() => {
         const fetchMealPlan = async () => {
@@ -118,7 +124,7 @@ export function Confirmation() {
                     </FeedbacksCard>
                 </Card>
                 <section>
-                    <PrimaryButton>Confirmar Plano Alimentar</PrimaryButton>
+                    <PrimaryButton onClick={handleConfirmMealPlan}>Confirmar Plano Alimentar</PrimaryButton>
                 </section>
             </SecondColumnContainer>
             <BackgroundImage src={folha} />
