@@ -48,9 +48,6 @@ export function MyPlans() {
 
   const { id, token } = useUsersInformations()
 
-  console.log("Exibindo dieta")
-  console.log(weeklyDiet)
-
   const todayKey = weekDayKeys[activeDay]
 
   const handleOpenDetails = (mealData: BackendMeal) => {
@@ -93,12 +90,10 @@ export function MyPlans() {
     setIsLoadingNewDiet(true);
 
     try {
-      console.log("Gerando dieta...");
       const newDiet = await postWeeklyDiet({id, token});
       setIsConfirmModalVisible(false);
       setIsLoadingNewDiet(false);
 
-      console.log("Dieta gerada com sucesso!", newDiet);
       setWeeklyDiet(newDiet);
 
     } catch (error) {
@@ -109,8 +104,6 @@ export function MyPlans() {
   useEffect(() => {
     async function fetchDiet() {
       const data = await getWeeklyDiet({token})
-      console.log('Dieta vinda do backend')
-      console.log(data)
       setWeeklyDiet(data.meals)
     }
     fetchDiet()

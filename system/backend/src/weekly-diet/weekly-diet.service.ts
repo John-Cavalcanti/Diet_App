@@ -19,8 +19,6 @@ export class WeeklyDietService {
   async create(createWeeklyDietDto: CreateWeeklyDietDto): Promise<WeeklyDiet> {
     const user = await this.usersService.findOne(createWeeklyDietDto.userId);
 
-    console.log(user);
-
     if (!user) {
       throw new BadRequestException('User not found');
     }
@@ -45,8 +43,6 @@ export class WeeklyDietService {
       const weeklyDiet = new WeeklyDiet(createWeeklyDietDto.userId, parsed.planoAlimentarSemanal);
       return this.weeklyDietRepository.createDiet(weeklyDiet);
     } catch (err) {
-      console.error('Erro ao fazer parse da resposta da IA:', err);
-      console.error('Conteúdo bruto:', content);
       throw new InternalServerError(500, err, 'Erro ao fazer parse da resposta da IA', content);
     }
   }

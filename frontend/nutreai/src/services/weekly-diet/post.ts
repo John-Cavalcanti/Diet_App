@@ -15,8 +15,6 @@ interface PostWeeklyDietResponse {
 }
 
 export async function postWeeklyDiet({ id, token }: PostWeeklyDietProps) {
-    console.log(token)
-    console.log(id)
     try {
         const response = await api.post<PostWeeklyDietResponse>(
           '/api/weekly-diet', 
@@ -27,9 +25,6 @@ export async function postWeeklyDiet({ id, token }: PostWeeklyDietProps) {
             }
           }
       )
-        console.log(response.data)
-        console.log(response.headers)
-        console.log(response.status)
         return response.data.meals
     } catch (error: any) {
         console.error('Erro ao enviar:', error.response?.data)
