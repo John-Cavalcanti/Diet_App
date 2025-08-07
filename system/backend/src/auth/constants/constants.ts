@@ -1,13 +1,13 @@
 export const mockLogInAccessToken = {
-  acess_token:
+  access_token:
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZmVybmFuZGEub2xpdmVpcmFAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTEyMDk0NzgsImV4cCI6MTc1MTIxMzA3OH0.TN48QRk_GHKb6R1yqbXpgy05osvc3pKoMaVyNTNuoRs',
 };
 
-export const mockGetJWTSECRET =
+export const mockGetToken =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZmVybmFuZGEub2xpdmVpcmFAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTEyMDk0NzgsImV4cCI6MTc1MTIxMzA3OH0.TN48QRk_GHKb6R1yqbXpgy05osvc3pKoMaVyNTNuoRs';
 
 export const mockAuthorizationHeader =
   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZmVybmFuZGEub2xpdmVpcmFAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTE1OTc2MjksImV4cCI6MTc1MTYwMTIyOX0.ACKa7l_yuEgVr8AC1J7_oiYf-k23wumrymMs4cRyx2o';
 
-export const mockGetToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZmVybmFuZGEub2xpdmVpcmFAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTEyMDk0NzgsImV4cCI6MTc1MTIxMzA3OH0.TN48QRk_GHKb6R1yqbXpgy05osvc3pKoMaVyNTNuoRs';
+export const mockEncryptedPassword =
+  '$2b$10$hSJ220DVDTeAs4sdyM2qVeGWAoB8RicWdyD31fDlTfak9TAClJZ/K';

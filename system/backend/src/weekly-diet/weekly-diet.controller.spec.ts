@@ -50,7 +50,7 @@ describe('WeeklyDietController', () => {
 
   describe('Quando houver uma tentativa de criação de novo plano alimentar', () => {
     it('deveria retornar uma instância de Weekly Diet caso seja bem-sucedida', async () => {
-      const SuccessResult = await controller.create({ userId: 1 });
+      const SuccessResult = await controller.create({ user: {sub: 1} });
       expect(SuccessResult).toBeInstanceOf(WeeklyDiet);
     });
     
@@ -58,14 +58,14 @@ describe('WeeklyDietController', () => {
       mockWeeklyDietService.create.mockImplementationOnce( async () => {
         throw new BadRequestException('User not found');
       });
-      await expect(controller.create( { userId: 123414141 } )).rejects.toThrow(BadRequestException);
+      await expect(controller.create({ user: {sub: 12341414} })).rejects.toThrow(BadRequestException);
     });
   
     it('deveria retornar internal server error caso a resposta da IA não seja em forma JSON válido', async () => {
       mockWeeklyDietService.create.mockImplementationOnce(async () => {
         throw new Error;
       });
-      await expect(controller.create({ userId: 1 })).rejects.toThrow(Error);
+      await expect(controller.create({ user: {sub: 1} })).rejects.toThrow(Error);
     });
   });
 

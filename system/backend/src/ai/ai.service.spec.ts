@@ -1,10 +1,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AiService } from './ai.service';
 import { AiWebService } from './ai.webservice';
+import { UtilitariesService } from '../utilitaries/utilitaries.service';
 
 describe('AiService', () => {
   let service: AiService;
-  let mockAiWebService: { generateSomething: jest.Mock , groqGenerateWeeklyDiet: jest.Mock };
+  let mockAiWebService: {
+    generateSomething: jest.Mock;
+    groqGenerateWeeklyDiet: jest.Mock;
+  };
+  const mockUtilitariesService = {
+    interpolateTemplate: jest
+      .fn()
+      .mockReturnValue('Prompt que será enviado ao llm'),
+  };
 
   beforeEach(async () => {
     mockAiWebService = {
@@ -17,10 +26,16 @@ describe('AiService', () => {
         AiService,
         {
           provide: AiWebService,
-          useValue: mockAiWebService
-        }
+          useValue: mockAiWebService,
+        },
+        UtilitariesService,
       ],
-    }).compile();
+    })
+
+      .overrideProvider(UtilitariesService)
+      .useValue(mockUtilitariesService)
+
+      .compile();
 
     service = module.get<AiService>(AiService);
   });
