@@ -222,8 +222,6 @@ const fakeDiet: WeeklyDiet = {
 export const postWeeklyDietMock = http.post('/api/weekly-diet', async ({ request }) => {
     const body = (await request.json()) as { userId: number };
 
-    console.log('Requisição recebida p/ /weekly-diet ⇒', body);
-
     if (body.userId <= 0) {
       return HttpResponse.json(
         { message: 'Usuário inexistente' },

@@ -19,8 +19,6 @@ export function FormCard({ title, description, percentageOfFomsCompletion, shoul
 
     const isLastStep = percentageOfFomsCompletion == 100 ? true : false
 
-    console.log(isLastStep)
-
     return (
         <Container>
             {
