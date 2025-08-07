@@ -30,7 +30,7 @@ export function ConfirmInfoModal({ isOpen, onClose, onConfirm, onEdit, userData,
   }, [userData]);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Confirme suas informações">
+    <Modal isOpen={true} onClose={onClose} title="Confirme suas informações">
       <InfoGrid>
         <InfoItem>
           <Label>Altura:</Label>

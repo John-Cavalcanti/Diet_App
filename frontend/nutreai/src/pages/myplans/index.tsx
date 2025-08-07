@@ -11,6 +11,7 @@ import { ConfirmInfoModal } from "../../componens/confirm-info-modal"
 import type { UserInfo } from "../../@types/user-info"
 import { getUserInfo } from "../../services/user"
 import { postWeeklyDiet } from "../../services/weekly-diet/post"
+import { useUsersInformations } from "../../contexts/user-informations"
 
 const weekDayNames = [
   "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"
@@ -45,11 +46,16 @@ export function MyPlans() {
     month: "long"
   })
 
+  const { id, token } = useUsersInformations()
+
+  console.log("Exibindo dieta")
+  console.log(weeklyDiet)
+
   const todayKey = weekDayKeys[activeDay]
 
   const handleOpenDetails = (mealData: BackendMeal) => {
     let formattedName = mealData.tipoRefeicao;
-    switch(mealData.tipoRefeicao){
+    switch (mealData.tipoRefeicao) {
       case "cafe_da_manha": formattedName = "Café da Manhã";
         break;
       case "almoco": formattedName = "Almoço";
@@ -72,45 +78,44 @@ export function MyPlans() {
     };
     setSelectedMeal(mealForModal);
   };
-  
+
   const handleCloseModal = () => {
     setSelectedMeal(null);
   };
 
-  function handleNewDietModal(){
+  function handleNewDietModal() {
     setIsConfirmModalVisible(true);
   }
 
-  async function handleConfirm(){
-    if(!userInformation) return;
+  async function handleConfirm() {
+    if (!userInformation) return;
 
     setIsLoadingNewDiet(true);
 
-    try{
+    try {
       console.log("Gerando dieta...");
-      const newDiet = await postWeeklyDiet();
+      const newDiet = await postWeeklyDiet({id, token});
       setIsConfirmModalVisible(false);
       setIsLoadingNewDiet(false);
-      
-      // substituir por encaminhamento p/ página: Rotina gerada após ajustes
-      console.log("Dieta gerada com sucesso!\n", newDiet);
+
+      console.log("Dieta gerada com sucesso!", newDiet);
       setWeeklyDiet(newDiet);
 
-    } catch(error){
+    } catch (error) {
       console.error("Falha ao gerar a dieta: ", error);
     }
   }
 
-    // coleta de dados da dieta
   useEffect(() => {
     async function fetchDiet() {
-      const data = await getWeeklyDiet()
-      setWeeklyDiet(data.at(-1)._meals) // retorna a última dieta gerada pelo usuário
+      const data = await getWeeklyDiet({token})
+      console.log('Dieta vinda do backend')
+      console.log(data)
+      setWeeklyDiet(data.meals)
     }
     fetchDiet()
-  }, [weeklyDiet])
+  }, [])
 
-  // coleta de dados do usuário
   useEffect(() => {
     getUserInfo().then(data => setUserInformation(data));
   }, []);
@@ -145,7 +150,7 @@ export function MyPlans() {
         onClose={() => setIsConfirmModalVisible(false)}
         onConfirm={handleConfirm}
         onEdit={() => { /* implementar futuramente*/ }}
-        isSubmitting = {isLoadingNewDiet}
+        isSubmitting={isLoadingNewDiet}
         userData={userInformation}
       />
     </Container>

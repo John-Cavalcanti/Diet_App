@@ -1,9 +1,21 @@
-import api from "../axios";
+import { wait } from "../../utils/wait"
+import api from "../axios"
 
-export async function getWeeklyDiet() {
+interface GetWeeklyDietProps {
+  token: string | undefined
+}
+
+export async function getWeeklyDiet({ token }: GetWeeklyDietProps) {
   try {
-    const response = await api.get("/api/weekly-diet/me");
-    return response.data;
+    // if(token == undefined) {
+    //   await wait(1000)
+    // }
+    const response = await api.get("/api/weekly-diet/me", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data
   } catch (error) {
 
   }

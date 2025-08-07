@@ -11,11 +11,14 @@ import { useEffect, useState } from "react"
 import type { Meal, WeeklyDiet } from "../../@types/meal-plan"
 import { postWeeklyDiet } from "../../services/weekly-diet/post"
 import { ClipLoader } from "react-spinners"
+import { useUsersInformations } from "../../contexts/user-informations"
 
 export function Confirmation() {
     const [refeicoesAgrupadas, setRefeicoesAgrupadas] = useState<
         { nome: string; opcoes: Meal[] }[]
     >([]);
+
+    const { id, token } = useUsersInformations()
 
     const agruparRefeicoesPorTipo = (mealPlan: WeeklyDiet) => {
         const todasRefeicoes: Meal[] = Object.values(mealPlan).flat();
@@ -38,19 +41,21 @@ export function Confirmation() {
 
     useEffect(() => {
         const fetchMealPlan = async () => {
-                try {
-                    const result = await postWeeklyDiet();
+            try {
+                if (token != undefined && id != 0) {
+                    const result = await postWeeklyDiet({ id, token });
                     setRefeicoesAgrupadas(agruparRefeicoesPorTipo(result!))
-                } catch (error) {
-                    console.error("Erro ao buscar plano alimentar:", error);
                 }
+            } catch (error) {
+                console.error("Erro ao buscar plano alimentar:", error);
+            }
         };
 
         fetchMealPlan();
-    }, []);
+    }, [token, id]);
 
-    if(refeicoesAgrupadas.length == 0){
-         return <ClipLoader data-testid="loading" color="#123abc" loading={true} size={50} />;
+    if (refeicoesAgrupadas.length == 0) {
+        return <ClipLoader data-testid="loading" color="#123abc" loading={true} size={50} />;
     }
 
     return (
