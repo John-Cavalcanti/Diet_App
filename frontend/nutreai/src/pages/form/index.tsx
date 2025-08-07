@@ -48,7 +48,7 @@ export function DietForm() {
 
     const { handleSubmit, formState: { errors } } = formMethods
 
-    console.log(errors)
+    //console.log(errors)
 
     const renderStep = () => {
         switch (step) {

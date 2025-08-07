@@ -19,6 +19,8 @@ export class WeeklyDietService {
   async create(createWeeklyDietDto: CreateWeeklyDietDto): Promise<WeeklyDiet> {
     const user = await this.usersService.findOne(createWeeklyDietDto.userId);
 
+    console.log(user);
+
     if (!user) {
       throw new BadRequestException('User not found');
     }
@@ -30,6 +32,8 @@ export class WeeklyDietService {
     const aiResponse = await this.aiService.groqGenerateWeeklyDiet(userData);
 
     let content = aiResponse ?? "Nenhuma resposta";
+
+    console.log(content);
     if (content === 'Nenhuma resposta') {
       throw new InternalServerErrorException();
     }
