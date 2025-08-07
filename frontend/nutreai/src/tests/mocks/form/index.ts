@@ -41,7 +41,5 @@ const fakeUser: PostFormResponse = {
 export const postFormMock =   http.post('/api/users', async ({ request }) => {
     const body = (await request.json()) as PostFormProps;
 
-    console.log('Chegou no mock:', body);
-
     return HttpResponse.json(fakeUser, {status: 200});
   })

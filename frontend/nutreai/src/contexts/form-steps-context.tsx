@@ -13,14 +13,12 @@ export function FormStepsProvider({ children }: { children: ReactNode }) {
     function handleNextStep () {
         if(step <= 4){
             setStep(state => state + 1)
-            console.log(step)
         }
     }
 
     function handlePreviuosStep () {
         if (step >= 1){
             setStep(state => state - 1)
-            console.log(step)
         }
     }
 

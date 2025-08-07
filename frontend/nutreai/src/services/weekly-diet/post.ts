@@ -1,14 +1,31 @@
 import type { WeeklyDiet } from "../../@types/meal-plan"
 import api from "../axios"
 
-export interface postWeeklyDietProps {
-    userId: number
+interface PostWeeklyDietProps {
+    id: number | undefined
+    token: string | undefined
 }
 
-export async function postWeeklyDiet(userId: postWeeklyDietProps) {
+interface PostWeeklyDietResponse {
+    id: number
+    createdAt: string
+    updatedAt: string
+    userId: number
+    meals: WeeklyDiet
+}
+
+export async function postWeeklyDiet({ id, token }: PostWeeklyDietProps) {
     try {
-        const response = await api.post<WeeklyDiet>('/api/weekly-diet', userId)
-        return response.data
+        const response = await api.post<PostWeeklyDietResponse>(
+          '/api/weekly-diet', 
+          { id },
+          {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+          }
+      )
+        return response.data.meals
     } catch (error: any) {
         console.error('Erro ao enviar:', error.response?.data)
     }
