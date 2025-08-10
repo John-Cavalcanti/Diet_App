@@ -1,17 +1,5 @@
 import { http, HttpResponse } from 'msw'
 
-interface PostFormProps {
-    name: string,
-    email: string,
-    birthday: string,
-    height: number,
-    weight: number,
-    workoutsFrequency: string,
-    goals: string,
-    foodRestrictions: string,
-    foodPreferences: string
-}
-
 interface PostFormResponse {
 	_id: number,
 	_name: string,
@@ -38,8 +26,7 @@ const fakeUser: PostFormResponse = {
   _foodPreferences: 'Low‑carb',
 };
 
-export const postFormMock =   http.post('/api/users', async ({ request }) => {
-    const body = (await request.json()) as PostFormProps;
+export const postFormMock =   http.post('/api/users', async () => {
 
     return HttpResponse.json(fakeUser, {status: 200});
   })

@@ -10,6 +10,7 @@ describe('MealCard', () => {
         title="Café da Manhã"
         items={['Ovo', 'Pão']}
         calories={350}
+        onOpenMore={() => {}}
       />
     )
 
@@ -34,7 +35,7 @@ describe('MealsList', () => {
         calorias: 500
       }
     ]
-    render(<MealsList meals={meals as any[]} />)
+    render(<MealsList meals={meals as any[] } onOpenDetails={() => { }} />)
     screen.debug()
     expect(screen.getByText('Cafe Da Manha')).toBeInTheDocument()
     expect(screen.getByText('Almoco')).toBeInTheDocument()
