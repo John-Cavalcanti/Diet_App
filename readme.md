@@ -86,6 +86,16 @@ A API do backend é documentada utilizando Swagger. Com o servidor do backend em
 
 > http://localhost:5000/api/swagger
 
+## Responsáveis
+
+- João Victor Cavalcanti <jvpsc>
+- Ian Davi de Holanda <idhac>
+- Marcos Kaiô Belarmino Santana <mkbs>
+- Paula Carolina Oliveira dos Santos <pcos>
+- José Guilherme Teixeira Nunes <jgtn>
+- Luana de Melo Queiroz <lmq2>
+- Rafael Victor Pereira de Melo <rvpm>
+
 ## Links auxiliares do projeto
 
 - [Boas práticas de desenvolvimento como rodar este código](contributing.md)
