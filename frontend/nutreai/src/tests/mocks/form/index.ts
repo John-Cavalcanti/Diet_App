@@ -38,8 +38,7 @@ const fakeUser: PostFormResponse = {
   _foodPreferences: 'Low‑carb',
 };
 
-export const postFormMock =   http.post('/api/users', async ({ request }) => {
-    const body = (await request.json()) as PostFormProps;
+export const postFormMock =   http.post('/api/users', async () => {
 
     return HttpResponse.json(fakeUser, {status: 200});
   })

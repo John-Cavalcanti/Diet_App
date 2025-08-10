@@ -8,7 +8,7 @@ interface FoodCheckBoxProps {
     onCheckedChange: (item: string) => void
 }
 export function FoodCheckbox({ children, value, onCheckedChange }: FoodCheckBoxProps) {
-    const handleChange = (checked: boolean) => {
+    const handleChange = () => {
         onCheckedChange(value)
     }
     return (
