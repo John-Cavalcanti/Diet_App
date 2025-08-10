@@ -46,7 +46,7 @@ export function DietForm() {
         resolver: zodResolver(DietFormSchema)
     })
 
-    const { handleSubmit, formState: { errors } } = formMethods
+    const { handleSubmit } = formMethods
 
     //console.log(errors)
 
