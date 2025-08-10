@@ -1,17 +1,5 @@
 import { http, HttpResponse } from 'msw'
 
-interface PostFormProps {
-    name: string,
-    email: string,
-    birthday: string,
-    height: number,
-    weight: number,
-    workoutsFrequency: string,
-    goals: string,
-    foodRestrictions: string,
-    foodPreferences: string
-}
-
 interface PostFormResponse {
 	_id: number,
 	_name: string,
