@@ -113,20 +113,20 @@ Para começar a usar o Nutre.AI e gerar sua primeira dieta personalizada, siga o
     - Preencha seus Dados Alimentares 🍎
 
     > Você será guiado por um formulário de 5 passos para que possamos entender suas necessidades:
-
+    >
     > - Passo 1: Informações básicas (idade, gênero, peso, altura).
-
+    >
     > - Passo 2: Nível de atividade física e objetivo (perder peso, manter, etc.).
-
+    >
     > - Passo 3: Restrições alimentares (lactose, glúten, etc.).
-
+    >
     > - Passo 4: Alimentos que você não gosta.
-
+    >
     > - Passo 5: Preferências de alimentos para cada refeição.
 
-- Confirme e Gere sua Dieta 확인
+- Confirme e Gere sua Dieta 
 
-Após preencher tudo, você verá um resumo das suas informações.
+Após preencher todas as informações, o sistema gerará a sua dieta.
 
 Pronto! Sua dieta estará disponível na tela "Meus Planos".
 
