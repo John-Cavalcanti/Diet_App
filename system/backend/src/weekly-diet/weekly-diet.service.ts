@@ -30,8 +30,7 @@ export class WeeklyDietService {
     const aiResponse = await this.aiService.groqGenerateWeeklyDiet(userData);
 
     let content = aiResponse ?? "Nenhuma resposta";
-
-    console.log(content);
+    
     if (content === 'Nenhuma resposta') {
       throw new InternalServerErrorException();
     }

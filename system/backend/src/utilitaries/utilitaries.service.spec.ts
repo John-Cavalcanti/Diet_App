@@ -55,6 +55,4 @@ describe('UtilitariesService', () => {
       expect(userAge).toEqual(38);
     });
   });
-
-  // TODO: imterpolateTemplate
 });
