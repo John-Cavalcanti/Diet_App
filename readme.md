@@ -88,13 +88,49 @@ A API do backend é documentada utilizando Swagger. Com o servidor do backend em
 
 ## Responsáveis
 
-- João Victor Cavalcanti <jvpsc>
-- Ian Davi de Holanda <idhac>
-- Marcos Kaiô Belarmino Santana <mkbs>
-- Paula Carolina Oliveira dos Santos <pcos>
-- José Guilherme Teixeira Nunes <jgtn>
-- Luana de Melo Queiroz <lmq2>
-- Rafael Victor Pereira de Melo <rvpm>
+- João Victor Cavalcanti (**jvpsc**)
+- Ian Davi de Holanda (**idhac**)
+- Marcos Kaiô Belarmino Santana (**mkbs**)
+- Paula Carolina Oliveira dos Santos (**pcos**)
+- José Guilherme Teixeira Nunes (**jgtn**)
+- Luana de Melo Queiroz (**lmq2**)
+- Rafael Victor Pereira de Melo (**rvpm**)
+
+## Tutorial de uso
+
+Para começar a usar o Nutre.AI e gerar sua primeira dieta personalizada, siga os passos abaixo:
+
+- Acesse a Aplicação 
+
+> Clique no link a seguir para abrir o site: https://nutreai.vercel.app/
+
+- Realize seu Cadastro 📝
+
+    - Na página inicial, clique em "Começar jornada".
+
+    - Preencha seu nome, e-mail e crie uma senha para registrar sua conta.
+
+    - Preencha seus Dados Alimentares 🍎
+
+    > Você será guiado por um formulário de 5 passos para que possamos entender suas necessidades:
+
+    > - Passo 1: Informações básicas (idade, gênero, peso, altura).
+
+    > - Passo 2: Nível de atividade física e objetivo (perder peso, manter, etc.).
+
+    > - Passo 3: Restrições alimentares (lactose, glúten, etc.).
+
+    > - Passo 4: Alimentos que você não gosta.
+
+    > - Passo 5: Preferências de alimentos para cada refeição.
+
+- Confirme e Gere sua Dieta 확인
+
+Após preencher tudo, você verá um resumo das suas informações.
+
+Pronto! Sua dieta estará disponível na tela "Meus Planos".
+
+- [Vídeos de Demonstração](https://www.youtube.com/watch?v=upPnV8yhURs&ab_channel=JoaoVictorPereiraSilvestreCavalcanti)
 
 ## Links auxiliares do projeto
 
