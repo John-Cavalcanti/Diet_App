@@ -22,11 +22,6 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  // @Get(':id')
-  // findOneById(@Param('id') id: string) {
-  //   return this.usersService.findOne(+id);
-  // }
-
   @UsersDocsFindOne()
   @UseGuards(AuthGuard)
   @Get('me')

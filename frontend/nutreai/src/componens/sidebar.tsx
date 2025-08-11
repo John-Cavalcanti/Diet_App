@@ -6,18 +6,38 @@ import profileIcon from "../assets/sidebar/profile.png"
 import logoutIcon from "../assets/sidebar/logout.png"
 
 export function Sidebar() {
+  const postMvp = false;
   return (
     <Container>
       <Nav>
-        <IconLink to="/home">
-          <img src={homeIcon} alt="Início" />
-        </IconLink>
+        {
+          postMvp ? 
+            (
+              <IconLink to="/home">
+                <img src={homeIcon} alt="Início" />
+              </IconLink>
+            ) : (
+              <DisabledIconLink>
+                <img src={homeIcon} alt="Início" />
+              </DisabledIconLink>
+            )
+        }
         <IconLink to="/my-plans">
           <img src={plansIcon} alt="Meus Planos" />
         </IconLink>
-        <IconLink to="/perfil">
-          <img src={profileIcon} alt="Perfil" />
-        </IconLink>
+
+        {
+          postMvp ?
+          (
+            <IconLink to="/perfil">
+            <img src={profileIcon} alt="Perfil" />
+            </IconLink>
+          ) : (
+            <DisabledIconLink>
+              <img src={profileIcon} alt="Perfil" />
+            </DisabledIconLink>
+          )
+        }
         <IconLink to="/login">
           <img src={logoutIcon} alt="Sair" />
         </IconLink>
@@ -61,3 +81,19 @@ const IconLink = styled(NavLink)`
     height: 1.75rem;
   }
 `
+
+const DisabledIconLink = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  cursor: not-allowed;
+  opacity: 0.5;
+
+  img {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+`;

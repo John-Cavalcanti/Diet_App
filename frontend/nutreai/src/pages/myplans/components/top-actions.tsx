@@ -5,11 +5,11 @@ import addIcon from "../../../assets/button/add.png"
 export function TopActions({onNewDiet}: {onNewDiet: () => void}) {
   return (
     <ActionsRow>
-      <ActionButton>
+      <ActionButton disabled>
         <Icon src={clipboardIcon} alt="Meus Dados" />
         Meus Dados
       </ActionButton>
-      <ActionButton onClick={onNewDiet}>
+      <ActionButton disabled onClick={onNewDiet}>
         <Icon src={addIcon} alt="Gerar Nova Dieta" />
         Gerar Nova Dieta
       </ActionButton>
@@ -39,6 +39,11 @@ const ActionButton = styled.button`
 
   &:hover {
     background: #E9E9E9;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 `
 

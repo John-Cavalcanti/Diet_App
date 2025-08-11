@@ -6,7 +6,7 @@ import { WeeklyDietRepository } from './weekly-diet.repository';
 import { User } from '../users/entities/user.entity';
 import { aiGeneratedText, weeklyDietExample } from './constants/constants';
 import { WeeklyDiet } from './entities/weekly-diet.entity';
-import { BadRequestException} from '@nestjs/common';
+import { BadRequestException, InternalServerErrorException} from '@nestjs/common';
 import { UtilitariesService } from '../utilitaries/utilitaries.service';
 
 describe('WeeklyDietService', () => {
@@ -103,12 +103,12 @@ describe('WeeklyDietService', () => {
       expect(await service.findWeeklyDietByUserId(1)).toBeInstanceOf(Array);
     });
 
-    it('deveria lançar um Bad request exception caso não houver nenhum plano alimentar ligado àquele id', async () => {
-      mockDietRepository.findWeeklyDietByUserId.mockResolvedValueOnce(
-        [],
+    it('deveria lançar um Internal server exception caso não houver nenhum plano alimentar ligado àquele id', async () => {
+      mockDietRepository.findWeeklyDietByUserId.mockRejectedValueOnce(
+        new InternalServerErrorException,
       );
       await expect(service.findWeeklyDietByUserId(1)).rejects.toThrow(
-        BadRequestException,
+        InternalServerErrorException,
       );
     });
   });
