@@ -10,9 +10,9 @@ import { PrimaryButton } from "../../componens/primary-button"
 import { useEffect, useState } from "react"
 import type { Meal, WeeklyDiet } from "../../@types/meal-plan"
 import { postWeeklyDiet } from "../../services/weekly-diet/post"
-import { ClipLoader } from "react-spinners"
 import { useUsersInformations } from "../../contexts/user-informations"
 import { useNavigate } from "react-router-dom"
+import { Loader } from "../../componens/loader"
 
 export function Confirmation() {
     const [refeicoesAgrupadas, setRefeicoesAgrupadas] = useState<
@@ -61,7 +61,7 @@ export function Confirmation() {
     }, [token, id]);
 
     if (refeicoesAgrupadas.length == 0) {
-        return <ClipLoader data-testid="loading" color="#123abc" loading={true} size={50} />;
+        return <Loader/>;
     }
 
     return (

@@ -35,9 +35,7 @@ import { UtilitariesModule } from './utilitaries/utilitaries.module';
         ],
         synchronize: true,
         logging: true,
-        ssl:{
-          rejectUnauthorized: false
-        }
+        ssl: false,
       }),
       inject: [ConfigService],
     })
