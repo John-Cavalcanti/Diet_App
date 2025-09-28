@@ -30,7 +30,13 @@ export class UsersService {
   }
 
   async findAll() {
-    return await this.userRepository.findAll();
+    let allUsers = await this.userRepository.findAll();
+
+    allUsers = allUsers.map(user => {
+      user.setPassword('');
+      return user;
+    });
+    return allUsers;
   }
 
   async findOne(id: number): Promise <User | undefined> {
@@ -38,6 +44,8 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException('User with ID ' + id + ' not found');
     }
+
+    user.setPassword('');
     return user;
   }
 
@@ -75,7 +83,9 @@ export class UsersService {
     existingUser.foodPreferences = updateUserDto.foodPreferences ?? existingUser.foodPreferences;
 
     try {
-      return await this.userRepository.updateUser(id, existingUser);
+      let userUpdated = await this.userRepository.updateUser(id, existingUser);
+      userUpdated.setPassword('');
+      return userUpdated;
     } catch (error) {
       if (error && error.code === '23505' && error.detail?.includes('email')) {
         throw new ConflictException('O e-mail fornecido já está em uso.');
